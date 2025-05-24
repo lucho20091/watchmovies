@@ -29,7 +29,7 @@ export default function SearchPage() {
                     />
                     <button 
                         type="submit" 
-                        className="bg-blue-500 text-white p-2 rounded ml-2"
+                        className="bg-white text-black font-bold p-2 rounded ml-2"
                     >
                         Search
                     </button>

@@ -10,7 +10,6 @@ export default async function Home(){
     }
     try{
       const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
-      console.log(response);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -21,7 +20,7 @@ export default async function Home(){
     }
   }
   const latestMovies = await getLatestMovies();
-  console.log(latestMovies);
+
   return (
     <div className="grow p-4">
       <div className="container mx-auto">
