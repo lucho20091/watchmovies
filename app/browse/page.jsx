@@ -65,7 +65,9 @@ export default function BrowsePage() {
             <div>
             <div className="p-4 container mx-auto">
             <div className="text-white flex items-center justify-between">
-                <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">What's trending today</h3>
+                <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">
+                    <span className="hidden md:inline-block">What's </span>trending 
+                    <span className="hidden md:inline-block">today</span></h3>
                 <div>
                     <button 
                     className={`px-4 py-2 border-b-2 ${trending === 'movies' ? 'border-red-500' : 'border-white'} cursor-pointer`}
@@ -78,14 +80,14 @@ export default function BrowsePage() {
                 </div>
             </div>
             <div className="flex justify-center mt-4">
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                     {trendingData && trendingData.map((movie) => {
                         if (movie.poster_path){
                             return (
-                            <Link href={movie.media_type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`} key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
+                                <Link href={trending === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
                                 <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 w-full text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title || movie.name}</h2>
-                                <span className="absolute top-4 right-4 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>
+                                <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>
                             </Link>
                             )
                         }
@@ -108,14 +110,14 @@ export default function BrowsePage() {
                 </div>
             </div>
             <div className="flex justify-center mt-4">
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                     {ratedData && ratedData.map((movie) => {
                         if (movie.poster_path){
                             return (
-                            <Link href={movie.media_type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`} key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
+                                <Link href={rated === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
                                 <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 w-full text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title || movie.name}</h2>
-                                <span className="absolute top-4 right-4 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>
+                                {rated === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">tv</span>}
                             </Link>
                             )
                         }
@@ -155,14 +157,13 @@ export default function BrowsePage() {
                 </div>
             </div>
             <div className="flex justify-center mt-4">
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                     {moviesGenresData && moviesGenresData.map((movie) => {
                         if (movie.poster_path){
                             return (
-                            <Link href={movie.media_type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`} key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
+                            <Link href={`/movie/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
                                 <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 w-full text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title || movie.name}</h2>
-                                <span className="absolute top-4 right-4 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>
                             </Link>
                             )
                         }
