@@ -128,8 +128,9 @@ export default function BrowsePage() {
 
             <div className="p-4 container mx-auto">
             <div className="text-white flex items-center justify-between">
-                <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">Discover by Genres</h3>
-                <div className="grid grid-cols-3">
+                <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">
+                    <span className="hidden md:inline-block">Discover by </span>Genres</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3">
                     <button 
                     className={`px-4 py-2 border-b-2 ${genres === 'comedy' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                     onClick={() => setGenres('comedy')}

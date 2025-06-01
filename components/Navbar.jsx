@@ -9,19 +9,19 @@ export default function Navbar(){
             <nav className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-2 bg-red-500 px-4 py-2 rounded-3xl cursor-pointer">
-                        <FaHome size={32}/>
-                        <span className="font-bold text-xl">Home</span>
+                        <FaHome size={16}/>
+                        <span className="font-bold">Home</span>
                     </Link>
                     <Link href="/browse">
-                        <span className="text-xl">Browse</span>
+                        <span className>Browse</span>
                     </Link>
                 </div>
                 <div className="flex items-center gap-4">
                     <Link href="/search">
-                        <FaSearch size={32}/>
+                        <FaSearch size={16}/>
                     </Link>
                     <Link href="/settings">
-                        <FaCog size={32}/>
+                        <FaCog size={16}/>
                     </Link>
                 </div>
             </nav>
