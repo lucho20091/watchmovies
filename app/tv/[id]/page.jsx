@@ -10,7 +10,7 @@ export default function TvPage() {
     const [openSeason, setOpenSeason] = useState(null)
     const { id } = useParams()
 
-    console.log(id)
+
 
 
     useEffect(() => {
@@ -18,22 +18,19 @@ export default function TvPage() {
 
         async function fetchTvUrl() {
             try {
-                console.log("ran 2");
                 const response = await fetch(`/api/tv/${id}?season=${season || 1}&episode=${episode || 1}`, {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json'
                     },
                 });
-                console.log(response);
-                console.log("ran 3");
+
                 
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 
                 const data = await response.json();
-                console.log(data)
                 setTvUrl(data.url);
                 setTvData(data.data)
             } catch (error) {
@@ -44,7 +41,6 @@ export default function TvPage() {
         fetchTvUrl();
     }, [id, episode]);
 
-    console.log(tvData)
     const seasonsFormat = tvData?.seasons.filter((season) => {
         if (season.name.includes("Season")){
             return season
@@ -56,8 +52,6 @@ export default function TvPage() {
         setEpisode(episode)
     }
 
-    console.log(seasonsFormat)
-    console.log(openSeason)
 
 
     return (

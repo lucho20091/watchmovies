@@ -21,7 +21,7 @@ export default function BrowsePage() {
                 const data = await response.json();
                 setTrendingData(data);
             } catch(e){
-                console.log(e)
+                // console.log(e)
             }
         }
         fetchTrendingMovies()
@@ -36,7 +36,7 @@ export default function BrowsePage() {
                 const data = await response.json();
                 setRatedData(data);
             } catch(e){
-                console.log(e)
+                // console.log(e)
             }
         }
         fetchRatedMovies()
@@ -51,15 +51,12 @@ export default function BrowsePage() {
                 const data = await response.json();
                 setMoviesGenresData(data);
             } catch(e){
-                console.log(e)
+                // console.log(e)
             }
         }
         fetchGenreMovies()
     }, [genres])
 
-    // console.log(trendingData)
-    // console.log('rated data', ratedData)
-    console.log('genre data', moviesGenresData)
 
     return (
             <div>
