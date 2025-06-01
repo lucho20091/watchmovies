@@ -1,1 +1,5 @@
 @import "tailwindcss";
+.custom-mobile-img{
+    transform: scale(1.5);
+    /* width: 100%; */
+}

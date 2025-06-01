@@ -17,7 +17,7 @@ export default function SearchPage() {
 
     return (
         <div className="grow p-4">
-            <div className="container mx-auto">
+            <div className="container mx-auto max-w-md">
                 <form onSubmit={handleSubmit} className="mb-4 flex items-center">
                     <label htmlFor="search" className="sr-only">Search</label>
                     <input 
