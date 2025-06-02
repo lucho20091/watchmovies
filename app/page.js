@@ -22,7 +22,6 @@ export default async function Home(){
   const trendingMovies = await getTrendingMovies();
   const first10TrendingMovies = trendingMovies.slice(0,10)
 
-  console.log(first10TrendingMovies.length)
   return (
     <div className="grow p-4 pb-8">
       <div className="container mx-auto">

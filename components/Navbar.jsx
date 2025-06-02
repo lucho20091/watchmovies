@@ -6,10 +6,15 @@ import { FaCog } from "react-icons/fa";
 export default function Navbar(){
     return (
         <header className="bg-neutral-950 text-white p-4">
-            <nav className="container mx-auto max-w-screen-xl flex justify-between items-center">
+            <nav className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-1 bg-red-500 px-2 py-1 rounded-3xl cursor-pointer">
-                        <FaHome size={16}/>
+                        <div className="block md:hidden">
+                            <FaHome size={16}/>
+                        </div>
+                        <div className="hidden md:block">
+                            <FaHome size={18}/>
+                        </div>
                         <span className="font-bold">Home</span>
                     </Link>
                     <Link href="/browse">
@@ -18,10 +23,21 @@ export default function Navbar(){
                 </div>
                 <div className="flex items-center gap-4">
                     <Link href="/search">
-                        <FaSearch size={18}/>
+                        <div className="block md:hidden">
+                            <FaSearch size={18}/>
+                        </div>
+                        <div className="hidden md:block">
+                            <FaSearch size={20}/>
+                        </div>
                     </Link>
                     <Link href="/settings">
-                        <FaCog size={18}/>
+                        <div className="block md:hidden">
+                            <FaCog size={18}/>
+                        </div>
+                        <div className="hidden md:block">
+                            <FaCog size={20}/>
+                        </div>
+                        
                     </Link>
                 </div>
             </nav>

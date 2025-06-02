@@ -58,13 +58,10 @@ export default async function MoviePage({ params }) {
             return item
         }
     })
-    console.log(findPosterMobile)
     let posterMobSrc = null
     if (findPosterMobile){
         posterMobSrc = 'https://image.tmdb.org/t/p/original' + findPosterMobile.file_path
     }
-    // console.log(movieData.genres)
-    // console.log(moviePosters)
     // movie poster https://image.tmdb.org/t/p/original/${backdrop_path}
     return (
         <div className="grow relative">
@@ -76,7 +73,7 @@ export default async function MoviePage({ params }) {
                     )}
                 <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent rounded-b-lg"></div>
                 <i className="fa-solid fa-arrow-left text-white text-3xl absolute top-4 left-4 cursor-pointer"></i>
-                <div className="absolute top-[10%] left-0 right-0">
+                <div className="absolute top-[10%] left-0 right-0 pb-20">
                     <h1 className="text-6xl font-bold mb-4 text-center">
                         {movieData?.title}
                     </h1>
