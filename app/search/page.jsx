@@ -34,7 +34,7 @@ export default function SearchPage() {
                         Search
                     </button>
                 </form>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
                     {movies && movies.map((movie) => {
                         if (movie.poster_path){
                             return (

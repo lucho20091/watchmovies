@@ -81,10 +81,10 @@ export default function BrowsePage() {
                         {trendingData && trendingData.map((movie) => {
                             if (movie.poster_path){
                                 return (
-                                    <Link href={trending === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
-                                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-                                    <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title || movie.name}</h2>
-                                    <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>
+                                    <Link href={trending === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center justify-between cursor-pointer relative">
+                                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
+                                        <h2 className="text-xs font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
+                                    {trending === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>}
                                 </Link>
                                 )
                             }
@@ -111,9 +111,9 @@ export default function BrowsePage() {
                         {ratedData && ratedData.map((movie) => {
                             if (movie.poster_path){
                                 return (
-                                    <Link href={rated === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
+                                <Link href={rated === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative cursor-pointer">
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-                                    <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title || movie.name}</h2>
+                                    <h2 className="text-xs font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                     {rated === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">tv</span>}
                                 </Link>
                                 )
@@ -122,7 +122,7 @@ export default function BrowsePage() {
                     </div>
                 </div>
                 </div>
-                <div className="p-4 container mx-auto">
+                <div className="p-4 container mx-auto mb-20">
                 <div className="text-white flex items-center justify-between">
                     <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">
                         <span className="hidden md:inline-block">Discover by </span> Genres</h3>
@@ -158,9 +158,9 @@ export default function BrowsePage() {
                         {moviesGenresData && moviesGenresData.map((movie) => {
                             if (movie.poster_path){
                                 return (
-                                <Link href={`/movie/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
+                                <Link href={`/movie/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative cursor-pointer">
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-                                    <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title || movie.name}</h2>
+                                    <h2 className="text-xs font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                 </Link>
                                 )
                             }
