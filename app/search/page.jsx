@@ -16,9 +16,9 @@ export default function SearchPage() {
     }
 
     return (
-        <div className="grow p-4">
-            <div className="container mx-auto max-w-md">
-                <form onSubmit={handleSubmit} className="mb-4 flex items-center">
+        <div className={`${!search && 'md:grid md:place-items-center'} grow p-4`}>
+            <div className="container mx-auto">
+                <form onSubmit={handleSubmit} className="mb-4 flex items-center max-w-md mx-auto">
                     <label htmlFor="search" className="sr-only">Search</label>
                     <input 
                         type="text" 

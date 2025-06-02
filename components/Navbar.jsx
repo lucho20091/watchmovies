@@ -13,7 +13,7 @@ export default function Navbar(){
                             <FaHome size={16}/>
                         </div>
                         <div className="hidden md:block">
-                            <FaHome size={18}/>
+                            <FaHome size={20}/>
                         </div>
                         <span className="font-bold">Home</span>
                     </Link>
@@ -21,13 +21,13 @@ export default function Navbar(){
                         <span>Browse</span>
                     </Link>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 md:gap-8">
                     <Link href="/search">
                         <div className="block md:hidden">
                             <FaSearch size={18}/>
                         </div>
                         <div className="hidden md:block">
-                            <FaSearch size={20}/>
+                            <FaSearch size={22}/>
                         </div>
                     </Link>
                     <Link href="/settings">
@@ -35,7 +35,7 @@ export default function Navbar(){
                             <FaCog size={18}/>
                         </div>
                         <div className="hidden md:block">
-                            <FaCog size={20}/>
+                            <FaCog size={22}/>
                         </div>
                         
                     </Link>

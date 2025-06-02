@@ -57,6 +57,12 @@ export default function BrowsePage() {
         fetchGenreMovies()
     }, [genres])
 
+    function scrollToBottom(){
+        window.scrollTo({
+            top: document.documentElement.scrollHeight + 80,
+            behavior: 'smooth'
+        });
+    }
 
     return (
             <div className="overflow-x-hidden">
@@ -77,13 +83,13 @@ export default function BrowsePage() {
                     </div>
                 </div>
                 <div className="flex justify-center mt-4">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-4 lg:grid-cols-6 gap-4">
                         {trendingData && trendingData.map((movie) => {
                             if (movie.poster_path){
                                 return (
                                     <Link href={trending === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center justify-between cursor-pointer relative">
                                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-                                        <h2 className="text-xs font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
+                                        <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                     {trending === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>}
                                 </Link>
                                 )
@@ -107,13 +113,13 @@ export default function BrowsePage() {
                     </div>
                 </div>
                 <div className="flex justify-center mt-4">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-4 lg:grid-cols-6 gap-4">
                         {ratedData && ratedData.map((movie) => {
                             if (movie.poster_path){
                                 return (
                                 <Link href={rated === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative cursor-pointer">
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-                                    <h2 className="text-xs font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
+                                    <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                     {rated === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">tv</span>}
                                 </Link>
                                 )
@@ -129,38 +135,50 @@ export default function BrowsePage() {
                     <div className="grid grid-cols-2 md:grid-cols-3">
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'comedy' ? 'border-red-500' : 'border-white'} cursor-pointer`}
-                        onClick={() => setGenres('comedy')}
-                        >Comedy</button>
+                        onClick={() => {
+                            setGenres('comedy')
+                            scrollToBottom()
+                        }}>Comedy</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'action' ? 'border-red-500' : 'border-white'} cursor-pointer`}
-                        onClick={() => setGenres('action')}
-                        >Action</button>
+                        onClick={() => {
+                            setGenres('action')
+                            scrollToBottom()
+                        }}>Action</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'horror' ? 'border-red-500' : 'border-white'} cursor-pointer`}
-                        onClick={() => setGenres('horror')}
-                        >Horror</button>
+                        onClick={() => {
+                            setGenres('horror')
+                            scrollToBottom()
+                        }}>Horror</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'romance' ? 'border-red-500' : 'border-white'} cursor-pointer`}
-                        onClick={() => setGenres('romance')}
-                        >Romance</button>
+                        onClick={() => {
+                            setGenres('romance')
+                            scrollToBottom()
+                        }}>Romance</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'drama' ? 'border-red-500' : 'border-white'} cursor-pointer`}
-                        onClick={() => setGenres('drama')}
-                        >Drama</button>
+                        onClick={() => {
+                            setGenres('drama')
+                            scrollToBottom()
+                        }}>Drama</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'scifi' ? 'border-red-500' : 'border-white'} cursor-pointer`}
-                        onClick={() => setGenres('scifi')}
-                        >Scifi</button>
+                        onClick={() => {
+                            setGenres('scifi')
+                            scrollToBottom()
+                        }}>Scifi</button>
                     </div>
                 </div>
                 <div className="flex justify-center mt-4">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-4 lg:grid-cols-6 gap-4">
                         {moviesGenresData && moviesGenresData.map((movie) => {
                             if (movie.poster_path){
                                 return (
                                 <Link href={`/movie/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative cursor-pointer">
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-                                    <h2 className="text-xs font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
+                                    <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                 </Link>
                                 )
                             }
