@@ -79,13 +79,13 @@ export default function TvPage() {
                 </div>
                 <div className="p-4 md:p-0 max-w-screen-xl mx-auto md:mb-12">
                 <div className="grid h-64 overflow-y-auto p-4 gap-y-4 bg-neutral-950 mt-4">
-                     {Array.from({ length: tvData.seasons[season - 1].episode_count }).map((_, index) => (
+                     {Array.from({ length: tvData.seasons[season === 1 ? season - 1 : season].episode_count }).map((_, index) => (
                         <button key={index} onClick={() => setEpisode(index + 1)}>
                             <div className="flex relative border-b-2 border-gray-400 pb-4 cursor-pointer gap-x-4">
-                                <img src={'https://image.tmdb.org/t/p/original' + tvData.seasons[season - 1].poster_path} 
+                                <img src={'https://image.tmdb.org/t/p/original' + tvData.seasons[season === 1 ? season - 1 : season].poster_path} 
                                 className="w-12"/>
                                 <span className="absolute bottom-4 left-0 bg-red-500 px-2 py-1 font-bold ">{index + 1}</span>
-                                <p className="line-clamp-3 text-white">{tvData.seasons[season - 1].overview || `${tvData.name} S${season}E${index+1}`}</p>
+                                <p className="line-clamp-3 text-white">{tvData.seasons[season === 1 ? season - 1 : season].overview || `${tvData.name} S${season}E${index+1}`}</p>
                             </div>
                         </button>
                      ))}
