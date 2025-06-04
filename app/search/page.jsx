@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 export default function SearchPage() {
+    const searchInputRef = useRef(null)
     const [search, setSearch] = useState("");
     const [movies, setMovies] = useState([]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -15,12 +17,17 @@ export default function SearchPage() {
         }
     }
 
+    useEffect(()=> {
+        searchInputRef.current.focus()
+    }, [])
+
     return (
         <div className={`${!search && 'md:grid md:place-items-center'} grow p-4`}>
             <div className="container mx-auto">
                 <form onSubmit={handleSubmit} className="mb-4 flex items-center max-w-md mx-auto">
                     <label htmlFor="search" className="sr-only">Search</label>
                     <input 
+                        ref={searchInputRef}
                         type="text" 
                         placeholder="Search for movies or shows..." 
                         className="p-2 border border-gray-300 rounded w-full"
