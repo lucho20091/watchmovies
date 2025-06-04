@@ -74,7 +74,7 @@ export default function TvPageSeasonEpisode() {
                     </span>
                 </div>
                 <div className="grid place-items-center">
-                    <select name="season" id="season" className="bg-neutral-950 px-2 py-1 rounded-sm" onChange={(e) => setSeasonRef(e.target.value)} value={seasonRef}>
+                    <select name="season" id="season" className="bg-neutral-950 px-2 py-1 rounded-sm font-bold text-xl border-white border-2" onChange={(e) => setSeasonRef(e.target.value)} value={seasonRef}>
                         {tvData.seasons.map(item => (
                             <option key={item.id} value={item.season_number}>{item.name}</option>
                         ))}
