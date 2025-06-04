@@ -63,7 +63,7 @@ export default async function MoviePage({ params }) {
         posterMobSrc = 'https://image.tmdb.org/t/p/original' + findPosterMobile.file_path
     }
     // movie poster https://image.tmdb.org/t/p/original/${backdrop_path}
-    return (
+    return  (
         <div className="grow relative">
                 {moviePosters && <img src={`https://image.tmdb.org/t/p/original${moviePosters?.backdrops[0]?.file_path}`} className="absolute top-0 bottom-0 left-0 right-0 hidden md:block"/>}
                 {moviePosters && (
