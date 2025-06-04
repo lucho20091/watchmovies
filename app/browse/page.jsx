@@ -87,7 +87,7 @@ export default function BrowsePage() {
                         {trendingData && trendingData.map((movie) => {
                             if (movie.poster_path){
                                 return (
-                                    <Link href={trending === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center justify-between cursor-pointer relative">
+                                    <Link href={trending === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}/1/1`}  key={movie.id} className="flex flex-col items-center justify-between cursor-pointer relative">
                                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
                                         <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                     {trending === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">{movie.media_type}</span>}
@@ -117,7 +117,7 @@ export default function BrowsePage() {
                         {ratedData && ratedData.map((movie) => {
                             if (movie.poster_path){
                                 return (
-                                <Link href={rated === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}`}  key={movie.id} className="flex flex-col items-center relative cursor-pointer">
+                                <Link href={rated === 'movies' ? `/movie/${movie.id}` : `tv/${movie.id}/1/1`}  key={movie.id} className="flex flex-col items-center relative cursor-pointer">
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
                                     <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">{movie.title || movie.name}</h2>
                                     {rated === 'series' && <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">tv</span>}
