@@ -34,7 +34,10 @@ export default function TvPageSeasonEpisode() {
                 setTvUrl(data.url);
                 setTvData(data.data)
                 if (data.data.poster_path){
-                    setTvPoster(`https://image.tmdb.org/t/p/original${data.data.poster_path}`)
+                    setTvPoster({ 
+                        mobile: `https://image.tmdb.org/t/p/original${data.data.poster_path}`,
+                        desktop: `https://image.tmdb.org/t/p/original${data.data.backdrop_path}`
+                    })
                 }
             } catch (error) {
                 console.error("Error fetching TV URL:", error);
@@ -45,10 +48,11 @@ export default function TvPageSeasonEpisode() {
     }, [id, episode]);
 
  return tvData && (
-        <div className="grow relative">
-            {tvPoster && <img src={tvPoster} className="absolute top-0 bottom-0 left-0 right-0"/>}
-            <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent rounded-b-lg"></div>
-            <div className="absolute top-[1%] md:top-[10%] left-0 right-0 pb-20">
+        <div className="relative">
+            {tvPoster && <img src={tvPoster.mobile} className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-cover"/>}
+            {tvPoster && <img src={tvPoster.desktop} className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full"/>}
+            <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
+            <div className="z-[2] pt-4 md:pt-10 pb-20">
                 <h1 className="text-6xl font-bold mb-4 text-center">{tvData?.name}</h1>
                 <div className="flex gap-4 text-white w-fit mx-auto font-bold text-lg">
                     <span>{tvData?.first_air_date}</span>
@@ -74,7 +78,7 @@ export default function TvPageSeasonEpisode() {
                         ))}
                     </select>
                 </div>
-                <div className="p-4 md:p-0 max-w-screen-xl mx-auto md:mb-4">
+                <div className="p-4 md:p-0 max-w-screen-xl mx-auto md:mb-4 md:mt-4">
                 <div className="grid h-64 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
                      {Array.from({ length: tvData.seasons[season === 1 ? season - 1 : season].episode_count }).map((_, index) => (
                         <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
