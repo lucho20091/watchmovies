@@ -46,9 +46,6 @@ export default function TvPageSeasonEpisode() {
         
         fetchTvUrl();
     }, [id, episode]);
-    console.log('tvdata', tvData)
-    console.log('season', season)
-    console.log(season == 1 ? season - 1 : season)
 
  return tvData && (
         <div className="relative">
