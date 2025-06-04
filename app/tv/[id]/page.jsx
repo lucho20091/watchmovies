@@ -7,7 +7,7 @@ export default function TvPage() {
     const [tvData, setTvData] = useState(null);
     const [tvUrl, setTvUrl] = useState(null);
     const [tvPoster, setTvPoster] = useState(null)
-    const [season, setSeason] = useState(1)
+    const [season, setSeason] = useState(0)
     const [episode, setEpisode] = useState(1)
     const [openSeason, setOpenSeason] = useState(null)
     const { id } = useParams()
@@ -32,6 +32,7 @@ export default function TvPage() {
                 const data = await response.json();
                 setTvUrl(data.url);
                 setTvData(data.data)
+                setSeason(data.data.seasons[0].season_number)
                 if (data.data.poster_path){
                     setTvPoster(`https://image.tmdb.org/t/p/original${data.data.poster_path}`)
                 }
@@ -78,13 +79,13 @@ export default function TvPage() {
                 </div>
                 <div className="p-4">
                 <div className="grid h-64 overflow-y-auto p-4 gap-y-4 bg-neutral-950 mt-4">
-                     {Array.from({ length: tvData.seasons[season].episode_count }).map((_, index) => (
+                     {Array.from({ length: tvData.seasons[season - 1].episode_count }).map((_, index) => (
                         <button key={index} onClick={() => setEpisode(index + 1)}>
                             <div className="flex relative border-b-2 border-gray-400 pb-4 cursor-pointer gap-x-4">
-                                <img src={'https://image.tmdb.org/t/p/original' + tvData.seasons[season].poster_path} 
+                                <img src={'https://image.tmdb.org/t/p/original' + tvData.seasons[season - 1].poster_path} 
                                 className="w-12"/>
                                 <span className="absolute bottom-0 left-0 bg-black px-2 py-1 font-bold ">{index + 1}</span>
-                                <p className="line-clamp-3 text-white">{tvData.seasons[season].overview || `${tvData.name} S${season}E${index+1}`}</p>
+                                <p className="line-clamp-3 text-white">{tvData.seasons[season - 1].overview || `${tvData.name} S${season}E${index+1}`}</p>
                             </div>
                         </button>
                      ))}
