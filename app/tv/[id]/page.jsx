@@ -7,7 +7,7 @@ export default function TvPage() {
     const [tvData, setTvData] = useState(null);
     const [tvUrl, setTvUrl] = useState(null);
     const [tvPoster, setTvPoster] = useState(null)
-    const [season, setSeason] = useState(0)
+    const [season, setSeason] = useState(1)
     const [episode, setEpisode] = useState(1)
     const [openSeason, setOpenSeason] = useState(null)
     const { id } = useParams()
@@ -32,7 +32,6 @@ export default function TvPage() {
                 const data = await response.json();
                 setTvUrl(data.url);
                 setTvData(data.data)
-                setSeason(data.data.seasons[0].season_number)
                 if (data.data.poster_path){
                     setTvPoster(`https://image.tmdb.org/t/p/original${data.data.poster_path}`)
                 }
@@ -43,6 +42,20 @@ export default function TvPage() {
         
         fetchTvUrl();
     }, [id, episode]);
+
+    function handleSelectSeason(value){
+        const season = value
+        const url = new URL(window.location)
+        url.searchParams.set('S', season)
+        setSeason(value)
+        window.history.pushState({}, '', url)
+    }
+
+    const getCurrentParams = () => {
+        return new URLSearchParams(window.location.search)
+    }
+
+    getCurrentParams()
 
     console.log("tvdata", tvData)
     // console.log("season", season)
@@ -71,7 +84,7 @@ export default function TvPage() {
                     </span>
                 </div>
                 <div className="grid place-items-center">
-                    <select name="season" id="season" className="bg-neutral-950 px-2 py-1 rounded-sm" onChange={(e) => setSeason(e.target.value)} value={season}>
+                    <select name="season" id="season" className="bg-neutral-950 px-2 py-1 rounded-sm" onChange={(e) => handleSelectSeason(e.target.value)} value={season}>
                         {tvData.seasons.map(item => (
                             <option key={item.id} value={item.season_number}>{item.name}</option>
                         ))}
