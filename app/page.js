@@ -36,7 +36,7 @@ export default async function Home(){
       {trendingMovies && first10TrendingMovies.map((movie) => (
         <Link href={`/movie/${movie.id}`} key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-auto"/>
-          <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 w-full text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">{movie.title}</h2>
+          <h2 className="text-xl font-bold  bg-neutral-950 w-full text-center p-2">{movie.title}</h2>
         </Link>
       ))}
       </div>

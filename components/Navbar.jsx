@@ -20,6 +20,9 @@ export default function Navbar(){
                     <Link href="/browse">
                         <span>Browse</span>
                     </Link>
+                    <Link href="/kdrama">
+                        <span>Kdrama</span>
+                    </Link>
                 </div>
                 <div className="flex items-center gap-4 md:gap-8">
                     <Link href="/search">
@@ -30,15 +33,14 @@ export default function Navbar(){
                             <FaSearch size={22}/>
                         </div>
                     </Link>
-                    <Link href="/settings">
+                    {/* <Link href="/settings">
                         <div className="block md:hidden">
                             <FaCog size={18}/>
                         </div>
                         <div className="hidden md:block">
                             <FaCog size={22}/>
                         </div>
-                        
-                    </Link>
+                    </Link> */}
                 </div>
             </nav>
         </header>

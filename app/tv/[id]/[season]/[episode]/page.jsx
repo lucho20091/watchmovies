@@ -49,6 +49,8 @@ export default function TvPageSeasonEpisode() {
     console.log(tvData)
     console.log(seasonRef)
 
+    console.log(tvData)
+
  return tvData && (
         <div className="relative">
             {tvPoster && <img src={tvPoster.mobile} className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-cover"/>}
