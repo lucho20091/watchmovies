@@ -82,7 +82,7 @@ export default function TvPageSeasonEpisode() {
                         ))}
                     </select>
                 </div>
-                <div className="border-2 border-gray-700 w-[90%] p-4 md:p-0 max-w-screen-xl mx-auto md:mb-4 md:mt-4">
+                <div className="md:border-2 md:border-gray-700 w-[90%] md:p-4 md:p-0 max-w-screen-xl mx-auto md:mb-4 md:mt-4">
                 <div className="grid h-64 md:h-96 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
                      {Array.from({ length: tvData.seasons[seasonRef == 0 ? seasonRef : seasonRef -1].episode_count }).map((_, index) => (
                         <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
