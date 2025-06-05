@@ -64,17 +64,14 @@ export default async function MoviePage({ params }) {
     }
     // movie poster https://image.tmdb.org/t/p/original/${backdrop_path}
     return  (
-        <div className="grow relative">
-                {moviePosters && <img src={`https://image.tmdb.org/t/p/original${moviePosters?.backdrops[0]?.file_path}`} className="absolute top-0 bottom-0 left-0 right-0 hidden md:block"/>}
+        <div className="h-full relative pb-20">
+                {moviePosters && <img src={`https://image.tmdb.org/t/p/original${moviePosters?.backdrops[0]?.file_path}`} className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full mx-auto"/>}
                 {moviePosters && (
-                    <div className="relative overflow-hidden h-full">
-                        {posterMobSrc && <img src={posterMobSrc} className="absolute top-0 bottom-0 left-0 right-0 block md:hidden custom-mobile-img"/>}
-                    </div>
+                        posterMobSrc && <img src={posterMobSrc} className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-contain mx-auto"/>
                     )}
-                <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent rounded-b-lg"></div>
-                <i className="fa-solid fa-arrow-left text-white text-3xl absolute top-4 left-4 cursor-pointer"></i>
-                <div className="absolute top-[10%] left-0 right-0 pb-20">
-                    <h1 className="text-6xl font-bold mb-4 text-center">
+                <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
+                <div className="z-[2] pt-4 md:pt-10 pb-20">
+                    <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
                         {movieData?.title}
                     </h1>
                     <div className="flex gap-4 text-white w-fit mx-auto font-bold text-lg">
@@ -88,7 +85,7 @@ export default async function MoviePage({ params }) {
                         ))}
                     </div>
                     <div className="text-white p-4">
-                        <span className="line-clamp-3 text-base/5 text-center w-[90%] mx-auto font-semibold">{movieData?.overview}</span>
+                        <span className="line-clamp-3 text-base/5 text-center w-[90%] max-w-screen-xl mx-auto font-semibold">{movieData?.overview}</span>
                     </div>
                     {movieUrl ? (
                     <div>

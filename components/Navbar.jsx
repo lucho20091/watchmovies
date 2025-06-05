@@ -5,7 +5,7 @@ import { FaCog } from "react-icons/fa";
 
 export default function Navbar(){
     return (
-        <header className="bg-neutral-950 text-white p-4">
+        <header className="bg-neutral-950 text-white p-4 fixed top-0 w-full z-[1000] mb-[48px]">
             <nav className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-1 bg-red-500 px-2 py-1 rounded-3xl cursor-pointer">

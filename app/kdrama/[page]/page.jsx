@@ -23,7 +23,7 @@ export default async function kdrama({params}){
   const trendingSeries = await getTrendingSeries();
   console.log(trendingSeries)
     return (
-    <div className="grow p-4 pb-12">
+    <div className="p-4 pb-12">
       <div className="container mx-auto">
       <div className="flex items-center justify-center gap-4">
           <h2 className="text-red-500 text-4xl md:text-5xl font-bold">TOP 100</h2>
