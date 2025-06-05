@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
             }
         }
     try{
-        const response = await fetch(`https://vidsrc.xyz/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=es`);
+        const response = await fetch(`https://vidsrc.xyz/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=es&autoplay=1`);
         const responseData = await fetch(`https://api.themoviedb.org/3/tv/${id}?language=en-US`, options)
         const data = await responseData.json()
         return NextResponse.json({url: response.url, data});

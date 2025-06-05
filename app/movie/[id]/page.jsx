@@ -2,7 +2,7 @@ export default async function MoviePage({ params }) {
     const { id } = await params;
     async function fetchMovieUrl(){
         try{
-            const response = await fetch(`https://vidsrc.xyz/embed/movie?tmdb=${id}`);
+            const response = await fetch(`https://vidsrc.xyz/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`);
             return response.url;
         } catch (error){
             return null;
