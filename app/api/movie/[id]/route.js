@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
     const { id } = await params;
     try{
-        const response = await fetch(`https://vidsrc.xyz/embed/movie/${id}`);
+        const response = await fetch(`https://vidsrc.xyz/embed/movie?tmdb=${id}&ds_lang=es`);
         console.log(response.url);
         // const data = await response.json();
         return NextResponse.json(response.url);
