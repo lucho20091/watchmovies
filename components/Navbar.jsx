@@ -20,7 +20,7 @@ export default function Navbar(){
                     <Link href="/browse">
                         <span>Browse</span>
                     </Link>
-                    <Link href="/kdrama">
+                    <Link href="/kdrama/1">
                         <span>Kdrama</span>
                     </Link>
                 </div>
