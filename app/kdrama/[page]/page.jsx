@@ -34,7 +34,7 @@ export default async function kdrama({params}){
       </div>
       <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {trendingSeries && trendingSeries.map((movie) => (
-        <Link href={`/movie/${movie.id}`} key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
+        <Link href={`/tv/${movie.id}/1/1`} key={movie.id} className="flex flex-col items-center relative group cursor-pointer">
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} className="h-auto"/>
           <h2 className="text-xl font-bold bg-neutral-950 w-full text-center p-2 ">{movie.name}</h2>
         </Link>
