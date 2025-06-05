@@ -76,13 +76,13 @@ export default function TvPageSeasonEpisode() {
                     </span>
                 </div>
                 <div className="grid place-items-center">
-                    <select name="season" id="season" className="bg-neutral-950 px-2 py-1 rounded-sm font-bold text-xl border-white border-2" onChange={(e) => setSeasonRef(e.target.value)} value={seasonRef}>
+                    <select name="season" id="season" className="w-36 mx-auto bg-neutral-950 px-2 py-1 rounded-sm font-bold text-xl border-white border-2 text-center" onChange={(e) => setSeasonRef(e.target.value)} value={seasonRef}>
                         {tvData.seasons.map(item => (
                             <option key={item.id} value={item.season_number}>{item.name}</option>
                         ))}
                     </select>
                 </div>
-                <div className="md:border-2 md:border-gray-700 w-[90%]  md:p-0 max-w-screen-xl mx-auto md:mb-4 mt-4">
+                <div className="md:border-2 md:border-gray-700 w-[90%] md:p-0 max-w-screen-xl mx-auto md:mb-4 mt-4">
                 <div className="grid h-64 md:h-96 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
                      {Array.from({ length: tvData.seasons[seasonRef == 0 ? seasonRef : seasonRef -1].episode_count }).map((_, index) => (
                         <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
