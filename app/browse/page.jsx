@@ -55,13 +55,6 @@ export default function BrowsePage() {
         fetchGenreMovies()
     }, [genres])
 
-    function scrollToBottom(){
-        window.scrollTo({
-            top: document.documentElement.scrollHeight + 80,
-            behavior: 'smooth'
-        });
-    }
-
     return (
             <div className="overflow-x-hidden">
                 <div className="p-4 container mx-auto">
@@ -135,37 +128,32 @@ export default function BrowsePage() {
                         className={`px-4 py-2 border-b-2 ${genres === 'comedy' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                         onClick={() => {
                             setGenres('comedy')
-                            scrollToBottom()
+
                         }}>Comedy</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'action' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                         onClick={() => {
                             setGenres('action')
-                            scrollToBottom()
                         }}>Action</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'horror' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                         onClick={() => {
                             setGenres('horror')
-                            scrollToBottom()
                         }}>Horror</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'romance' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                         onClick={() => {
                             setGenres('romance')
-                            scrollToBottom()
                         }}>Romance</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'drama' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                         onClick={() => {
                             setGenres('drama')
-                            scrollToBottom()
                         }}>Drama</button>
                         <button 
                         className={`px-4 py-2 border-b-2 ${genres === 'scifi' ? 'border-red-500' : 'border-white'} cursor-pointer`}
                         onClick={() => {
                             setGenres('scifi')
-                            scrollToBottom()
                         }}>Scifi</button>
                     </div>
                 </div>
