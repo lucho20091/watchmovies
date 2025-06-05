@@ -57,7 +57,7 @@ export default function TvPageSeasonEpisode() {
             {tvPoster && <img src={tvPoster.desktop} className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full"/>}
             <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
             <div className="z-[2] pt-4 md:pt-10 pb-20">
-                <h1 className="text-6xl font-bold mb-4 text-center">{tvData?.name}</h1>
+                <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">{tvData?.name}</h1>
                 <div className="flex gap-4 text-white w-fit mx-auto font-bold text-lg">
                     <span>{tvData?.first_air_date}</span>
                     <span>⭐{tvData?.vote_average.toFixed(1)}</span>
@@ -82,7 +82,7 @@ export default function TvPageSeasonEpisode() {
                         ))}
                     </select>
                 </div>
-                <div className="md:border-2 md:border-gray-700 w-[90%] md:p-4 md:p-0 max-w-screen-xl mx-auto md:mb-4 md:mt-4">
+                <div className="md:border-2 md:border-gray-700 w-[90%] md:p-4 md:p-0 max-w-screen-xl mx-auto md:mb-4 mt-4">
                 <div className="grid h-64 md:h-96 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
                      {Array.from({ length: tvData.seasons[seasonRef == 0 ? seasonRef : seasonRef -1].episode_count }).map((_, index) => (
                         <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
