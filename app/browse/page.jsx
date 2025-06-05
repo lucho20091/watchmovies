@@ -21,7 +21,7 @@ export default function BrowsePage() {
                 const data = await response.json();
                 setTrendingData(data);
             } catch(e){
-                // console.log(e)
+    
             }
         }
         fetchTrendingMovies()
@@ -36,7 +36,6 @@ export default function BrowsePage() {
                 const data = await response.json();
                 setRatedData(data);
             } catch(e){
-                // console.log(e)
             }
         }
         fetchRatedMovies()
@@ -51,7 +50,6 @@ export default function BrowsePage() {
                 const data = await response.json();
                 setMoviesGenresData(data);
             } catch(e){
-                // console.log(e)
             }
         }
         fetchGenreMovies()
@@ -172,7 +170,7 @@ export default function BrowsePage() {
                     </div>
                 </div>
                 <div className="flex justify-center mt-4">
-                    <div className="grid grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-4 lg:grid-cols-6 gap-4  h-44 sm:h-[462px] md:h-[564px] xl:h-[693px] 2xl:h-[900px]">
                         {moviesGenresData && moviesGenresData.map((movie) => {
                             if (movie.poster_path){
                                 return (
