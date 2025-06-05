@@ -9,7 +9,7 @@ export default async function kdrama(){
       }
     }
     try{
-      const response = await fetch('https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&with_origin_country=KR', options);
+      const response = await fetch('https://api.themoviedb.org/3/discover/tv?sort_by=vote_count.desc&with_origin_country=KR', options);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
