@@ -50,6 +50,13 @@ export default function TvPageSeasonEpisode() {
     console.log(seasonRef)
 
     console.log(tvData)
+    let something = null
+    console.log(something)
+    
+    setTimeout(() => {
+        something = true
+        console.log(something)
+    }, 1000)
 
  return tvData && (
         <div className="relative">
@@ -99,6 +106,7 @@ export default function TvPageSeasonEpisode() {
                 {tvUrl ? (
                     <div>
                         <iframe 
+                        sandbox={something && 'allow-scripts'}
                         src={tvUrl} 
                         allow="fullscreen" 
                         allowFullScreen

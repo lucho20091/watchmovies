@@ -53,6 +53,14 @@ export default async function MoviePage({ params }) {
     const movieData = await fetchMovieData();
     const moviePosters = await fetchMoviePosters()
 
+    let something = null
+    console.log(something)
+    
+    setTimeout(() => {
+        something = true
+        console.log(something)
+    }, 1000)
+
     const findPosterMobile = moviePosters.logos.find((item) => {
         if (item.height > 500){
             return item
@@ -90,6 +98,7 @@ export default async function MoviePage({ params }) {
                     {movieUrl ? (
                     <div>
                         <iframe 
+                        sandbox={something && 'allow-scripts'}
                         src={movieUrl} 
                         allow="fullscreen" 
                         allowFullScreen
