@@ -11,8 +11,6 @@ export default function TvPageSeasonEpisode() {
     const [tvPoster, setTvPoster] = useState(null)
     const [seasonRef, setSeasonRef] = useState(season)
 
-
-
     useEffect(() => {
         if (!id) return; 
 
@@ -46,17 +44,6 @@ export default function TvPageSeasonEpisode() {
         
         fetchTvUrl();
     }, [id, episode]);
-    console.log(tvData)
-    console.log(seasonRef)
-
-    console.log(tvData)
-    let something = null
-    console.log(something)
-    
-    setTimeout(() => {
-        something = true
-        console.log(something)
-    }, 1000)
 
  return tvData && (
         <div className="relative">
@@ -106,7 +93,6 @@ export default function TvPageSeasonEpisode() {
                 {tvUrl ? (
                     <div>
                         <iframe 
-                        sandbox={something && 'allow-scripts'}
                         src={tvUrl} 
                         allow="fullscreen" 
                         allowFullScreen
