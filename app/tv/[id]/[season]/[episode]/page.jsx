@@ -105,12 +105,4 @@ export default function TvPageSeasonEpisode() {
             </div>
         </div>
     )
-   
-
-
-
-
-
-
-
 }
