@@ -11,7 +11,7 @@ export default function TvPageSeasonEpisode() {
   const [tvPoster, setTvPoster] = useState(null);
   const [seasonRef, setSeasonRef] = useState(season);
 
-  console.log(tvData);
+  //   console.log(tvData);
 
   useEffect(() => {
     if (!id) return;
@@ -33,7 +33,7 @@ export default function TvPageSeasonEpisode() {
         }
 
         const data = await response.json();
-        // setTvUrl(data.url);
+        setTvUrl(data.url);
         setTvData(data.data);
         if (data.data.poster_path) {
           setTvPoster({
