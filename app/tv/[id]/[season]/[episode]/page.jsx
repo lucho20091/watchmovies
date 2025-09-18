@@ -51,7 +51,7 @@ export default function TvPageSeasonEpisode() {
 
   return (
     tvData && (
-      <div className="relative">
+      <div className="relative pb-80">
         {tvPoster && (
           <img
             src={tvPoster.mobile}

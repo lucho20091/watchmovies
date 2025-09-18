@@ -51,7 +51,7 @@ export default async function Home() {
 
   console.log(first10TrendingSeries);
   return (
-    <div className="grow p-4 pb-8">
+    <div className="grow p-4 pb-80">
       <div className="container mx-auto">
         <div className="flex items-center justify-center gap-4">
           <h2 className="text-red-500 text-4xl md:text-5xl font-bold">
@@ -62,8 +62,8 @@ export default async function Home() {
             <span>Today</span>
           </div>
         </div>
-        <h2 class="text-3xl font-bold mb-8 flex items-center">
-          <span class="bg-red-600 w-2 h-8 mr-3"></span>
+        <h2 className="text-3xl font-bold mb-8 flex items-center">
+          <span className="bg-red-600 w-2 h-8 mr-3"></span>
           TOP 10 MOVIES
         </h2>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -85,8 +85,8 @@ export default async function Home() {
               </Link>
             ))}
         </div>
-        <h2 class="text-3xl font-bold mb-8 flex items-center mt-4 md:mt-8">
-          <span class="bg-red-600 w-2 h-8 mr-3"></span>
+        <h2 className="text-3xl font-bold mb-8 flex items-center mt-4 md:mt-8">
+          <span className="bg-red-600 w-2 h-8 mr-3"></span>
           TOP 10 SERIES
         </h2>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">

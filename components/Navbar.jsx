@@ -5,23 +5,23 @@ import { FaCog } from "react-icons/fa";
 
 export default function Navbar() {
   return (
-    <nav class="bg-gray-800 py-4 px-6 shadow-lg">
-      <div class="container mx-auto flex justify-between items-center">
-        <Link href="/" class="text-xl md:text-2xl font-bold text-red-500">
+    <nav className="bg-gray-800 py-4 px-6 shadow-lg">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link href="/" className="text-xl md:text-2xl font-bold text-red-500">
           MoviesFree
         </Link>
-        <div class="flex space-x-2 md:space-x-6">
-          <Link href="/" class="hover:text-red-400 transition">
+        <div className="flex space-x-2 md:space-x-6">
+          <Link href="/" className="hover:text-red-400 transition">
             Home
           </Link>
-          <Link href="/browse" class="hover:text-red-400 transition">
+          <Link href="/browse" className="hover:text-red-400 transition">
             Browse
           </Link>
-          <Link href="/kdrama/1" class="hover:text-red-400 transition">
+          <Link href="/kdrama/1" className="hover:text-red-400 transition">
             Kdrama
           </Link>
         </div>
-        <div class="flex items-center space-x-4">
+        <div className="flex items-center space-x-4">
           <Link href="/search">
             <div className="flex jusitfy-center items-center gap-2 md:hidden">
               <span className="hidden">Search</span>
