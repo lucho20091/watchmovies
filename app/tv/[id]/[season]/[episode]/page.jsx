@@ -11,6 +11,8 @@ export default function TvPageSeasonEpisode() {
   const [tvPoster, setTvPoster] = useState(null);
   const [seasonRef, setSeasonRef] = useState(season);
 
+  console.log(tvData);
+
   useEffect(() => {
     if (!id) return;
 
@@ -31,7 +33,7 @@ export default function TvPageSeasonEpisode() {
         }
 
         const data = await response.json();
-        setTvUrl(data.url);
+        // setTvUrl(data.url);
         setTvData(data.data);
         if (data.data.poster_path) {
           setTvPoster({
@@ -109,8 +111,11 @@ export default function TvPageSeasonEpisode() {
             <div className="grid h-64 md:h-96 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
               {Array.from({
                 length:
-                  tvData.seasons[seasonRef == 0 ? seasonRef : seasonRef - 1]
-                    .episode_count,
+                  tvData.seasons[
+                    tvData.seasons[0].season_number == 0
+                      ? seasonRef
+                      : seasonRef - 1
+                  ].episode_count,
               }).map((_, index) => (
                 <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
                   <div className="flex relative border-b-2 border-gray-400 pb-4 cursor-pointer gap-x-4">
@@ -127,7 +132,11 @@ export default function TvPageSeasonEpisode() {
                       {index + 1}
                     </span>
                     <p className="line-clamp-3 text-white">
-                      {tvData.seasons[seasonRef].overview ||
+                      {tvData?.seasons[
+                        tvData.seasons[0].season_number == 0
+                          ? seasonRef
+                          : seasonRef - 1
+                      ]?.overview ||
                         `${tvData.name} S${seasonRef}E${index + 1}`}
                     </p>
                   </div>
