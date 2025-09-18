@@ -51,7 +51,7 @@ export default async function Home() {
 
   console.log(first10TrendingSeries);
   return (
-    <div className="grow p-4 pb-80">
+    <div className=" mt-4 md:mt-[64px] grow p-4 pb-80">
       <div className="container mx-auto">
         <div className="flex items-center justify-center gap-4">
           <h2 className="text-red-500 text-4xl md:text-5xl font-bold">

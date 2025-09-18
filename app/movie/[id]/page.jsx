@@ -73,7 +73,7 @@ export default async function MoviePage({ params }) {
   }
   // movie poster https://image.tmdb.org/t/p/original/${backdrop_path}
   return (
-    <div className="h-full relative pb-20">
+    <div className="h-full relative pb-80">
       {moviePosters && (
         <img
           src={`https://image.tmdb.org/t/p/original${moviePosters?.backdrops[0]?.file_path}`}
