@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import MovieCard from "@/components/Movie-card";
 
-export default function SearchPage() {
+// Separate component that uses useSearchParams
+function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchInputRef = useRef(null);
@@ -101,5 +102,39 @@ export default function SearchPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Loading fallback component
+function SearchLoading() {
+  return (
+    <div className="md:grid md:place-items-center grow p-4">
+      <div className="container mx-auto">
+        <div className="mb-4 flex items-center max-w-md mx-auto">
+          <input
+            type="text"
+            placeholder="Search for movies or shows..."
+            className="p-2 border border-gray-300 rounded w-full"
+            disabled
+          />
+          <button
+            type="button"
+            className="bg-white text-black font-bold p-2 rounded ml-2 opacity-50"
+            disabled
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Main component that wraps SearchContent in Suspense
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SearchLoading />}>
+      <SearchContent />
+    </Suspense>
   );
 }
