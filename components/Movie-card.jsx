@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, isSeries }) {
+  console.log(movie);
   return (
     <Link
       href={
-        movie.media_type === "tv" ? `/tv/${movie.id}/1/1` : `/movie/${movie.id}`
+        movie.media_type === "tv" || isSeries
+          ? `/tv/${movie.id}/1/1`
+          : `/movie/${movie.id}`
       }
       className="flex flex-col items-center relative group cursor-pointer"
     >

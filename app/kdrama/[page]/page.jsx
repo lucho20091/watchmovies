@@ -41,7 +41,7 @@ export default async function kdrama({ params }) {
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-10 gap-4">
           {trendingSeries &&
             trendingSeries.map((movie) => (
-              <MovieCard movie={movie} key={movie.id} />
+              <MovieCard movie={movie} isSeries={true} key={movie.id} />
             ))}
         </div>
         <div className="flex items-center justify-center gap-4 mt-12 md:mt-12">

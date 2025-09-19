@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import MovieCard from "@/components/Movie-card";
 
 export default function SearchPage() {
   const router = useRouter();
@@ -94,29 +95,7 @@ export default function SearchPage() {
           {movies &&
             movies.map((movie) => {
               if (movie.poster_path) {
-                return (
-                  <Link
-                    href={
-                      movie.media_type === "movie"
-                        ? `/movie/${movie.id}`
-                        : `/tv/${movie.id}/1/1`
-                    }
-                    key={movie.id}
-                    className="flex flex-col items-center relative group cursor-pointer"
-                  >
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title || movie.name}
-                      className="h-auto"
-                    />
-                    <h2 className="text-xl font-bold absolute bottom-0 bg-neutral-950 w-full text-center p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                      {movie.title || movie.name}
-                    </h2>
-                    <span className="absolute top-4 right-4 bg-black px-2 py-1 text-xs font-bold">
-                      {movie.media_type}
-                    </span>
-                  </Link>
-                );
+                return <MovieCard movie={movie} key={movie.id} />;
               }
             })}
         </div>
