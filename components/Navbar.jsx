@@ -2,13 +2,17 @@ import Link from "next/link";
 import { FaHome } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
+import { MdLocalMovies } from "react-icons/md";
 
 export default function Navbar() {
   return (
     <nav className="bg-gray-800 py-4 px-6 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl md:text-2xl font-bold text-red-500">
-          MoviesFree
+        <Link
+          href="/"
+          className="flex  gap-2text-xl md:text-2xl font-bold text-red-500"
+        >
+          <span>MoviesFree</span>
         </Link>
         <div className="flex space-x-2 md:space-x-6">
           <Link href="/" className="hover:text-red-400 transition">
@@ -23,12 +27,12 @@ export default function Navbar() {
         </div>
         <div className="flex items-center space-x-4">
           <Link href="/search">
-            <div className="flex jusitfy-center items-center gap-2 md:hidden">
+            <div className="flex jusitfy-center items-center gap-2 md:hidden hover:text-red-400 transition">
               <span className="hidden">Search</span>
               <FaSearch size={18} />
             </div>
 
-            <div className="hidden md:flex jusitfy-center items-center gap-2">
+            <div className="hidden md:flex jusitfy-center items-center gap-2 hover:text-red-400 transition">
               <span>Search</span>
               <FaSearch size={22} />
             </div>

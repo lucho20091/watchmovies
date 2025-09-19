@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MovieCard from "@/components/Movie-card";
 export default async function kdrama({ params }) {
   const { page } = await params;
   async function getTrendingSeries() {
@@ -26,7 +27,7 @@ export default async function kdrama({ params }) {
   const trendingSeries = await getTrendingSeries();
   console.log(trendingSeries);
   return (
-    <div className="p-4 pb-100">
+    <div className="p-4">
       <div className="container mx-auto">
         <div className="flex items-center justify-center gap-4">
           <h2 className="text-red-500 text-4xl md:text-5xl font-bold">
@@ -37,23 +38,10 @@ export default async function kdrama({ params }) {
             <span>Series</span>
           </div>
         </div>
-        <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-10 gap-4">
           {trendingSeries &&
             trendingSeries.map((movie) => (
-              <Link
-                href={`/tv/${movie.id}/1/1`}
-                key={movie.id}
-                className="flex flex-col items-center relative group cursor-pointer"
-              >
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.name}
-                  className="h-auto"
-                />
-                <h2 className="text-xl font-bold bg-neutral-950 w-full text-center p-2 ">
-                  {movie.name}
-                </h2>
-              </Link>
+              <MovieCard movie={movie} key={movie.id} />
             ))}
         </div>
         <div className="flex items-center justify-center gap-4 mt-12 md:mt-12">

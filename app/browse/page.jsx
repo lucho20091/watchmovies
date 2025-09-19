@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import MovieCard from "@/components/Movie-card";
 export default function BrowsePage() {
   const [trending, setTrending] = useState("movies");
   const [rated, setRated] = useState("series");
@@ -52,8 +53,8 @@ export default function BrowsePage() {
   }, [genres]);
 
   return (
-    <div className="overflow-x-hidden pb-80">
-      <div className="p-4 container mx-auto">
+    <div className="overflow-x-hidden">
+      <div className="p-4 md:p-0 md:pt-4 container mx-auto">
         <div className="text-white flex items-center justify-between">
           <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">
             <span className="hidden md:inline-block">What's</span> trending{" "}
@@ -79,41 +80,17 @@ export default function BrowsePage() {
           </div>
         </div>
         <div className="flex justify-center mt-4">
-          <div className="grid grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-10 gap-4">
             {trendingData &&
               trendingData.map((movie) => {
                 if (movie.poster_path) {
-                  return (
-                    <Link
-                      href={
-                        trending === "movies"
-                          ? `/movie/${movie.id}`
-                          : `tv/${movie.id}/1/1`
-                      }
-                      key={movie.id}
-                      className="flex flex-col items-center justify-between cursor-pointer relative"
-                    >
-                      <img
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.title}
-                        className="h-auto"
-                      />
-                      <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">
-                        {movie.title || movie.name}
-                      </h2>
-                      {trending === "series" && (
-                        <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">
-                          {movie.media_type}
-                        </span>
-                      )}
-                    </Link>
-                  );
+                  return <MovieCard movie={movie} key={movie.id} />;
                 }
               })}
           </div>
         </div>
       </div>
-      <div className="p-4 container mx-auto">
+      <div className="p-4 md:p-0 md:pt-4 container mx-auto">
         <div className="text-white flex items-center justify-between">
           <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">
             Top Rated
@@ -138,41 +115,17 @@ export default function BrowsePage() {
           </div>
         </div>
         <div className="flex justify-center mt-4">
-          <div className="grid grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-10 gap-4">
             {ratedData &&
               ratedData.map((movie) => {
                 if (movie.poster_path) {
-                  return (
-                    <Link
-                      href={
-                        rated === "movies"
-                          ? `/movie/${movie.id}`
-                          : `tv/${movie.id}/1/1`
-                      }
-                      key={movie.id}
-                      className="flex flex-col items-center relative cursor-pointer"
-                    >
-                      <img
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.title}
-                        className="h-auto"
-                      />
-                      <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">
-                        {movie.title || movie.name}
-                      </h2>
-                      {rated === "series" && (
-                        <span className="absolute top-1 right-1 bg-black px-2 py-1 text-xs font-bold">
-                          tv
-                        </span>
-                      )}
-                    </Link>
-                  );
+                  return <MovieCard movie={movie} key={movie.id} />;
                 }
               })}
           </div>
         </div>
       </div>
-      <div className="p-4 container mx-auto mb-20">
+      <div className="p-4 md:p-0 md:pt-4 container mx-auto">
         <div className="text-white flex items-center justify-between">
           <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2">
             <span className="hidden md:inline-block">Discover by </span> Genres
@@ -241,26 +194,11 @@ export default function BrowsePage() {
           </div>
         </div>
         <div className="flex justify-center mt-4">
-          <div className="grid grid-cols-4 lg:grid-cols-6 gap-4  h-44 sm:h-[462px] md:h-[564px] xl:h-[693px] 2xl:h-[900px]">
+          <div className="grid grid-cols-4 lg:grid-cols-6 gap-4 xl:grid-cols-10">
             {moviesGenresData &&
               moviesGenresData.map((movie) => {
                 if (movie.poster_path) {
-                  return (
-                    <Link
-                      href={`/movie/${movie.id}`}
-                      key={movie.id}
-                      className="flex flex-col items-center relative cursor-pointer"
-                    >
-                      <img
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.title}
-                        className="h-auto"
-                      />
-                      <h2 className="text-xs lg:text-2xl lg:mt-4 font-bold bg-neutral-950 text-center line-clamp-1">
-                        {movie.title || movie.name}
-                      </h2>
-                    </Link>
-                  );
+                  return <MovieCard movie={movie} key={movie.id} />;
                 }
               })}
           </div>
