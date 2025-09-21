@@ -25,7 +25,7 @@ export default async function kdrama({ params }) {
     }
   }
   const trendingSeries = await getTrendingSeries();
-  console.log(trendingSeries);
+
   return (
     <div className="p-4">
       <div className="container mx-auto">

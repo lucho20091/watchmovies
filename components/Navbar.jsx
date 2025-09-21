@@ -12,7 +12,6 @@ export default function Navbar() {
 
   // Helper function to check if link is active
   const isActive = (path) => {
-    console.log(pathname, path);
     if (path === "/") {
       return pathname === "/";
     }

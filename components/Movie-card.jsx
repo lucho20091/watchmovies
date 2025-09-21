@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 export default function MovieCard({ movie, isSeries }) {
-  //   console.log(movie);
   return (
     <Link
       href={

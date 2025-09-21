@@ -11,8 +11,6 @@ export default function TvPageSeasonEpisode() {
   const [tvPoster, setTvPoster] = useState(null);
   const [seasonRef, setSeasonRef] = useState(season);
 
-  //   console.log(tvData);
-
   useEffect(() => {
     if (!id) return;
 

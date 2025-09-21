@@ -52,8 +52,6 @@ export default async function Home() {
   const first10TrendingSeries = trendingSeries.slice(0, 10);
   const first10TrendingMovies = trendingMovies.slice(0, 10);
 
-  console.log(first10TrendingSeries);
-  console.log(first10TrendingMovies);
   return (
     <div className=" mt-4 grow p-4">
       <div className="container mx-auto">
