@@ -83,6 +83,7 @@ export default function BrowsePage() {
           <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-10 gap-4">
             {trendingData &&
               trendingData.map((movie) => {
+                console.log({ movie });
                 if (movie.poster_path) {
                   return <MovieCard movie={movie} key={movie.id} />;
                 }
@@ -118,8 +119,15 @@ export default function BrowsePage() {
           <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-10 gap-4">
             {ratedData &&
               ratedData.map((movie) => {
+                console.log({ movie });
                 if (movie.poster_path) {
-                  return <MovieCard movie={movie} key={movie.id} />;
+                  return (
+                    <MovieCard
+                      movie={movie}
+                      key={movie.id}
+                      isSeries={rated === "series" ? true : false}
+                    />
+                  );
                 }
               })}
           </div>
