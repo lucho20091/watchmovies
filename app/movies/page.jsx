@@ -1,11 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import MovieCard from "@/components/MovieCard";
 import CategorySelector from "@/components/CategorySelector";
-import MovieCardSkeleton from "@/components/MovieCardSkeleton"; // Import the new skeleton component
+import MovieCardSkeleton from "@/components/MovieCardSkeleton";
+import PageLoadingSkeleton from "@/components/PageLoadingSkeleton"; // Import the page loading skeleton
 
-export default function MoviesPage() {
+// Client component that uses useSearchParams
+function MoviesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -163,5 +165,14 @@ export default function MoviesPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// Main MoviesPage component that wraps MoviesContent in Suspense
+export default function MoviesPage() {
+  return (
+    <Suspense fallback={<PageLoadingSkeleton />}>
+      <MoviesContent />
+    </Suspense>
   );
 }
