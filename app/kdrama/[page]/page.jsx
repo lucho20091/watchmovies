@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MovieCard from "@/components/Movie-card";
+import MovieCard from "@/components/MovieCard";
 export default async function kdrama({ params }) {
   const { page } = await params;
   async function getTrendingSeries() {

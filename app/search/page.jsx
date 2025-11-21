@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef, Suspense } from "react";
-import MovieCard from "@/components/Movie-card";
+import MovieCard from "@/components/MovieCard";
 
 // Separate component that uses useSearchParams
 function SearchContent() {

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import MovieCard from "@/components/Movie-card";
+import MovieCard from "@/components/MovieCard";
 
 export default function BrowsePage() {
   const [trendingType, setTrendingType] = useState("movies");

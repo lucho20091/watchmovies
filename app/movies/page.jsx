@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import MovieCard from "@/components/Movie-card";
+import MovieCard from "@/components/MovieCard";
 
 export default function MoviesPage() {
   const router = useRouter();
