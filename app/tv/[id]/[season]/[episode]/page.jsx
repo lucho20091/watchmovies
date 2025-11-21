@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import Image from "next/image"; // Import the Image component
 import Link from "next/link";
 
 export default function TvPageSeasonEpisode() {
@@ -45,21 +45,29 @@ export default function TvPageSeasonEpisode() {
     }
 
     fetchTvUrl();
-  }, [id, episode]);
+  }, [id, episode, season]); // Added season to dependency array
 
   return (
     tvData && (
       <div className="relative mb-[-16px] md:mb-[-80px]">
-        {tvPoster && (
-          <img
+        {tvPoster && tvPoster.mobile && (
+          <Image
             src={tvPoster.mobile}
+            alt={tvData?.name || "TV Series Poster"}
+            fill
+            sizes="100vw"
             className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-cover"
+            priority
           />
         )}
-        {tvPoster && (
-          <img
+        {tvPoster && tvPoster.desktop && (
+          <Image
             src={tvPoster.desktop}
+            alt={tvData?.name || "TV Series Backdrop"}
+            fill
+            sizes="100vw"
             className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full"
+            priority
           />
         )}
         <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
@@ -117,15 +125,22 @@ export default function TvPageSeasonEpisode() {
               }).map((_, index) => (
                 <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
                   <div className="flex relative border-b-2 border-gray-400 pb-4 cursor-pointer gap-x-4">
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/original" +
-                        tvData.seasons[
-                          seasonRef == 0 ? seasonRef : seasonRef - 1
-                        ].poster_path
-                      }
-                      className="w-12"
-                    />
+                    {tvData.seasons[
+                      seasonRef == 0 ? seasonRef : seasonRef - 1
+                    ]?.poster_path && (
+                      <Image
+                        src={
+                          "https://image.tmdb.org/t/p/original" +
+                          tvData.seasons[
+                            seasonRef == 0 ? seasonRef : seasonRef - 1
+                          ].poster_path
+                        }
+                        alt={`Season ${seasonRef} Episode ${index + 1} poster`}
+                        width={48} // Set a fixed width for the small poster
+                        height={72} // Set a fixed height for the small poster
+                        className="w-12 object-cover"
+                      />
+                    )}
                     <span className="absolute bottom-4 left-0 bg-red-500 px-2 py-1 font-bold ">
                       {index + 1}
                     </span>

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
-  console.log("ran backend");
+  // console.log("ran backend"); // Removed console.log
   const { id } = await params;
   const season = request.nextUrl.searchParams.get("season");
   const episode = request.nextUrl.searchParams.get("episode");
@@ -22,7 +22,7 @@ export async function GET(request, { params }) {
     const data = await responseData.json();
     return NextResponse.json({ url: response.url, data });
   } catch (error) {
-    console.log(error);
+    console.error(error); // Changed to console.error for actual errors
     return NextResponse.json(
       { error: "Failed to fetch data" },
       { status: 500 }

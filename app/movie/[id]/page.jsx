@@ -1,3 +1,6 @@
+import Image from "next/image"; // Import the Image component
+import Link from "next/link";
+
 export default async function MoviePage({ params }) {
   const { id } = await params;
   async function fetchMovieUrl() {
@@ -61,7 +64,7 @@ export default async function MoviePage({ params }) {
   const movieData = await fetchMovieData();
   const moviePosters = await fetchMoviePosters();
 
-  const findPosterMobile = moviePosters.logos.find((item) => {
+  const findPosterMobile = moviePosters?.logos?.find((item) => {
     if (item.height > 500) {
       return item;
     }
@@ -71,19 +74,27 @@ export default async function MoviePage({ params }) {
     posterMobSrc =
       "https://image.tmdb.org/t/p/original" + findPosterMobile.file_path;
   }
-  // movie poster https://image.tmdb.org/t/p/original/${backdrop_path}
+  
   return (
     <div className="h-full relative mb-[-16px] md:mb-[-80px]">
-      {moviePosters && (
-        <img
-          src={`https://image.tmdb.org/t/p/original${moviePosters?.backdrops[0]?.file_path}`}
+      {moviePosters && moviePosters.backdrops[0]?.file_path && (
+        <Image
+          src={`https://image.tmdb.org/t/p/original${moviePosters.backdrops[0].file_path}`}
+          alt={movieData?.title || "Movie Backdrop"}
+          fill
+          sizes="100vw"
           className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full mx-auto"
+          priority
         />
       )}
       {moviePosters && posterMobSrc && (
-        <img
+        <Image
           src={posterMobSrc}
+          alt={movieData?.title || "Movie Poster"}
+          fill
+          sizes="100vw"
           className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-contain mx-auto"
+          priority
         />
       )}
       <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
@@ -97,7 +108,7 @@ export default async function MoviePage({ params }) {
           <span>{movieData?.runtime} minutes</span>
         </div>
         <div className="flex justify-center items-center mt-4 gap-4">
-          {movieData.genres.map((item) => (
+          {movieData?.genres?.map((item) => (
             <span
               key={item?.id}
               className="bg-red-800 text-orange-200 font-bold  px-2 py-1 rounded-sm custom-shadow cursor-pointer"
