@@ -28,7 +28,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 py-4 px-6 shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-800 py-5 px-6 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
