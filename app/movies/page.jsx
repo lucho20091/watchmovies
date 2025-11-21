@@ -27,7 +27,6 @@ export default function MoviesPage() {
       try {
         setMoviesData(null);
         let url = "";
-        let isGenreSearch = false;
 
         if (selectedCategory === "popular") {
           url = `/api/movies/trending?page=${currentPage}`;
@@ -38,29 +37,14 @@ export default function MoviesPage() {
         } else {
           // It's a genre
           url = `/api/movies/genres/${selectedCategory}?page=${currentPage}`;
-          isGenreSearch = true;
         }
 
         const response = await fetch(url);
         const data = await response.json();
 
-        if (isGenreSearch || selectedCategory === "recent") {
-          setMoviesData(data.results.slice(0, 18)); // Limit to 18 results
-          setTotalPages(data.total_pages);
-        } else {
-          // For trending/rated, the API routes already return a full page (20 results)
-          // We still slice to 18 for consistency in display
-          setMoviesData(data.slice(0, 18));
-          // For trending/rated, we assume 20 items per page for total_pages calculation
-          // This is a simplification, ideally the API would return total_pages
-          // For now, we'll just use a placeholder or calculate based on total_results if available
-          // Since the API routes for trending/rated don't return total_pages, we'll estimate or keep it simple.
-          // For now, let's assume a fixed number of pages or just disable pagination for these specific types if total_pages isn't available.
-          // Given the current API structure, it's better to fetch all results for trending/rated and not paginate them.
-          // Let's adjust the API calls for popular/rated to also return total_pages.
-          // For now, I'll set totalPages to 1 for popular/rated to avoid pagination issues.
-          setTotalPages(1); // Temporarily disable pagination for popular/rated until API is updated
-        }
+        // All API routes now return { results, total_pages, total_results }
+        setMoviesData(data.results.slice(0, 18)); // Limit to 18 results for display
+        setTotalPages(data.total_pages);
       } catch (e) {
         console.error("Error fetching movie data:", e);
       }

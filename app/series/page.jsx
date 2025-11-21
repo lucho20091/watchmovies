@@ -27,7 +27,6 @@ export default function SeriesPage() {
       try {
         setSeriesData(null);
         let url = "";
-        let isGenreSearch = false;
 
         if (selectedCategory === "popular") {
           url = `/api/series/trending?page=${currentPage}`;
@@ -38,22 +37,14 @@ export default function SeriesPage() {
         } else {
           // It's a genre
           url = `/api/series/genres/${selectedCategory}?page=${currentPage}`;
-          isGenreSearch = true;
         }
 
         const response = await fetch(url);
         const data = await response.json();
 
-        if (isGenreSearch || selectedCategory === "recent") {
-          setSeriesData(data.results.slice(0, 18)); // Limit to 18 results
-          setTotalPages(data.total_pages);
-        } else {
-          // For trending/rated, the API routes already return a full page (20 results)
-          // We still slice to 18 for consistency in display
-          setSeriesData(data.slice(0, 18));
-          // Temporarily disable pagination for popular/rated until API is updated to return total_pages
-          setTotalPages(1);
-        }
+        // All API routes now return { results, total_pages, total_results }
+        setSeriesData(data.results.slice(0, 18)); // Limit to 18 results for display
+        setTotalPages(data.total_pages);
       } catch (e) {
         console.error("Error fetching series data:", e);
       }
@@ -139,7 +130,9 @@ export default function SeriesPage() {
           {seriesData &&
             seriesData.map((series) => {
               if (series.poster_path) {
-                return <MovieCard movie={series} key={series.id} isSeries={true} />;
+                return (
+                  <MovieCard movie={series} key={series.id} isSeries={true} />
+                );
               }
             })}
         </div>

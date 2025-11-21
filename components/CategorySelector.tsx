@@ -16,11 +16,11 @@ interface CategorySelectorProps {
 export default function CategorySelector({ categories, activeCategory, onCategoryChange }: CategorySelectorProps) {
   return (
     <div className="w-full overflow-x-auto whitespace-nowrap py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-neutral-900">
-      <div className="inline-flex space-x-4 px-4 md:px-0">
+      <div className="flex justify-between space-x-4 px-4 md:px-0"> {/* Changed to flex justify-between */}
         {categories.map((category) => (
           <button
             key={category.value}
-            className={`relative pb-2 text-lg font-semibold transition-colors duration-200 ease-in-out
+            className={`relative pb-2 text-lg font-semibold transition-colors duration-200 ease-in-out flex-shrink-0
               ${activeCategory === category.value ? 'text-red-500' : 'text-white hover:text-red-300'}`}
             onClick={() => onCategoryChange(category.value)}
           >
