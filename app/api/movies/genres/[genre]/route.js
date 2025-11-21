@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
   const { genre } = await params;
+  const sortBy = request.nextUrl.searchParams.get("sort_by") || "popularity.desc"; // Default sort by popularity
+
   const options = {
     method: "GET",
     headers: {
@@ -11,22 +13,25 @@ export async function GET(request, { params }) {
   };
   const genresId = {
     action: 28,
+    adventure: 12,
+    animation: 16,
     comedy: 35,
-    horror: 27,
-    romance: 10749,
+    crime: 80,
     drama: 18,
+    fantasy: 14,
+    horror: 27,
+    mystery: 9648,
+    romance: 10749,
     scifi: 878,
+    thriller: 53,
   };
   try {
-    console.log("ran");
-    console.log(genre);
-    // const response = await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${genre}`, options);
     const response = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genresId[genre]}`,
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=${sortBy}&with_genres=${genresId[genre]}`,
       options
     );
     if (!response.ok) {
-      NextResponse.json({ message: "network error" }, { status: 400 });
+      return NextResponse.json({ message: "network error" }, { status: 400 });
     }
     const data = await response.json();
     const first10Results = data.results.slice(0, 20);
