@@ -1,28 +1,41 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import MovieCard from "@/components/Movie-card";
 
 export default function SeriesPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [seriesGenres, setSeriesGenres] = useState("action"); // Default series genre
   const [seriesSortBy, setSeriesSortBy] = useState("popularity.desc");
   const [seriesGenresData, setSeriesGenresData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Update currentPage from URL search params
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+    setCurrentPage(parseInt(pageParam) || 1);
+  }, [searchParams]);
 
   // Fetch Series by Genre
   useEffect(() => {
     async function fetchSeriesGenreData() {
       try {
         setSeriesGenresData(null);
-        const url = `/api/series/genres/${seriesGenres}?sort_by=${seriesSortBy}`;
+        const url = `/api/series/genres/${seriesGenres}?sort_by=${seriesSortBy}&page=${currentPage}`;
         const response = await fetch(url);
         const data = await response.json();
-        setSeriesGenresData(data);
+        setSeriesGenresData(data.results);
+        setTotalPages(data.total_pages);
       } catch (e) {
         console.error("Error fetching series genre data:", e);
       }
     }
     fetchSeriesGenreData();
-  }, [seriesGenres, seriesSortBy]);
+  }, [seriesGenres, seriesSortBy, currentPage]);
 
   const seriesGenreButtons = [
     { name: "Action & Adventure", value: "action" },
@@ -47,6 +60,40 @@ export default function SeriesPage() {
     { name: "Release Date", value: "release_date.desc" },
     { name: "Vote Average", value: "vote_average.desc" },
   ];
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      router.push(`/series?page=${newPage}`);
+    }
+  };
+
+  const renderPaginationButtons = () => {
+    const buttons = [];
+    const maxButtons = 5; // Max number of page buttons to show
+    let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+    if (endPage - startPage + 1 < maxButtons) {
+      startPage = Math.max(1, endPage - maxButtons + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      buttons.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`px-4 py-2 rounded-md font-bold ${
+            currentPage === i
+              ? "bg-red-600 text-white"
+              : "bg-gray-700 text-white hover:bg-gray-600"
+          }`}
+        >
+          {i}
+        </button>
+      );
+    }
+    return buttons;
+  };
 
   return (
     <div className="p-4 md:p-0 md:pt-4 container mx-auto">
@@ -79,6 +126,8 @@ export default function SeriesPage() {
             } cursor-pointer text-center`}
             onClick={() => {
               setSeriesGenres(genreItem.value);
+              setCurrentPage(1); // Reset to first page when genre changes
+              router.push(`/series?page=1`);
             }}
           >
             {genreItem.name}
@@ -95,6 +144,27 @@ export default function SeriesPage() {
             })}
         </div>
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-8 mb-20">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+          >
+            Previous
+          </button>
+          {renderPaginationButtons()}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }
