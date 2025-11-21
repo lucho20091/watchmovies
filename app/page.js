@@ -90,20 +90,34 @@ export default async function Home() {
       )}
 
       <div className="container mx-auto p-4">
-        <h2 className="text-3xl font-bold mb-8 flex items-center md:mt-8">
-          <span className="bg-red-600 w-2 h-8 mr-3"></span>
-          TOP 10 MOVIES
-        </h2>
+        <div className="flex items-center justify-between mb-8 md:mt-8">
+          <h2 className="text-3xl font-bold flex items-center">
+            <span className="bg-red-600 w-2 h-8 mr-3"></span>
+            TOP 10 MOVIES
+          </h2>
+          <Link href="/movies">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors">
+              View More
+            </button>
+          </Link>
+        </div>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {trendingMovies &&
             first10TrendingMovies.map((movie) => (
               <MovieCard movie={movie} key={movie.id} />
             ))}
         </div>
-        <h2 className="text-3xl font-bold mb-8 flex items-center mt-4 md:mt-8">
-          <span className="bg-red-600 w-2 h-8 mr-3"></span>
-          TOP 10 SERIES
-        </h2>
+        <div className="flex items-center justify-between mb-8 mt-4 md:mt-8">
+          <h2 className="text-3xl font-bold flex items-center">
+            <span className="bg-red-600 w-2 h-8 mr-3"></span>
+            TOP 10 SERIES
+          </h2>
+          <Link href="/series">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors">
+              View More
+            </button>
+          </Link>
+        </div>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {trendingSeries &&
             first10TrendingSeries.map((serie) => (
