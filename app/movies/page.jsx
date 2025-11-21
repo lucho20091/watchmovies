@@ -28,7 +28,7 @@ export default function MoviesPage() {
         const url = `/api/movies/genres/${movieGenres}?sort_by=${movieSortBy}&page=${currentPage}`;
         const response = await fetch(url);
         const data = await response.json();
-        setMoviesGenresData(data.results);
+        setMoviesGenresData(data.results.slice(0, 18)); // Limit to 18 results
         setTotalPages(data.total_pages);
       } catch (e) {
         console.error("Error fetching movie genre data:", e);
@@ -40,7 +40,8 @@ export default function MoviesPage() {
   const movieGenreButtons = [
     { name: "Comedy", value: "comedy" },
     { name: "Action", value: "action" },
-    { name: "Horror", value: "horror" },
+    { name: "Horror",
+    value: "horror" },
     { name: "Romance", value: "romance" },
     { name: "Drama", value: "drama" },
     { name: "Sci-Fi", value: "scifi" },

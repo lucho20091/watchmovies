@@ -28,7 +28,7 @@ export default function SeriesPage() {
         const url = `/api/series/genres/${seriesGenres}?sort_by=${seriesSortBy}&page=${currentPage}`;
         const response = await fetch(url);
         const data = await response.json();
-        setSeriesGenresData(data.results);
+        setSeriesGenresData(data.results.slice(0, 18)); // Limit to 18 results
         setTotalPages(data.total_pages);
       } catch (e) {
         console.error("Error fetching series genre data:", e);
