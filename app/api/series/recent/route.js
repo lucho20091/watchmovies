@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
+  const page = request.nextUrl.searchParams.get("page") || "1";
   const options = {
     method: "GET",
     headers: {
@@ -10,14 +11,18 @@ export async function GET(request) {
   };
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
+      `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=first_air_date.desc`,
       options
     );
     if (!response.ok) {
-      NextResponse.json({ message: "network error" }, { status: 400 });
+      return NextResponse.json({ message: "network error" }, { status: 400 });
     }
     const data = await response.json();
-    return NextResponse.json(data.results); // Removed slicing
+    return NextResponse.json({
+      results: data.results,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
+    });
   } catch (e) {
     console.log(e);
     return NextResponse.json(

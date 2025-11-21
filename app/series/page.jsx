@@ -1,43 +1,70 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 import MovieCard from "@/components/MovieCard";
+import CategorySelector from "@/components/CategorySelector";
 
 export default function SeriesPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [seriesGenres, setSeriesGenres] = useState("action"); // Default series genre
-  const [seriesSortBy, setSeriesSortBy] = useState("popularity.desc");
-  const [seriesGenresData, setSeriesGenresData] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("popular"); // Default to "Most popular"
+  const [seriesData, setSeriesData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // Update currentPage from URL search params
+  // Update currentPage and selectedCategory from URL search params
   useEffect(() => {
     const pageParam = searchParams.get("page");
+    const categoryParam = searchParams.get("category");
     setCurrentPage(parseInt(pageParam) || 1);
+    setSelectedCategory(categoryParam || "popular");
   }, [searchParams]);
 
-  // Fetch Series by Genre
+  // Fetch Series based on selected category and page
   useEffect(() => {
-    async function fetchSeriesGenreData() {
+    async function fetchSeries() {
       try {
-        setSeriesGenresData(null);
-        const url = `/api/series/genres/${seriesGenres}?sort_by=${seriesSortBy}&page=${currentPage}`;
+        setSeriesData(null);
+        let url = "";
+        let isGenreSearch = false;
+
+        if (selectedCategory === "popular") {
+          url = `/api/series/trending?page=${currentPage}`;
+        } else if (selectedCategory === "rated") {
+          url = `/api/series/rated?page=${currentPage}`;
+        } else if (selectedCategory === "recent") {
+          url = `/api/series/recent?page=${currentPage}`;
+        } else {
+          // It's a genre
+          url = `/api/series/genres/${selectedCategory}?page=${currentPage}`;
+          isGenreSearch = true;
+        }
+
         const response = await fetch(url);
         const data = await response.json();
-        setSeriesGenresData(data.results.slice(0, 18)); // Limit to 18 results
-        setTotalPages(data.total_pages);
+
+        if (isGenreSearch || selectedCategory === "recent") {
+          setSeriesData(data.results.slice(0, 18)); // Limit to 18 results
+          setTotalPages(data.total_pages);
+        } else {
+          // For trending/rated, the API routes already return a full page (20 results)
+          // We still slice to 18 for consistency in display
+          setSeriesData(data.slice(0, 18));
+          // Temporarily disable pagination for popular/rated until API is updated to return total_pages
+          setTotalPages(1);
+        }
       } catch (e) {
-        console.error("Error fetching series genre data:", e);
+        console.error("Error fetching series data:", e);
       }
     }
-    fetchSeriesGenreData();
-  }, [seriesGenres, seriesSortBy, currentPage]);
+    fetchSeries();
+  }, [selectedCategory, currentPage]);
 
-  const seriesGenreButtons = [
+  const seriesCategories = [
+    { name: "Most popular", value: "popular" },
+    { name: "Most rating", value: "rated" },
+    { name: "Most recent", value: "recent" },
     { name: "Action & Adventure", value: "action" },
     { name: "Animation", value: "animation" },
     { name: "Comedy", value: "comedy" },
@@ -55,15 +82,15 @@ export default function SeriesPage() {
     { name: "Western", value: "western" },
   ];
 
-  const sortOptions = [
-    { name: "Popularity", value: "popularity.desc" },
-    { name: "Release Date", value: "release_date.desc" },
-    { name: "Vote Average", value: "vote_average.desc" },
-  ];
+  const handleCategoryChange = (newCategory) => {
+    setSelectedCategory(newCategory);
+    setCurrentPage(1); // Reset to first page when category changes
+    router.push(`/series?category=${newCategory}&page=1`);
+  };
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
-      router.push(`/series?page=${newPage}`);
+      router.push(`/series?category=${selectedCategory}&page=${newPage}`);
     }
   };
 
@@ -99,45 +126,18 @@ export default function SeriesPage() {
     <div className="p-4 md:p-0 md:pt-4 container mx-auto">
       <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
         <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2 mb-4 md:mb-0">
-          Discover Series by Genres
+          Series
         </h3>
-        <div className="flex items-center gap-2">
-          <label htmlFor="series-sort-by" className="text-lg font-semibold">Sort By:</label>
-          <select
-            id="series-sort-by"
-            className="bg-neutral-800 text-white p-2 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-            value={seriesSortBy}
-            onChange={(e) => setSeriesSortBy(e.target.value)}
-          >
-            {sortOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.name}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 mb-4">
-        {seriesGenreButtons.map((genreItem) => (
-          <button
-            key={genreItem.value}
-            className={`px-4 py-2 border-b-2 ${
-              seriesGenres === genreItem.value ? "border-red-500" : "border-white"
-            } cursor-pointer text-center`}
-            onClick={() => {
-              setSeriesGenres(genreItem.value);
-              setCurrentPage(1); // Reset to first page when genre changes
-              router.push(`/series?page=1`);
-            }}
-          >
-            {genreItem.name}
-          </button>
-        ))}
-      </div>
+      <CategorySelector
+        categories={seriesCategories}
+        activeCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+      />
       <div className="flex justify-center mt-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          {seriesGenresData &&
-            seriesGenresData.map((series) => {
+          {seriesData &&
+            seriesData.map((series) => {
               if (series.poster_path) {
                 return <MovieCard movie={series} key={series.id} isSeries={true} />;
               }

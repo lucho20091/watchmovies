@@ -17,8 +17,7 @@ export async function GET(request) {
       NextResponse.json({ message: "network error" }, { status: 400 });
     }
     const data = await response.json();
-    const first12Results = data.results.slice(0, 12); // Changed from 20 to 12
-    return NextResponse.json(first12Results);
+    return NextResponse.json(data.results); // Removed slicing
   } catch (e) {
     console.log(e);
     return NextResponse.json(
