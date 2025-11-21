@@ -44,6 +44,12 @@ export default function Navbar() {
           <Link href="/browse" className={getLinkClasses("/browse")}>
             Browse
           </Link>
+          <Link href="/movies" className={getLinkClasses("/movies")}>
+            Movies
+          </Link>
+          <Link href="/series" className={getLinkClasses("/series")}>
+            Series
+          </Link>
           <Link href="/kdrama/1" className={getLinkClasses("/kdrama")}>
             Kdrama
           </Link>
