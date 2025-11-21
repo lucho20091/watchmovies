@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import MovieCard from "@/components/MovieCard";
 import CategorySelector from "@/components/CategorySelector";
+import MovieCardSkeleton from "@/components/MovieCardSkeleton"; // Import the new skeleton component
 
 export default function MoviesPage() {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function MoviesPage() {
   const [moviesData, setMoviesData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   // Update currentPage and selectedCategory from URL search params
   useEffect(() => {
@@ -25,6 +27,7 @@ export default function MoviesPage() {
   useEffect(() => {
     async function fetchMovies() {
       try {
+        setIsLoading(true); // Set loading to true before fetching
         setMoviesData(null);
         let url = "";
 
@@ -42,11 +45,13 @@ export default function MoviesPage() {
         const response = await fetch(url);
         const data = await response.json();
 
-        // All API routes now return { results, total_pages, total_results }
         setMoviesData(data.results.slice(0, 18)); // Limit to 18 results for display
         setTotalPages(data.total_pages);
       } catch (e) {
         console.error("Error fetching movie data:", e);
+        setMoviesData([]); // Set to empty array on error
+      } finally {
+        setIsLoading(false); // Set loading to false after fetching
       }
     }
     fetchMovies();
@@ -112,6 +117,11 @@ export default function MoviesPage() {
 
   return (
     <div className="p-4 md:p-0 md:pt-4 container mx-auto">
+      <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
+        <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2 mb-4 md:mb-0">
+          Movies
+        </h3>
+      </div>
       <CategorySelector
         categories={movieCategories}
         activeCategory={selectedCategory}
@@ -119,12 +129,16 @@ export default function MoviesPage() {
       />
       <div className="flex justify-center mt-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          {moviesData &&
-            moviesData.map((movie) => {
-              if (movie.poster_path) {
-                return <MovieCard movie={movie} key={movie.id} />;
-              }
-            })}
+          {isLoading
+            ? Array.from({ length: 18 }).map((_, index) => (
+                <MovieCardSkeleton key={index} />
+              ))
+            : moviesData &&
+              moviesData.map((movie) => {
+                if (movie.poster_path) {
+                  return <MovieCard movie={movie} key={movie.id} />;
+                }
+              })}
         </div>
       </div>
 
@@ -133,7 +147,7 @@ export default function MoviesPage() {
         <div className="flex justify-center items-center gap-2 mt-8 mb-20">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
+            disabled={currentPage === 1 || isLoading}
             className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
           >
             Previous
@@ -141,7 +155,7 @@ export default function MoviesPage() {
           {renderPaginationButtons()}
           <button
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={currentPage === totalPages || isLoading}
             className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
           >
             Next
