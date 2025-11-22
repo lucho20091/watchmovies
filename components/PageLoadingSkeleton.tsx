@@ -5,7 +5,7 @@ export default function PageLoadingSkeleton() {
   return (
     <div className="p-4 md:p-0 md:pt-4 container mx-auto animate-pulse">
       <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
-        <div className="h-8 bg-gray-700 rounded w-48 mb-4 md:mb-0"></div>
+        <div className="h-10 bg-gray-700 rounded w-64 mb-4 md:mb-0"></div> {/* Adjusted height and width */}
       </div>
       <div className="w-full overflow-x-auto whitespace-nowrap py-2">
         <div className="flex flex-nowrap gap-4 px-4 md:px-0">
