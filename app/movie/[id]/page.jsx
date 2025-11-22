@@ -14,9 +14,11 @@ export default function MoviePage() {
 
   // Define your video sources dynamically using the 'id'
   const videoServers = [
-    { name: "Server 1 (vidsrc)", url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1` },
-    { name: "Server 2 (vidking)", url: `https://www.vidking.net/embed/movie/${id}` },
-    // { name: "Server 3 (111Movies)", url: `https://111movies.com/movie/${id}` }, // Uncomment if 111Movies is embeddable
+    {
+      name: "Vidsrc",
+      url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`,
+    },
+    { name: "2Embed", url: `https://www.2embed.cc/embed/movie?id=${id}` },
   ];
 
   useEffect(() => {
@@ -171,6 +173,7 @@ export default function MoviePage() {
               src={currentVideoUrl}
               allow="fullscreen"
               allowFullScreen
+              frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
             ></iframe>
           ) : (
