@@ -6,7 +6,7 @@ This document outlines the specific Tailwind CSS color classes used for each UI 
 -   **Category Selector**:
     -   Active Category Text: `text-rich-mahogany-500`
     -   Inactive Category Text: `text-rich-mahogany-100`
-    -   Inactive Category Hover Text: `hover:text-rich-mahogany-800`
+    -   Inactive Category Hover Text: `hover:text-rich-mahogany-300`
     -   Active Category Underline: `bg-rich-mahogany-500`
 -   **Movie Card**: (Refer to `styles_rules/moviecard.md` for detailed MovieCard colors, as it's a shared component)
 -   **Loading Skeleton (Page and Card)**:

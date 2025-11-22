@@ -17,7 +17,7 @@ export default function CategorySelector({
               ${
                 activeCategory === category.value
                   ? "text-rich-mahogany-500"
-                  : "text-rich-mahogany-100 hover:text-rich-mahogany-800"
+                  : "text-rich-mahogany-100 hover:text-rich-mahogany-300"
               }`}
             onClick={() => onCategoryChange(category.value)}
           >
