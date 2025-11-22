@@ -113,7 +113,7 @@ export default function Navbar() {
                 type="text"
                 placeholder="Search..."
                 className="flex-1 w-full p-2 rounded-md bg-rich-mahogany-950 text-rich-mahogany-100
-               border border-gray-700 focus:outline-none h-10"
+               border border-rich-mahogany-950 focus:outline-none h-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -122,7 +122,7 @@ export default function Navbar() {
                 type="submit"
                 className="flex items-center justify-center h-10 min-w-[42px]
                bg-rich-mahogany-950 hover:bg-rich-mahogany-800 text-gray-300
-               rounded-md border border-gray-700 transition-colors
+               rounded-md border border-rich-mahogany-950 transition-colors
                disabled:opacity-50 disabled:cursor-not-allowed
                disabled:hover:bg-rich-mahogany-800"
                 disabled={!searchQuery.trim()}
