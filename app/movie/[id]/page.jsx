@@ -31,7 +31,7 @@ export default async function MoviePage({ params }) {
       );
       if (!response.ok) {
         if (response.status === 404) {
-          return null; 
+          return null;
         }
         throw new Error("Network response was not ok");
       }
@@ -53,7 +53,10 @@ export default async function MoviePage({ params }) {
         <p className="text-lg text-center mb-6">
           The movie you are looking for does not exist or an error occurred.
         </p>
-        <Link href="/" className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors">
+        <Link
+          href="/"
+          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors"
+        >
           Go to Home
         </Link>
       </div>
@@ -85,7 +88,7 @@ export default async function MoviePage({ params }) {
         />
       )}
       {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/30"></div>
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-white container mx-auto px-4">
@@ -93,8 +96,12 @@ export default async function MoviePage({ params }) {
           {movieData.title}
         </h1>
         <div className="flex flex-wrap justify-center gap-4 text-white font-bold text-lg mb-4">
-          {movieData.release_date && <span>{movieData.release_date.substring(0, 4)}</span>}
-          {movieData.vote_average && <span>⭐{movieData.vote_average.toFixed(1)}</span>}
+          {movieData.release_date && (
+            <span>{movieData.release_date.substring(0, 4)}</span>
+          )}
+          {movieData.vote_average && (
+            <span>⭐{movieData.vote_average.toFixed(1)}</span>
+          )}
           {movieData.runtime && <span>{movieData.runtime} minutes</span>}
         </div>
         <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">

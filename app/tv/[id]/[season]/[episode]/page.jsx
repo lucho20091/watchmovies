@@ -75,7 +75,7 @@ export default function TvPageSeasonEpisode() {
           />
         )}
         {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/30"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-white container mx-auto px-4">
           <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
@@ -119,44 +119,36 @@ export default function TvPageSeasonEpisode() {
             </select>
           </div>
           <div className="md:border-2 md:border-gray-700 w-full max-w-screen-xl mx-auto md:mb-4 mt-4 rounded-lg overflow-hidden">
-            <div className="grid h-48 md:h-64 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
+            <div className="flex flex-wrap gap-2 p-4 bg-neutral-950 max-h-64 overflow-y-auto">
               {tvData.seasons[
-                tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
+                tvData.seasons[0].season_number === 0
+                  ? seasonRef
+                  : seasonRef - 1
               ]?.episode_count &&
                 Array.from({
                   length:
                     tvData.seasons[
-                      tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
+                      tvData.seasons[0].season_number === 0
+                        ? seasonRef
+                        : seasonRef - 1
                     ].episode_count,
                 }).map((_, index) => {
                   const episodeNumber = index + 1;
-                  const seasonIndex = tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1;
-                  const seasonPosterPath = tvData.seasons[seasonIndex]?.poster_path;
-                  const episodeOverview = tvData.seasons[seasonIndex]?.overview || `${tvData.name} S${seasonRef}E${episodeNumber}`;
-
                   return (
-                    <Link key={index} href={`/tv/${id}/${seasonRef}/${episodeNumber}`}>
-                      <div className={`flex relative border-b border-gray-700 pb-4 cursor-pointer gap-x-4 items-center ${
-                          parseInt(episode) === episodeNumber && parseInt(season) === seasonRef ? "bg-red-800/20 rounded-md p-2 -mx-2" : "hover:bg-neutral-800/50 rounded-md p-2 -mx-2"
-                      }`}>
-                        {seasonPosterPath && (
-                          <Image
-                            src={`https://image.tmdb.org/t/p/w92${seasonPosterPath}`}
-                            alt={`Season ${seasonRef} Episode ${episodeNumber} poster`}
-                            width={48}
-                            height={72}
-                            className="w-12 h-18 object-cover rounded-sm flex-shrink-0"
-                          />
-                        )}
-                        <div className="flex flex-col justify-center">
-                          <span className="text-red-500 font-bold text-lg mb-1">
-                            Episode {episodeNumber}
-                          </span>
-                          <p className="line-clamp-2 text-white text-sm">
-                            {episodeOverview}
-                          </p>
-                        </div>
-                      </div>
+                    <Link
+                      key={index}
+                      href={`/tv/${id}/${seasonRef}/${episodeNumber}`}
+                    >
+                      <button
+                        className={`px-4 py-2 rounded-md font-bold transition-colors duration-200 ${
+                          parseInt(episode) === episodeNumber &&
+                          parseInt(season) === seasonRef
+                            ? "bg-red-600 text-white"
+                            : "bg-gray-700 text-white hover:bg-gray-600"
+                        }`}
+                      >
+                        E{episodeNumber}
+                      </button>
                     </Link>
                   );
                 })}
