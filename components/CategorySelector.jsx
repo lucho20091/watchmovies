@@ -8,7 +8,7 @@ export default function CategorySelector({
   onCategoryChange,
 }) {
   return (
-    <div className="w-full overflow-x-auto whitespace-nowrap py-2">
+    <div className="w-full overflow-x-auto whitespace-nowrap py-2 mb-4">
       <div className="flex justify-between space-x-4 px-4 md:px-0">
         {categories.map((category) => (
           <button

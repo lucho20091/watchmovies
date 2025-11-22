@@ -73,11 +73,11 @@ export default function Navbar() {
   }, [isSearchInputVisible]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-900 py-4 px-6 shadow-lg border-b border-gray-800">
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-neutral-900 py-4 px-6 shadow-lg border-b border-gray-800">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
-          className="flex gap-2 text-2xl md:text-3xl font-bold text-red-500 hover:text-red-400 transition-colors"
+          className="flex gap-2 text-xl md:text-3xl font-bold text-red-500 hover:text-red-400 transition-colors"
         >
           <span>MoviesFree</span>
         </Link>
@@ -100,7 +100,7 @@ export default function Navbar() {
           {isSearchInputVisible && (
             <form
               onSubmit={handleSearchSubmit}
-              className="flex items-center w-full max-w-md gap-2"
+              className="flex items-center w-full max-w-md gap-2 mr-0"
             >
               <label htmlFor="navbar-search-input" className="sr-only">
                 Search for movies or shows
@@ -135,7 +135,9 @@ export default function Navbar() {
           <button
             id="search-toggle-button"
             onClick={toggleSearchInput}
-            className="px-3 py-1 rounded-md transition-colors duration-200 ease-in-out text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+            className={`${
+              isSearchInputVisible && "hidden"
+            }px-3 py-1 rounded-md transition-colors duration-200 ease-in-out text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer`}
             aria-label={isSearchInputVisible ? "Close search" : "Open search"}
           >
             {isSearchInputVisible ? (

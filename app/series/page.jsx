@@ -104,7 +104,7 @@ function SeriesContent() {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={`px-4 py-2 rounded-md font-bold ${
+          className={`px-4 py-2 rounded-md font-bold cursor-pointer ${
             currentPage === i
               ? "bg-red-600 text-white"
               : "bg-gray-700 text-white hover:bg-gray-600"
@@ -118,7 +118,7 @@ function SeriesContent() {
   };
 
   return (
-    <div className="p-4 md:p-0 pt-20 container mx-auto">
+    <div className="p-4 lg:pt-6 container mx-auto">
       <CategorySelector
         categories={seriesCategories}
         activeCategory={selectedCategory}
@@ -133,7 +133,7 @@ function SeriesContent() {
               ))}
             </div>
           </div>
-          <div className="flex justify-center items-center gap-2 mt-8 mb-20">
+          <div className="flex justify-center items-center gap-2 mt-12 ">
             <div className="h-10 bg-gray-700 rounded w-24"></div>
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="h-10 bg-gray-700 rounded w-10"></div>
@@ -156,11 +156,11 @@ function SeriesContent() {
 
           {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-8 mb-20">
+            <div className="flex justify-center items-center gap-2 mt-16 ">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1 || isLoading}
-                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
               >
                 Previous
               </button>
@@ -168,7 +168,7 @@ function SeriesContent() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages || isLoading}
-                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
               >
                 Next
               </button>
