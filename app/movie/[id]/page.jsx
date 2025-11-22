@@ -1,8 +1,9 @@
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function MoviePage({ params }) {
   const { id } = await params;
+
   async function fetchMovieUrl() {
     try {
       const response = await fetch(
@@ -10,13 +11,14 @@ export default async function MoviePage({ params }) {
       );
       return response.url;
     } catch (error) {
+      console.error("Error fetching movie URL:", error);
       return null;
     }
   }
 
   async function fetchMovieData() {
     const options = {
-      method: "Get",
+      method: "GET",
       headers: {
         accept: "application/json",
         Authorization: process.env.MOVIEDB_API_BEARER,
@@ -28,111 +30,98 @@ export default async function MoviePage({ params }) {
         options
       );
       if (!response.ok) {
+        if (response.status === 404) {
+          return null; 
+        }
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
       return data;
     } catch (error) {
-      return null;
-    }
-  }
-
-  async function fetchMoviePosters() {
-    const options = {
-      method: "Get",
-      headers: {
-        accept: "application/json",
-        Authorization: process.env.MOVIEDB_API_BEARER,
-      },
-    };
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/images?include_image_language=en`,
-        options
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
+      console.error("Error fetching movie data:", error);
       return null;
     }
   }
 
   const movieUrl = await fetchMovieUrl();
   const movieData = await fetchMovieData();
-  const moviePosters = await fetchMoviePosters();
 
-  const findPosterMobile = moviePosters?.logos?.find((item) => {
-    if (item.height > 500) {
-      return item;
-    }
-  });
-  let posterMobSrc = null;
-  if (findPosterMobile) {
-    posterMobSrc =
-      "https://image.tmdb.org/t/p/original" + findPosterMobile.file_path;
+  if (!movieData) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
+        <h1 className="text-4xl font-bold mb-4">Movie Not Found</h1>
+        <p className="text-lg text-center mb-6">
+          The movie you are looking for does not exist or an error occurred.
+        </p>
+        <Link href="/" className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors">
+          Go to Home
+        </Link>
+      </div>
+    );
   }
-  
+
   return (
-    <div className="h-full relative mb-[-16px] md:mb-[-80px]">
-      {moviePosters && moviePosters.backdrops[0]?.file_path && (
+    <div className="relative min-h-screen flex flex-col">
+      {/* Desktop Background Image */}
+      {movieData.backdrop_path && (
         <Image
-          src={`https://image.tmdb.org/t/p/original${moviePosters.backdrops[0].file_path}`}
-          alt={movieData?.title || "Movie Backdrop"}
+          src={`https://image.tmdb.org/t/p/original${movieData.backdrop_path}`}
+          alt={movieData.title || "Movie Backdrop"}
           fill
           sizes="100vw"
-          className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full mx-auto"
+          className="absolute inset-0 w-full h-full object-cover z-[-2] hidden md:block"
           priority
         />
       )}
-      {moviePosters && posterMobSrc && (
+      {/* Mobile Background Image */}
+      {movieData.poster_path && (
         <Image
-          src={posterMobSrc}
-          alt={movieData?.title || "Movie Poster"}
+          src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`}
+          alt={movieData.title || "Movie Poster"}
           fill
           sizes="100vw"
-          className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-contain mx-auto"
+          className="absolute inset-0 w-full h-full object-cover z-[-2] block md:hidden"
           priority
         />
       )}
-      <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
-      <div className="z-[2] pt-4 md:pt-10 pb-20">
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent"></div>
+
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-white container mx-auto px-4">
         <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
-          {movieData?.title}
+          {movieData.title}
         </h1>
-        <div className="flex gap-4 text-white w-fit mx-auto font-bold text-lg">
-          <span>{movieData?.release_date}</span>
-          <span>⭐{movieData?.vote_average.toFixed(1)}</span>
-          <span>{movieData?.runtime} minutes</span>
+        <div className="flex flex-wrap justify-center gap-4 text-white font-bold text-lg mb-4">
+          {movieData.release_date && <span>{movieData.release_date.substring(0, 4)}</span>}
+          {movieData.vote_average && <span>⭐{movieData.vote_average.toFixed(1)}</span>}
+          {movieData.runtime && <span>{movieData.runtime} minutes</span>}
         </div>
-        <div className="flex justify-center items-center mt-4 gap-4">
-          {movieData?.genres?.map((item) => (
+        <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
+          {movieData.genres?.map((item) => (
             <span
-              key={item?.id}
-              className="bg-red-800 text-orange-200 font-bold  px-2 py-1 rounded-sm custom-shadow cursor-pointer"
+              key={item.id}
+              className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium"
             >
-              {item?.name}
+              {item.name}
             </span>
           ))}
         </div>
-        <div className="text-white p-4">
-          <span className="line-clamp-3 text-base/5 text-center w-[90%] max-w-screen-xl mx-auto font-semibold">
-            {movieData?.overview}
-          </span>
-        </div>
+        <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">
+          {movieData.overview}
+        </p>
+
         {movieUrl ? (
-          <div>
+          <div className="w-full max-w-screen-xl mx-auto">
             <iframe
               src={movieUrl}
               allow="fullscreen"
               allowFullScreen
-              className="w-[90%] max-w-screen-xl mx-auto aspect-video"
+              className="w-full aspect-video rounded-lg shadow-xl"
             ></iframe>
           </div>
         ) : (
-          <p>Loading...</p>
+          <p className="text-lg">Loading video player...</p>
         )}
       </div>
     </div>
