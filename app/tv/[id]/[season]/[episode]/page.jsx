@@ -119,7 +119,7 @@ export default function TvPageSeasonEpisode() {
             </select>
           </div>
           <div className="md:border-2 md:border-gray-700 w-full max-w-screen-xl mx-auto md:mb-4 mt-4 rounded-lg overflow-hidden">
-            <div className="grid h-64 md:h-96 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
+            <div className="grid h-48 md:h-64 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
               {tvData.seasons[
                 tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
               ]?.episode_count &&
