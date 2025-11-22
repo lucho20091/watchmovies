@@ -2,19 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 
-interface MovieCardProps {
-  movie: {
-    id: number;
-    title?: string;
-    name?: string;
-    poster_path: string;
-    vote_average: number;
-    media_type?: string; // 'movie' or 'tv'
-  };
-  isSeries?: boolean;
-}
-
-export default function MovieCard({ movie, isSeries }: MovieCardProps) {
+export default function MovieCard({ movie, isSeries }) {
   const title = movie.title || movie.name;
   const mediaType = movie.media_type || (isSeries ? "tv" : "movie");
 
