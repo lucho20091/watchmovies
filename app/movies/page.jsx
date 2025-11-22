@@ -90,7 +90,7 @@ function MoviesContent() {
 
   const renderPaginationButtons = () => {
     const buttons = [];
-    const maxButtons = 5; // Max number of page buttons to show
+    const maxButtons = 3; // Max number of page buttons to show
     let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
     let endPage = Math.min(totalPages, startPage + maxButtons - 1);
 
