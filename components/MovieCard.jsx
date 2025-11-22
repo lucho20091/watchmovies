@@ -50,20 +50,20 @@ export default function MovieCard({ movie, isSeries }) {
 
         {/* Hover Overlay for Title, Summary, Release Year, and Rating */}
         <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 text-center z-40">
-          <h3 className="text-xl font-bold text-white mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-100">
+          <h3 className="text-xl font-bold text-white mb-2">
             {title}
           </h3>
           {movie.overview && (
-            <p className="text-white text-sm line-clamp-4 mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-200">
+            <p className="text-white text-sm line-clamp-3 mb-2">
               {movie.overview}
             </p>
           )}
-          <div className="flex items-center gap-1 text-yellow-400 text-lg mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-300">
+          <div className="flex items-center gap-1 text-yellow-400 text-lg mb-2">
             <FaStar />
             <span>{movie.vote_average.toFixed(1)}</span>
           </div>
           {releaseYear && (
-            <p className="text-white text-sm translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-400">
+            <p className="text-white text-sm">
               Year: {releaseYear}
             </p>
           )}

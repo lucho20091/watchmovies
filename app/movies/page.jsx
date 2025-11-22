@@ -116,6 +116,7 @@ function MoviesContent() {
     return buttons;
   };
 
+  console.log(moviesData);
   return (
     <div className="p-4 md:p-0 md:pt-4 container mx-auto">
       <CategorySelector
