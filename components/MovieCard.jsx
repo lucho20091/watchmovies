@@ -6,6 +6,7 @@ export default function MovieCard({ movie, isSeries }) {
   const title = movie.title || movie.name;
   const mediaType = movie.media_type || (isSeries ? "tv" : "movie");
   const displayDate = movie.release_date || movie.first_air_date;
+  const releaseYear = displayDate ? displayDate.substring(0, 4) : "";
 
   return (
     <Link
@@ -47,17 +48,25 @@ export default function MovieCard({ movie, isSeries }) {
           </div>
         )}
 
-        {/* Hover Overlay for Release Date and Rating */}
+        {/* Hover Overlay for Title, Summary, Release Year, and Rating */}
         <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 text-center z-40">
-          {displayDate && (
-            <p className="text-white text-sm mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-100">
-              Release: {displayDate}
+          <h3 className="text-xl font-bold text-white mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-100">
+            {title}
+          </h3>
+          {movie.overview && (
+            <p className="text-white text-sm line-clamp-4 mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-200">
+              {movie.overview}
             </p>
           )}
-          <div className="flex items-center gap-1 text-yellow-400 text-lg translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-200">
+          <div className="flex items-center gap-1 text-yellow-400 text-lg mb-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-300">
             <FaStar />
             <span>{movie.vote_average.toFixed(1)}</span>
           </div>
+          {releaseYear && (
+            <p className="text-white text-sm translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out delay-400">
+              Year: {releaseYear}
+            </p>
+          )}
         </div>
       </div>
     </Link>
