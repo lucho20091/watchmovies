@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function MovieCardSkeleton() {
   return (
-    <div className="flex flex-col items-center relative group cursor-pointer rounded-lg overflow-hidden shadow-lg bg-neutral-950 animate-pulse">
+    <div className="w-full flex flex-col items-center relative group cursor-pointer rounded-lg overflow-hidden shadow-lg bg-neutral-950 animate-pulse">
       <div className="relative w-full aspect-[2/3] bg-gray-800">
         {/* Placeholder for image */}
       </div>

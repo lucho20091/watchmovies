@@ -8,9 +8,9 @@ export default function PageLoadingSkeleton() {
         <div className="h-8 bg-gray-700 rounded w-48 mb-4 md:mb-0"></div>
       </div>
       <div className="w-full overflow-x-auto whitespace-nowrap py-2">
-        <div className="flex justify-between space-x-4 px-4 md:px-0">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="h-6 bg-gray-700 rounded w-24"></div>
+        <div className="flex flex-nowrap gap-4 px-4 md:px-0">
+          {Array.from({ length: 7 }).map((_, i) => (
+            <div key={i} className="h-6 bg-gray-700 rounded w-24 flex-shrink-0"></div>
           ))}
         </div>
       </div>
