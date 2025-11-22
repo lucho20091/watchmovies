@@ -18,11 +18,15 @@ export default function TvPageSeasonEpisode() {
   const videoServers = [
     {
       name: "Vidsrc",
-      url: `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=en&autoplay=1`,
+      url: `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=es&autoplay=1`,
     },
     {
-      name: "2embed",
-      url: `https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${season}&e=${episode}`,
+      name: "Vidking",
+      url: `https://www.vidking.net/embed/tv/${id}/${season}/${episode}?color=9146ff&autoPlay=true&nextEpisode=true&episodeSelector=true`,
+    },
+    {
+      name: "111Movies",
+      url: `https://111movies.com/tv/${id}/${season}/${episode}`,
     },
   ];
 
@@ -42,7 +46,8 @@ export default function TvPageSeasonEpisode() {
         }
         const data = await response.json();
         setTvData(data);
-        if (data.poster_path) { // Set tvPoster
+        if (data.poster_path) {
+          // Set tvPoster
           setTvPoster({
             mobile: `https://image.tmdb.org/t/p/original${data.poster_path}`,
             desktop: `https://image.tmdb.org/t/p/original${data.backdrop_path}`,
@@ -211,9 +216,7 @@ export default function TvPageSeasonEpisode() {
         <div className="md:border-2 md:border-gray-700 w-full max-w-screen-xl mx-auto md:mb-4 mt-4 rounded-lg overflow-hidden">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] gap-4 p-4 bg-neutral-950 max-h-64 overflow-y-auto">
             {tvData.seasons[
-              tvData.seasons[0].season_number === 0
-                ? seasonRef
-                : seasonRef - 1
+              tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
             ]?.episode_count &&
               Array.from({
                 length:
@@ -249,8 +252,8 @@ export default function TvPageSeasonEpisode() {
           <div className="w-full max-w-screen-xl mx-auto mt-8">
             <iframe
               src={selectedServer.url}
-              allow="fullscreen"
               allowFullScreen
+              frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
             ></iframe>
           </div>

@@ -183,7 +183,6 @@ export default function MoviePage() {
           <div className="w-full max-w-screen-xl mx-auto">
             <iframe
               src={selectedServer.url}
-              allow="fullscreen"
               allowFullScreen
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
