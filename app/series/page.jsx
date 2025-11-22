@@ -62,7 +62,6 @@ function SeriesContent() {
   const seriesCategories = [
     { name: "Most popular", value: "popular" },
     { name: "Most rating", value: "rated" },
-    { name: "Most recent", value: "recent" },
     { name: "Action & Adventure", value: "action" },
     { name: "Animation", value: "animation" },
     { name: "Comedy", value: "comedy" },

@@ -23,6 +23,7 @@ export default function MovieCard({ movie, isSeries }) {
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover transition-opacity duration-300 group-hover:opacity-80"
           priority={false} // Only set to true for above-the-fold images
+          quality={70} // Reduced image quality for performance
         />
       </div>
       <div className="w-full p-3 text-white">

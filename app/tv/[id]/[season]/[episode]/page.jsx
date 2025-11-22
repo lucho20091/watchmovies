@@ -62,6 +62,7 @@ export default function TvPageSeasonEpisode() {
             sizes="100vw"
             className="absolute inset-0 w-full h-full object-cover z-[-2] block md:hidden"
             priority
+            quality={70} // Reduced image quality for performance
           />
         )}
         {tvPoster && tvPoster.desktop && (
@@ -72,6 +73,7 @@ export default function TvPageSeasonEpisode() {
             sizes="100vw"
             className="absolute inset-0 w-full h-full object-cover z-[-2] hidden md:block"
             priority
+            quality={70} // Reduced image quality for performance
           />
         )}
         {/* Overlay for readability */}

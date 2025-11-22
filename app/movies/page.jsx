@@ -62,7 +62,6 @@ function MoviesContent() {
   const movieCategories = [
     { name: "Most popular", value: "popular" },
     { name: "Most rating", value: "rated" },
-    { name: "Most recent", value: "recent" },
     { name: "Action", value: "action" },
     { name: "Adventure", value: "adventure" },
     { name: "Animation", value: "animation" },
