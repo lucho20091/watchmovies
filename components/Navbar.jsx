@@ -25,7 +25,7 @@ export default function Navbar() {
     const baseClasses = `px-1 md:px-3 py-1 rounded-md transition-colors duration-200 ease-in-out ${
       path === "/" && "hidden sm:inline"
     }`;
-    const activeClasses = "bg-red-600 text-white font-semibold shadow-md";
+    const activeClasses = "bg-rich-mahogany-500 text-white font-semibold shadow-md";
     const inactiveClasses = "text-gray-300 hover:bg-gray-700 hover:text-white";
 
     return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`;
@@ -78,7 +78,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
-          className="flex gap-2 text-xl md:text-3xl font-bold text-primary-500 hover:text-red-400 transition-colors"
+          className="flex gap-2 text-xl md:text-3xl font-bold text-rich-mahogany-500 hover:text-rich-mahogany-400 transition-colors"
         >
           <span>MoviesFree</span>
         </Link>
