@@ -16,14 +16,14 @@ export default function CategorySelector({
             className={`relative pb-2 cursor-pointer text-lg font-semibold transition-colors duration-200 ease-in-out flex-shrink-0
               ${
                 activeCategory === category.value
-                  ? "text-red-500"
-                  : "text-rich-mahogany-100 hover:text-red-300"
+                  ? "text-rich-mahogany-500"
+                  : "text-rich-mahogany-100 hover:text-rich-mahogany-300"
               }`}
             onClick={() => onCategoryChange(category.value)}
           >
             {category.name}
             {activeCategory === category.value && (
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-rich-mahogany-500"></span>
             )}
           </button>
         ))}
