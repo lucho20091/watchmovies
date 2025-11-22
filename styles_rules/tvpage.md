@@ -3,20 +3,20 @@
 This document outlines the specific Tailwind CSS color classes used for each UI element within the `TvPageSeasonEpisode` component (`app/tv/[id]/[season]/[episode]/page.jsx`).
 
 -   **Page Background**: Inherited from `RootLayout` (`bg-rich-mahogany-950`)
--   **Loading/Error/Not Found Page Background**: `bg-neutral-900`
--   **Loading/Error/Not Found Text**: `text-white`
--   **Loading/Error/Not Found Button**: `bg-red-600`, `hover:bg-red-700`, `text-white`
+-   **Loading/Error/Not Found Page Background**: `bg-rich-mahogany-950`
+-   **Loading/Error/Not Found Text**: `text-rich-mahogany-100`
+-   **Loading/Error/Not Found Button**: `bg-rich-mahogany-500`, `hover:bg-rich-mahogany-600`, `text-rich-mahogany-100`
 -   **Overlay Gradient**: `bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/50`
--   **Title**: `text-shadow`, `text-white`
--   **Info Text (Year, Rating, Status)**: `text-white`
--   **Genre Badges**: `bg-red-600`, `text-white`
--   **Overview Text**: `text-white`
+-   **Title**: `text-shadow`, `text-rich-mahogany-100`
+-   **Info Text (Year, Rating, Status)**: `text-rich-mahogany-100`
+-   **Genre Badges**: `bg-rich-mahogany-500`, `text-rich-mahogany-100`
+-   **Overview Text**: `text-rich-mahogany-100`
 -   **Server Selection Buttons**:
-    -   Active Button: `bg-red-600`, `text-white`
-    -   Inactive Button: `bg-gray-700`, `hover:bg-gray-600`, `text-white`
--   **Season Selector**: `bg-neutral-800`, `text-white`, `border-gray-700`, `focus:ring-red-500`
+    -   Active Button: `bg-rich-mahogany-500`, `text-rich-mahogany-100`
+    -   Inactive Button: `bg-rich-mahogany-800`, `hover:bg-rich-mahogany-700`, `text-rich-mahogany-100`
+-   **Season Selector**: `bg-rich-mahogany-800`, `text-rich-mahogany-100`, `border-rich-mahogany-700`, `focus:ring-rich-mahogany-500`
 -   **Episode Buttons**:
-    -   Active Button: `bg-red-600`, `text-white`
-    -   Inactive Button: `bg-gray-700`, `text-white`, `hover:bg-gray-600`
--   **Episode Grid Background**: `bg-neutral-950`
--   **Episode Grid Border**: `md:border-2 md:border-gray-700`
+    -   Active Button: `bg-rich-mahogany-500`, `text-rich-mahogany-100`
+    -   Inactive Button: `bg-rich-mahogany-800`, `text-rich-mahogany-100`, `hover:bg-rich-mahogany-700`
+-   **Episode Grid Background**: `bg-rich-mahogany-950`
+-   **Episode Grid Border**: `md:border-2 md:border-rich-mahogany-700`
