@@ -119,7 +119,7 @@ export default function TvPageSeasonEpisode() {
             </select>
           </div>
           <div className="md:border-2 md:border-gray-700 w-full max-w-screen-xl mx-auto md:mb-4 mt-4 rounded-lg overflow-hidden">
-            <div className="flex flex-wrap gap-2 p-4 bg-neutral-950 max-h-64 overflow-y-auto">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] gap-4 p-4 bg-neutral-950 max-h-64 overflow-y-auto">
               {tvData.seasons[
                 tvData.seasons[0].season_number === 0
                   ? seasonRef
@@ -140,12 +140,13 @@ export default function TvPageSeasonEpisode() {
                       href={`/tv/${id}/${seasonRef}/${episodeNumber}`}
                     >
                       <button
-                        className={`px-4 py-2 rounded-md font-bold transition-colors duration-200 ${
-                          parseInt(episode) === episodeNumber &&
-                          parseInt(season) === seasonRef
-                            ? "bg-red-600 text-white"
-                            : "bg-gray-700 text-white hover:bg-gray-600"
-                        }`}
+                        className={`px-4 py-2 rounded-md font-bold transition-colors duration-200 w-full cursor-pointer
+                          ${
+                            parseInt(episode) === episodeNumber &&
+                            parseInt(season) === seasonRef
+                              ? "bg-red-600 text-white"
+                              : "bg-gray-700 text-white hover:bg-gray-600"
+                          }`}
                       >
                         E{episodeNumber}
                       </button>
