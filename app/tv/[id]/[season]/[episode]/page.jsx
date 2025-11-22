@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 import Link from "next/link";
 
 export default function TvPageSeasonEpisode() {
@@ -9,7 +9,7 @@ export default function TvPageSeasonEpisode() {
   const [tvData, setTvData] = useState(null);
   const [tvUrl, setTvUrl] = useState(null);
   const [tvPoster, setTvPoster] = useState(null);
-  const [seasonRef, setSeasonRef] = useState(season);
+  const [seasonRef, setSeasonRef] = useState(parseInt(season)); // Ensure seasonRef is a number
 
   useEffect(() => {
     if (!id) return;
@@ -45,18 +45,22 @@ export default function TvPageSeasonEpisode() {
     }
 
     fetchTvUrl();
-  }, [id, episode, season]); // Added season to dependency array
+  }, [id, episode, season]);
+
+  useEffect(() => {
+    setSeasonRef(parseInt(season));
+  }, [season]);
 
   return (
     tvData && (
-      <div className="relative mb-[-16px] md:mb-[-80px]">
+      <div className="relative min-h-screen flex flex-col">
         {tvPoster && tvPoster.mobile && (
           <Image
             src={tvPoster.mobile}
             alt={tvData?.name || "TV Series Poster"}
             fill
             sizes="100vw"
-            className="absolute top-0 bottom-0 left-0 right-0 block md:hidden z-[-2] h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover z-[-2] block md:hidden"
             priority
           />
         )}
@@ -66,45 +70,46 @@ export default function TvPageSeasonEpisode() {
             alt={tvData?.name || "TV Series Backdrop"}
             fill
             sizes="100vw"
-            className="absolute top-0 bottom-0 left-0 right-0 hidden md:block custom-shadow object-cover z-[-2] object-cover h-full"
+            className="absolute inset-0 w-full h-full object-cover z-[-2] hidden md:block"
             priority
           />
         )}
-        <div className="absolute w-full h-[100%] left-0 bottom-0 right-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent md:via-black/80 md:to-black/40 rounded-b-lg z-[-1]"></div>
-        <div className="z-[2] pt-4 md:pt-10 pb-20">
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent"></div>
+
+        <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-white container mx-auto px-4">
           <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
             {tvData?.name}
           </h1>
-          <div className="flex gap-4 text-white w-fit mx-auto font-bold text-lg">
-            <span>{tvData?.first_air_date}</span>
+          <div className="flex flex-wrap justify-center gap-4 text-white font-bold text-lg mb-4">
+            <span>{tvData?.first_air_date?.substring(0, 4)}</span>
             <span>⭐{tvData?.vote_average.toFixed(1)}</span>
             <span>{tvData?.status}</span>
           </div>
-          <div className="flex justify-center items-center mt-4 gap-4">
+          <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
             {tvData.genres.map((item) => (
               <span
                 key={item?.id}
-                className="bg-red-800 text-orange-200 font-bold px-2 py-1 rounded-sm custom-shadow cursor-pointer"
+                className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium"
               >
                 {item?.name}
               </span>
             ))}
           </div>
-          <div className="text-white p-4">
-            <span className="line-clamp-3 text-base/5 text-center w-[90%] mx-auto font-semibold">
-              {tvData?.overview}
-            </span>
-          </div>
-          <div className="grid place-items-center">
+          <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">
+            {tvData?.overview}
+          </p>
+
+          <div className="grid place-items-center mb-4">
             <select
               name="season"
               id="season"
-              className="w-36 mx-auto bg-neutral-950 px-2 py-1 rounded-sm font-bold text-xl border-white border-2 text-center"
-              onChange={(e) => setSeasonRef(e.target.value)}
+              className="w-36 mx-auto bg-neutral-800 px-2 py-1 rounded-md font-bold text-xl border-gray-700 border-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+              onChange={(e) => setSeasonRef(parseInt(e.target.value))}
               value={seasonRef}
             >
               {tvData.seasons.map((item) => {
-                if (item.season_number == 0) return;
+                if (item.season_number === 0) return null; // Skip season 0 if it exists
                 return (
                   <option key={item.id} value={item.season_number}>
                     {item.name}
@@ -113,61 +118,61 @@ export default function TvPageSeasonEpisode() {
               })}
             </select>
           </div>
-          <div className="md:border-2 md:border-gray-700 w-[90%] md:p-0 max-w-screen-xl mx-auto md:mb-4 mt-4">
+          <div className="md:border-2 md:border-gray-700 w-full max-w-screen-xl mx-auto md:mb-4 mt-4 rounded-lg overflow-hidden">
             <div className="grid h-64 md:h-96 overflow-y-auto p-4 gap-y-4 bg-neutral-950">
-              {Array.from({
-                length:
-                  tvData.seasons[
-                    tvData.seasons[0].season_number == 0
-                      ? seasonRef
-                      : seasonRef - 1
-                  ].episode_count,
-              }).map((_, index) => (
-                <Link key={index} href={`/tv/${id}/${seasonRef}/${index + 1}`}>
-                  <div className="flex relative border-b-2 border-gray-400 pb-4 cursor-pointer gap-x-4">
-                    {tvData.seasons[
-                      seasonRef == 0 ? seasonRef : seasonRef - 1
-                    ]?.poster_path && (
-                      <Image
-                        src={
-                          "https://image.tmdb.org/t/p/original" +
-                          tvData.seasons[
-                            seasonRef == 0 ? seasonRef : seasonRef - 1
-                          ].poster_path
-                        }
-                        alt={`Season ${seasonRef} Episode ${index + 1} poster`}
-                        width={48} // Set a fixed width for the small poster
-                        height={72} // Set a fixed height for the small poster
-                        className="w-12 object-cover"
-                      />
-                    )}
-                    <span className="absolute bottom-4 left-0 bg-red-500 px-2 py-1 font-bold ">
-                      {index + 1}
-                    </span>
-                    <p className="line-clamp-3 text-white">
-                      {tvData?.seasons[
-                        tvData.seasons[0].season_number == 0
-                          ? seasonRef
-                          : seasonRef - 1
-                      ]?.overview ||
-                        `${tvData.name} S${seasonRef}E${index + 1}`}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+              {tvData.seasons[
+                tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
+              ]?.episode_count &&
+                Array.from({
+                  length:
+                    tvData.seasons[
+                      tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
+                    ].episode_count,
+                }).map((_, index) => {
+                  const episodeNumber = index + 1;
+                  const seasonIndex = tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1;
+                  const seasonPosterPath = tvData.seasons[seasonIndex]?.poster_path;
+                  const episodeOverview = tvData.seasons[seasonIndex]?.overview || `${tvData.name} S${seasonRef}E${episodeNumber}`;
+
+                  return (
+                    <Link key={index} href={`/tv/${id}/${seasonRef}/${episodeNumber}`}>
+                      <div className={`flex relative border-b border-gray-700 pb-4 cursor-pointer gap-x-4 items-center ${
+                          parseInt(episode) === episodeNumber && parseInt(season) === seasonRef ? "bg-red-800/20 rounded-md p-2 -mx-2" : "hover:bg-neutral-800/50 rounded-md p-2 -mx-2"
+                      }`}>
+                        {seasonPosterPath && (
+                          <Image
+                            src={`https://image.tmdb.org/t/p/w92${seasonPosterPath}`}
+                            alt={`Season ${seasonRef} Episode ${episodeNumber} poster`}
+                            width={48}
+                            height={72}
+                            className="w-12 h-18 object-cover rounded-sm flex-shrink-0"
+                          />
+                        )}
+                        <div className="flex flex-col justify-center">
+                          <span className="text-red-500 font-bold text-lg mb-1">
+                            Episode {episodeNumber}
+                          </span>
+                          <p className="line-clamp-2 text-white text-sm">
+                            {episodeOverview}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
             </div>
           </div>
           {tvUrl ? (
-            <div>
+            <div className="w-full max-w-screen-xl mx-auto mt-8">
               <iframe
                 src={tvUrl}
                 allow="fullscreen"
                 allowFullScreen
-                className="w-[90%] mt-4 max-w-screen-xl mx-auto aspect-video"
+                className="w-full aspect-video rounded-lg shadow-xl"
               ></iframe>
             </div>
           ) : (
-            <p>Loading...</p>
+            <p className="text-lg text-center mt-8">Loading video player...</p>
           )}
         </div>
       </div>
