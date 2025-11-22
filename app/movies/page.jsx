@@ -103,7 +103,7 @@ function MoviesContent() {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={`px-4 py-2 rounded-md font-bold ${
+          className={`px-4 py-2 rounded-md font-bold cursor-pointer ${
             currentPage === i
               ? "bg-red-600 text-white"
               : "bg-gray-700 text-white hover:bg-gray-600"
@@ -142,15 +142,13 @@ function MoviesContent() {
         </div>
       ) : (
         <>
-          <div className="flex justify-center mt-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {moviesData &&
-                moviesData.map((movie) => {
-                  if (movie.poster_path) {
-                    return <MovieCard movie={movie} key={movie.id} />;
-                  }
-                })}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {moviesData &&
+              moviesData.map((movie) => {
+                if (movie.poster_path) {
+                  return <MovieCard movie={movie} key={movie.id} />;
+                }
+              })}
           </div>
 
           {/* Pagination Controls */}
@@ -159,7 +157,7 @@ function MoviesContent() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1 || isLoading}
-                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
               >
                 Previous
               </button>
@@ -167,7 +165,7 @@ function MoviesContent() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages || isLoading}
-                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
               >
                 Next
               </button>

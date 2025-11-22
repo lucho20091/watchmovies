@@ -86,7 +86,7 @@ export default async function Home() {
               </span>
             </div>
             <Link href={`/movie/${heroMovie.id}`}>
-              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors">
+              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
                 Watch Now
               </button>
             </Link>
@@ -101,7 +101,7 @@ export default async function Home() {
             TOP 10 MOVIES
           </h2>
           <Link href="/movies">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
               View More
             </button>
           </Link>
@@ -118,7 +118,7 @@ export default async function Home() {
             TOP 10 SERIES
           </h2>
           <Link href="/series">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
               View More
             </button>
           </Link>

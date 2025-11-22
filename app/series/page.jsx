@@ -143,17 +143,15 @@ function SeriesContent() {
         </div>
       ) : (
         <>
-          <div className="flex justify-center mt-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {seriesData &&
-                seriesData.map((series) => {
-                  if (series.poster_path) {
-                    return (
-                      <MovieCard movie={series} key={series.id} isSeries={true} />
-                    );
-                  }
-                })}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {seriesData &&
+              seriesData.map((series) => {
+                if (series.poster_path) {
+                  return (
+                    <MovieCard movie={series} key={series.id} isSeries={true} />
+                  );
+                }
+              })}
           </div>
 
           {/* Pagination Controls */}

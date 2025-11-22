@@ -17,7 +17,8 @@ export default function Navbar() {
 
   // Helper function to get link classes
   const getLinkClasses = (path) => {
-    const baseClasses = "px-3 py-1 rounded-md transition-colors duration-200 ease-in-out";
+    const baseClasses =
+      "px-3 py-1 rounded-md transition-colors duration-200 ease-in-out";
     const activeClasses = "bg-red-600 text-white font-semibold shadow-md";
     const inactiveClasses = "text-gray-300 hover:bg-gray-700 hover:text-white";
 
@@ -34,7 +35,7 @@ export default function Navbar() {
           <span>MoviesFree</span>
         </Link>
 
-        <div className="flex space-x-2 md:space-x-4">
+        <div className="flex items-center space-x-4">
           <Link href="/" className={getLinkClasses("/")}>
             Home
           </Link>
@@ -44,9 +45,6 @@ export default function Navbar() {
           <Link href="/series" className={getLinkClasses("/series")}>
             Series
           </Link>
-        </div>
-
-        <div className="flex items-center space-x-4">
           <Link href="/search" className={getLinkClasses("/search")}>
             <div className="flex justify-center items-center gap-2">
               <span className="hidden md:inline">Search</span>
