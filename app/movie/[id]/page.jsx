@@ -68,7 +68,7 @@ export default function MoviePage() {
   // Conditional rendering for loading, error, or movie not found
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <p className="text-xl">Loading movie details...</p>
       </div>
     );
@@ -76,12 +76,12 @@ export default function MoviePage() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <h1 className="text-4xl font-bold mb-4">Error</h1>
         <p className="text-lg text-center mb-6">{error}</p>
         <Link
           href="/"
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors"
+          className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-2 px-4 rounded-lg text-lg transition-colors"
         >
           Go to Home
         </Link>
@@ -91,14 +91,14 @@ export default function MoviePage() {
 
   if (!movieData) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <h1 className="text-4xl font-bold mb-4">Movie Not Found</h1>
         <p className="text-lg text-center mb-6">
           The movie you are looking for does not exist.
         </p>
         <Link
           href="/"
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors"
+          className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-2 px-4 rounded-lg text-lg transition-colors"
         >
           Go to Home
         </Link>
