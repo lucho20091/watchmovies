@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image"; // Import the Image component
 import MovieCard from "@/components/MovieCard";
 
 export default async function Home() {
@@ -59,10 +60,13 @@ export default async function Home() {
     <div className="mt-4 grow">
       {heroMovie && (
         <div className="relative h-[500px] md:h-[700px] overflow-hidden mb-12">
-          <img
+          <Image // Using next/image component
             src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
             alt={heroMovie.title}
+            fill // Fills the parent container
+            sizes="100vw" // Image will be 100% of viewport width
             className="absolute inset-0 w-full h-full object-cover"
+            priority // Loads this image with high priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent"></div>
           <div className="relative z-10 flex flex-col justify-end h-full p-4 md:p-8 text-white max-w-screen-xl mx-auto">
