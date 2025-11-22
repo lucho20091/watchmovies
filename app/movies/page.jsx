@@ -105,8 +105,8 @@ function MoviesContent() {
           onClick={() => handlePageChange(i)}
           className={`px-4 py-2 rounded-md font-bold cursor-pointer ${
             currentPage === i
-              ? "bg-red-600 text-white"
-              : "bg-gray-700 text-white hover:bg-gray-600"
+              ? "bg-rich-mahogany-500 text-rich-mahogany-100"
+              : "bg-gray-700 text-rich-mahogany-100 hover:bg-rich-mahogany-800"
           }`}
         >
           {i}
@@ -157,7 +157,7 @@ function MoviesContent() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1 || isLoading}
-                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-md bg-gray-700 text-rich-mahogany-100 font-bold hover:bg-rich-mahogany-800 disabled:opacity-50 cursor-pointer"
               >
                 Previous
               </button>
@@ -165,7 +165,7 @@ function MoviesContent() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages || isLoading}
-                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-md bg-gray-700 text-rich-mahogany-100 font-bold hover:bg-rich-mahogany-800 disabled:opacity-50 cursor-pointer"
               >
                 Next
               </button>
