@@ -17,7 +17,7 @@ export default function CategorySelector({
               ${
                 activeCategory === category.value
                   ? "text-red-500"
-                  : "text-white hover:text-red-300"
+                  : "text-rich-mahogany-100 hover:text-red-300"
               }`}
             onClick={() => onCategoryChange(category.value)}
           >
