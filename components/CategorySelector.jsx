@@ -13,7 +13,7 @@ export default function CategorySelector({
         {categories.map((category) => (
           <button
             key={category.value}
-            className={`relative pb-2 text-lg font-semibold transition-colors duration-200 ease-in-out flex-shrink-0
+            className={`relative pb-2 cursor-pointer text-lg font-semibold transition-colors duration-200 ease-in-out flex-shrink-0
               ${
                 activeCategory === category.value
                   ? "text-red-500"

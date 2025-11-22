@@ -1,11 +1,8 @@
-"use client"; // Add this if you're using Next.js 13+ with app router
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaHome } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
-import { FaCog } from "react-icons/fa";
-import { MdLocalMovies } from "react-icons/md";
+import { FaSearch } from "react-icons/fa"; // Only FaSearch is needed
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -20,24 +17,24 @@ export default function Navbar() {
 
   // Helper function to get link classes
   const getLinkClasses = (path) => {
-    const baseClasses = "transition";
-    const activeClasses = "text-red-500 font-semibold";
-    const inactiveClasses = "hover:text-red-400";
+    const baseClasses = "px-3 py-1 rounded-md transition-colors duration-200 ease-in-out";
+    const activeClasses = "bg-red-600 text-white font-semibold shadow-md";
+    const inactiveClasses = "text-gray-300 hover:bg-gray-700 hover:text-white";
 
     return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`;
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-800 py-5 px-6 shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-900 py-4 px-6 shadow-lg border-b border-gray-800">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
-          className="flex gap-2 text-xl md:text-2xl font-bold text-red-500"
+          className="flex gap-2 text-2xl md:text-3xl font-bold text-red-500 hover:text-red-400 transition-colors"
         >
           <span>MoviesFree</span>
         </Link>
 
-        <div className="flex space-x-2 md:space-x-6">
+        <div className="flex space-x-2 md:space-x-4">
           <Link href="/" className={getLinkClasses("/")}>
             Home
           </Link>
@@ -50,23 +47,10 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Link href="/search">
-            <div
-              className={`flex justify-center items-center gap-2 md:hidden transition ${
-                isActive("/search") ? "text-red-500" : "hover:text-red-400"
-              }`}
-            >
-              <span className="hidden">Search</span>
-              <FaSearch size={18} />
-            </div>
-
-            <div
-              className={`hidden md:flex justify-center items-center gap-2 transition ${
-                isActive("/search") ? "text-red-500" : "hover:text-red-400"
-              }`}
-            >
-              <span>Search</span>
-              <FaSearch size={22} />
+          <Link href="/search" className={getLinkClasses("/search")}>
+            <div className="flex justify-center items-center gap-2">
+              <span className="hidden md:inline">Search</span>
+              <FaSearch size={18} className="md:text-xl" />
             </div>
           </Link>
         </div>
