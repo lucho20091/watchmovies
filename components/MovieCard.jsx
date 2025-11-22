@@ -15,7 +15,7 @@ export default function MovieCard({ movie, isSeries }) {
   return (
     <Link
       href={mediaType === "tv" ? `/tv/${movie.id}/1/1` : `/movie/${movie.id}`}
-      className="flex flex-col items-center relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 bg-neutral-950"
+      className="flex flex-col relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 bg-neutral-950 h-full"
     >
       <div className="relative w-full aspect-[2/3]">
         {imageUrl ? (
