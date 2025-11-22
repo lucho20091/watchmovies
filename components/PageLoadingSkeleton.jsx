@@ -10,7 +10,8 @@ export default function PageLoadingSkeleton() {
       <div className="w-full overflow-x-auto whitespace-nowrap py-2">
         <div className="flex flex-nowrap gap-4 px-4 md:px-0">
           {Array.from({ length: 7 }).map((_, i) => (
-            <div key={i} className="h-8 bg-gray-700 rounded-md w-28 flex-shrink-0"></div> {/* Adjusted height and width for category placeholders */}
+            // Adjusted height and width for category placeholders
+            <div key={i} className="h-8 bg-gray-700 rounded-md w-28 flex-shrink-0"></div> 
           ))}
         </div>
       </div>
