@@ -134,11 +134,11 @@ export default function MoviePage() {
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/50"></div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-white container mx-auto px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-rich-mahogany-100 container mx-auto px-4">
         <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
           {movieData.title}
         </h1>
-        <div className="flex flex-wrap justify-center gap-4 text-white font-bold text-lg mb-4">
+        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4">
           {movieData.release_date && (
             <span>{movieData.release_date.substring(0, 4)}</span>
           )}
@@ -151,7 +151,7 @@ export default function MoviePage() {
           {movieData.genres?.map((item) => (
             <span
               key={item.id}
-              className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium"
+              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium"
             >
               {item.name}
             </span>
@@ -169,9 +169,9 @@ export default function MoviePage() {
               onClick={() => handleServerSelection(server)}
               className={`px-6 py-3 rounded-lg font-bold transition-colors cursor-pointer ${
                 selectedServer?.name === server.name
-                  ? "bg-red-600"
-                  : "bg-gray-700 hover:bg-gray-600"
-              } text-white`}
+                  ? "bg-rich-mahogany-500"
+                  : "bg-rich-mahogany-800 hover:bg-rich-mahogany-700"
+              } text-rich-mahogany-100`}
             >
               {server.name}
             </button>
