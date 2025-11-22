@@ -8,27 +8,24 @@ import Link from "next/link";
 export default function MoviePage() {
   const { id } = useParams();
   const [movieData, setMovieData] = useState(null);
-  const [currentEmbedUrl, setCurrentEmbedUrl] = useState(""); // URL for the iframe
-  const [selectedServer, setSelectedServer] = useState(null); // Stores the currently selected server object
+  const [selectedServer, setSelectedServer] = useState(null); // Initialize as null
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Define your video sources dynamically using the 'id'
+  // This array will be recreated on each render, but the URLs depend on 'id'
   const videoServers = [
     {
       name: "Vidsrc",
-      url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`,
-      isEmbeddable: true,
+      url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=en&autoplay=1`, // Changed language to English
     },
     {
       name: "Vidking",
-      url: `https://www.vidking.net/embed/movie/${id}`, // This URL is likely not directly embeddable
-      isEmbeddable: false,
+      url: `https://www.vidking.net/embed/movie/${id}`,
     },
     {
       name: "111Movies",
-      url: `https://111movies.com/movie/${id}`, // This URL is likely not directly embeddable
-      isEmbeddable: false,
+      url: `https://111movies.com/movie/${id}`,
     },
   ];
 
@@ -49,18 +46,10 @@ export default function MoviePage() {
         }
         const data = await response.json();
         setMovieData(data);
-
-        // Set the initial video URL to the first embeddable server in the list
-        const firstEmbeddableServer = videoServers.find(s => s.isEmbeddable);
-        if (firstEmbeddableServer) {
-          setCurrentEmbedUrl(firstEmbeddableServer.url);
-          setSelectedServer(firstEmbeddableServer);
-        } else if (videoServers.length > 0) {
-          // If no embeddable server, select the first one and show external link message
+        // Set the first server as selected after data is fetched and id is available
+        if (videoServers.length > 0) {
           setSelectedServer(videoServers[0]);
-          setCurrentEmbedUrl(null); // No embed URL
         }
-
       } catch (err) {
         console.error("Error fetching data:", err);
         setError("Failed to load movie details or video player.");
@@ -70,15 +59,10 @@ export default function MoviePage() {
     }
 
     fetchMovieAndSetInitialVideo();
-  }, [id]); // Re-run effect if 'id' changes
+  }, [id]); // Re-run effect if 'id' changes or videoServers (due to id dependency)
 
   const handleServerSelection = (server) => {
     setSelectedServer(server);
-    if (server.isEmbeddable) {
-      setCurrentEmbedUrl(server.url);
-    } else {
-      setCurrentEmbedUrl(null); // Clear embed URL if not embeddable
-    }
   };
 
   // Conditional rendering for loading, error, or movie not found
@@ -124,7 +108,7 @@ export default function MoviePage() {
 
   // Main content rendering
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative flex flex-col">
       {/* Background Images (using movieData from state) */}
       {movieData.backdrop_path && (
         <Image
@@ -194,37 +178,18 @@ export default function MoviePage() {
           ))}
         </div>
 
-        {/* Video Player Iframe or External Link Message */}
-        <div className="w-full max-w-screen-xl mx-auto">
-          {currentEmbedUrl ? (
+        {/* Video Player Iframe */}
+        {selectedServer && ( // Only render iframe if a server is selected
+          <div className="w-full max-w-screen-xl mx-auto">
             <iframe
-              src={currentEmbedUrl}
+              src={selectedServer.url}
               allow="fullscreen"
               allowFullScreen
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
             ></iframe>
-          ) : selectedServer && !selectedServer.isEmbeddable ? (
-            <div className="bg-neutral-800 p-6 rounded-lg text-center shadow-xl">
-              <p className="text-lg mb-4">
-                The selected server ({selectedServer.name}) cannot be embedded
-                directly.
-              </p>
-              <a
-                href={selectedServer.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors"
-              >
-                Open {selectedServer.name} in a new tab
-              </a>
-            </div>
-          ) : (
-            <p className="text-lg text-center mt-8">
-              Select a server to start watching.
-            </p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
