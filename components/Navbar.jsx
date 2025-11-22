@@ -76,7 +76,7 @@ export default function Navbar() {
   }, [isSearchInputVisible]);
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-50 bg-rich-mahogany-900 py-4 px-6 shadow-lg border-b border-rich-mahogany-950">
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-rich-mahogany-900 py-4 px-4 2xl:px-6 shadow-lg border-b border-rich-mahogany-950">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
