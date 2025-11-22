@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
 import MovieCard from "@/components/MovieCard";
-import MovieCardSkeleton from "@/components/MovieCardSkeleton"; // Import skeleton for individual cards
 
 // Separate component that uses useSearchParams
 function SearchContent() {
@@ -52,13 +51,9 @@ function SearchContent() {
         </h1>
 
         {isLoading && (
-          <div className="flex justify-center mt-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {Array.from({ length: 18 }).map((_, index) => (
-                <MovieCardSkeleton key={index} />
-              ))}
-            </div>
-          </div>
+          <p className="text-center text-lg text-gray-400 mt-8">
+            Loading search results...
+          </p>
         )}
 
         {!isLoading && movies.length === 0 && searchQuery && (
@@ -87,29 +82,19 @@ function SearchContent() {
   );
 }
 
-// Loading fallback component for the initial load of the search page
-function SearchPageLoading() {
-  return (
-    <div className="grow p-4">
-      <div className="container mx-auto">
-        <div className="h-10 bg-gray-700 rounded w-64 mb-6 mx-auto animate-pulse"></div>{" "}
-        {/* Placeholder for title */}
-        <div className="flex justify-center mt-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {Array.from({ length: 18 }).map((_, index) => (
-              <MovieCardSkeleton key={index} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // Main component that wraps SearchContent in Suspense
 export default function SearchPage() {
   return (
-    <Suspense fallback={<SearchPageLoading />}>
+    <Suspense fallback={
+      <div className="grow p-4">
+        <div className="container mx-auto">
+          <div className="h-10 bg-gray-700 rounded w-64 mb-6 mx-auto animate-pulse"></div>
+          <p className="text-center text-lg text-gray-400 mt-8">
+            Loading search page...
+          </p>
+        </div>
+      </div>
+    }>
       <SearchContent />
     </Suspense>
   );
