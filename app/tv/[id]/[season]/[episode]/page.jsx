@@ -14,6 +14,20 @@ export default function TvPageSeasonEpisode() {
   const [isLoading, setIsLoading] = useState(true); // New loading state
   const [error, setError] = useState(null); // New error state
 
+  // Helper function to map genre name to category value for TV series
+  const getSeriesCategoryValue = (genreName) => {
+    switch (genreName) {
+      case "Action & Adventure":
+        return "action";
+      case "Sci-Fi & Fantasy":
+        return "scifi";
+      case "War & Politics":
+        return "war";
+      default:
+        return genreName.toLowerCase();
+    }
+  };
+
   // Define video servers dynamically
   const videoServers = [
     {
@@ -161,12 +175,13 @@ export default function TvPageSeasonEpisode() {
         </div>
         <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
           {tvData.genres.map((item) => (
-            <span
+            <Link
               key={item?.id}
-              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium"
+              href={`/series?category=${getSeriesCategoryValue(item.name)}&page=1`}
+              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium hover:bg-rich-mahogany-600 transition-colors cursor-pointer"
             >
               {item?.name}
-            </span>
+            </Link>
           ))}
         </div>
         <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">

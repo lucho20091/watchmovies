@@ -149,12 +149,13 @@ export default function MoviePage() {
         </div>
         <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
           {movieData.genres?.map((item) => (
-            <span
+            <Link
               key={item.id}
-              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium"
+              href={`/movies?category=${item.name.toLowerCase()}&page=1`}
+              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium hover:bg-rich-mahogany-600 transition-colors cursor-pointer"
             >
               {item.name}
-            </span>
+            </Link>
           ))}
         </div>
         <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">
