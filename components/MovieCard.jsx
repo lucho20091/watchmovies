@@ -14,7 +14,7 @@ export default function MovieCard({ movie, isSeries }) {
   return (
     <Link
       href={mediaType === "tv" ? `/tv/${movie.id}/1/1` : `/movie/${movie.id}`}
-      className="relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-neutral-950 h-full" // Removed flex flex-col, transform, and transition
+      className="relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-neutral-950 h-full"
     >
       <div className="relative w-full aspect-[2/3]">
         {imageUrl ? (
@@ -28,7 +28,7 @@ export default function MovieCard({ movie, isSeries }) {
             quality={70}
           />
         ) : (
-          <div className="w-full h-full bg-gray-800 flex items-center justify-center text-center text-gray-400 text-sm p-2">
+          <div className="w-full h-full bg-neutral-950 flex items-center justify-center text-center text-rich-mahogany-100 text-sm p-2">
             No Poster Available
           </div>
         )}
@@ -37,7 +37,7 @@ export default function MovieCard({ movie, isSeries }) {
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-neutral-950 to-transparent z-10"></div>
 
         {/* Title always visible, positioned over the gradient */}
-        <div className="absolute inset-x-0 bottom-0 p-3 z-20 text-white">
+        <div className="absolute inset-x-0 bottom-0 p-3 z-20 text-rich-mahogany-100">
           <h2 className="text-lg font-bold line-clamp-2 text-center">
             {title}
           </h2>
@@ -45,23 +45,23 @@ export default function MovieCard({ movie, isSeries }) {
 
         {/* Original Language Badge */}
         {movie.original_language && (
-          <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full z-30">
+          <div className="absolute top-2 right-2 bg-rich-mahogany-950 text-rich-mahogany-100 text-xs px-2 py-1 rounded-full z-30">
             {movie.original_language.toUpperCase()}
           </div>
         )}
 
         {/* Adult Content Badge */}
         {movie.adult && (
-          <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full z-30">
+          <div className="absolute top-2 left-2 bg-rich-mahogany-950 text-rich-mahogany-100 text-xs px-2 py-1 rounded-full z-30">
             +18
           </div>
         )}
 
         {/* Hover Overlay for Title, Summary, Release Year, and Rating */}
         <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 text-center z-40">
-          <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+          <h3 className="text-xl font-bold text-rich-mahogany-100 mb-2">{title}</h3>
           {movie.overview && (
-            <p className="text-white text-sm line-clamp-3 mb-2">
+            <p className="text-rich-mahogany-100 text-sm line-clamp-3 mb-2">
               {movie.overview}
             </p>
           )}
@@ -70,7 +70,7 @@ export default function MovieCard({ movie, isSeries }) {
             <span>{movie.vote_average.toFixed(1)}</span>
           </div>
           {releaseYear && (
-            <p className="text-white text-sm">Year: {releaseYear}</p>
+            <p className="text-rich-mahogany-100 text-sm">Year: {releaseYear}</p>
           )}
         </div>
       </div>
