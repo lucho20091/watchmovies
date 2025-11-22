@@ -96,12 +96,12 @@ export default async function Home() {
 
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between mb-8 md:mt-8">
-          <h2 className="text-3xl font-bold flex items-center">
-            <span className="bg-red-600 w-2 h-8 mr-3"></span>
+          <h2 className="text-3xl font-bold flex items-center text-rich-mahogany-100">
+            <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>
             TOP 10 MOVIES
           </h2>
           <Link href="/movies">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
+            <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
               View More
             </button>
           </Link>
@@ -113,12 +113,12 @@ export default async function Home() {
             ))}
         </div>
         <div className="flex items-center justify-between mb-8 mt-4 md:mt-8">
-          <h2 className="text-3xl font-bold flex items-center">
-            <span className="bg-red-600 w-2 h-8 mr-3"></span>
+          <h2 className="text-3xl font-bold flex items-center text-rich-mahogany-100">
+            <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>
             TOP 10 SERIES
           </h2>
           <Link href="/series">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
+            <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
               View More
             </button>
           </Link>

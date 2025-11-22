@@ -7,7 +7,7 @@ This document outlines the specific Tailwind CSS color classes used for each UI 
 -   **Hero Section Overview Text**: `text-rich-mahogany-100`
 -   **Hero Section Rating/Year Text**: `text-rich-mahogany-100`
 -   **Hero Section "Watch Now" Button**: `bg-rich-mahogany-500`, `hover:bg-rich-mahogany-600`, `text-rich-mahogany-100`
--   **Section Titles (e.g., "TOP 10 MOVIES")**: `text-white`
--   **Section Title Accent Bar**: `bg-red-600`
--   **"View More" Button**: `bg-red-600`, `hover:bg-red-700`, `text-white`
+-   **Section Titles (e.g., "TOP 10 MOVIES")**: `text-rich-mahogany-100`
+-   **Section Title Accent Bar**: `bg-rich-mahogany-500`
+-   **"View More" Button**: `bg-rich-mahogany-500`, `hover:bg-rich-mahogany-600`, `text-rich-mahogany-100`
 -   **Movie Card (from `components/MovieCard.jsx`)**: (Refer to `STYLE_GUIDE.md` for detailed MovieCard colors, as it's a shared component)
