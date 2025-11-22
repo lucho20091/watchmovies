@@ -95,7 +95,7 @@ export default function Navbar() {
           )}
 
           {isSearchInputVisible && (
-            <form onSubmit={handleSearchSubmit} className="flex items-center gap-2 flex-grow max-w-md">
+            <form onSubmit={handleSearchSubmit} className="flex items-center flex-grow max-w-md">
               <label htmlFor="navbar-search-input" className="sr-only">
                 Search for movies or shows
               </label>
@@ -104,13 +104,13 @@ export default function Navbar() {
                 id="navbar-search-input"
                 type="text"
                 placeholder="Search..."
-                className="flex-grow p-2 rounded-md bg-neutral-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="flex-grow p-2 rounded-l-full bg-neutral-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
                 type="submit"
-                className="bg-red-600 hover:bg-red-700 text-white font-bold p-2 rounded-md transition-colors disabled:opacity-50"
+                className="bg-neutral-700 hover:bg-neutral-600 text-white p-2 rounded-r-full transition-colors disabled:opacity-50 h-full"
                 disabled={!searchQuery.trim()}
                 aria-label="Perform search"
               >
