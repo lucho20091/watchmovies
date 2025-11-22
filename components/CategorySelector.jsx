@@ -2,21 +2,10 @@
 
 import React from 'react';
 
-interface Category {
-  name: string;
-  value: string;
-}
-
-interface CategorySelectorProps {
-  categories: Category[];
-  activeCategory: string;
-  onCategoryChange: (value: string) => void;
-}
-
-export default function CategorySelector({ categories, activeCategory, onCategoryChange }: CategorySelectorProps) {
+export default function CategorySelector({ categories, activeCategory, onCategoryChange }) {
   return (
     <div className="w-full overflow-x-auto whitespace-nowrap py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-neutral-900">
-      <div className="flex justify-between space-x-4 px-4 md:px-0"> {/* Changed to flex justify-between */}
+      <div className="flex justify-between space-x-4 px-4 md:px-0">
         {categories.map((category) => (
           <button
             key={category.value}

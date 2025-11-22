@@ -122,11 +122,6 @@ function SeriesContent() {
 
   return (
     <div className="p-4 md:p-0 md:pt-4 container mx-auto">
-      <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
-        <h3 className="text-2xl font-bold border-l-8 border-red-500 pl-2 mb-4 md:mb-0">
-          Series
-        </h3>
-      </div>
       <CategorySelector
         categories={seriesCategories}
         activeCategory={selectedCategory}
