@@ -17,7 +17,7 @@ export default function MoviePage() {
   const videoServers = [
     {
       name: "Vidsrc",
-      url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=en&autoplay=1`, // Changed language to English
+      url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`, // Changed language to English
     },
     {
       name: "Vidking",
