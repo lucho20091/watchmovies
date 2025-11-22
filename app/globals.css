@@ -27,3 +27,16 @@
 .text-shadow {
   text-shadow: 3px 20px 40px rgb(0, 0, 0);
 }
+@theme {
+  --color-rich-mahogany-50: #f8eced;
+  --color-rich-mahogany-100: #f2d9db;
+  --color-rich-mahogany-200: #e4b4b8;
+  --color-rich-mahogany-300: #d78e94;
+  --color-rich-mahogany-400: #ca6870;
+  --color-rich-mahogany-500: #bd424c;
+  --color-rich-mahogany-600: #97353d;
+  --color-rich-mahogany-700: #71282e;
+  --color-rich-mahogany-800: #4b1b1f;
+  --color-rich-mahogany-900: #260d0f;
+  --color-rich-mahogany-950: #1a090b;
+}

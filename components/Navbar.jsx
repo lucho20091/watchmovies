@@ -78,7 +78,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
-          className="flex gap-2 text-xl md:text-3xl font-bold text-red-500 hover:text-red-400 transition-colors"
+          className="flex gap-2 text-xl md:text-3xl font-bold text-primary-500 hover:text-red-400 transition-colors"
         >
           <span>MoviesFree</span>
         </Link>
