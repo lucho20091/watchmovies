@@ -8,8 +8,10 @@ export default function MovieCard({ movie, isSeries }) {
   const displayDate = movie.release_date || movie.first_air_date;
   const releaseYear = displayDate ? displayDate.substring(0, 4) : "";
 
-  const hasPoster = movie.poster_path && typeof movie.poster_path === 'string';
-  const imageUrl = hasPoster ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null;
+  const hasPoster = movie.poster_path && typeof movie.poster_path === "string";
+  const imageUrl = hasPoster
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : null;
 
   return (
     <Link
@@ -45,7 +47,7 @@ export default function MovieCard({ movie, isSeries }) {
 
         {/* Original Language Badge */}
         {movie.original_language && (
-          <div className="absolute top-2 right-2 bg-rich-mahogany-950 text-rich-mahogany-100 text-xs px-2 py-1 rounded-full z-30">
+          <div className="absolute top-2 right-2 bg-rich-mahogany-950 text-rich-mahogany-100 text-xs px-2 py-1 rounded-md z-30">
             {movie.original_language.toUpperCase()}
           </div>
         )}
@@ -59,7 +61,9 @@ export default function MovieCard({ movie, isSeries }) {
 
         {/* Hover Overlay for Title, Summary, Release Year, and Rating */}
         <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 text-center z-40">
-          <h3 className="text-xl font-bold text-rich-mahogany-100 mb-2">{title}</h3>
+          <h3 className="text-xl font-bold text-rich-mahogany-100 mb-2">
+            {title}
+          </h3>
           {movie.overview && (
             <p className="text-rich-mahogany-100 text-sm line-clamp-3 mb-2">
               {movie.overview}
@@ -70,7 +74,9 @@ export default function MovieCard({ movie, isSeries }) {
             <span>{movie.vote_average.toFixed(1)}</span>
           </div>
           {releaseYear && (
-            <p className="text-rich-mahogany-100 text-sm">Year: {releaseYear}</p>
+            <p className="text-rich-mahogany-100 text-sm">
+              Year: {releaseYear}
+            </p>
           )}
         </div>
       </div>
