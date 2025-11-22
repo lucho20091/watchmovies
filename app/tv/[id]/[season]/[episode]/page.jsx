@@ -1,18 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation"; // Added useRouter
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { seriesCategories } from "@/utils/categories"; // Import seriesCategories
 
 export default function TvPageSeasonEpisode() {
   const { id, season, episode } = useParams();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
   const [tvData, setTvData] = useState(null);
-  const [tvPoster, setTvPoster] = useState(null); // Added tvPoster state
-  const [selectedServer, setSelectedServer] = useState(null); // New state for selected server
+  const [tvPoster, setTvPoster] = useState(null);
+  const [selectedServer, setSelectedServer] = useState(null);
   const [seasonRef, setSeasonRef] = useState(parseInt(season));
-  const [isLoading, setIsLoading] = useState(true); // New loading state
-  const [error, setError] = useState(null); // New error state
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Helper function to map genre name to category value for TV series
   const getSeriesCategoryValue = (genreName) => {
@@ -51,7 +52,7 @@ export default function TvPageSeasonEpisode() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/api/tv-details/${id}`); // Fetch from new API route
+        const response = await fetch(`/api/tv-details/${id}`);
         if (!response.ok) {
           if (response.status === 404) {
             setTvData(null);
@@ -61,13 +62,11 @@ export default function TvPageSeasonEpisode() {
         const data = await response.json();
         setTvData(data);
         if (data.poster_path) {
-          // Set tvPoster
           setTvPoster({
             mobile: `https://image.tmdb.org/t/p/original${data.poster_path}`,
             desktop: `https://image.tmdb.org/t/p/original${data.backdrop_path}`,
           });
         }
-        // Set initial selected server
         if (videoServers.length > 0) {
           setSelectedServer(videoServers[0]);
         }
@@ -80,22 +79,19 @@ export default function TvPageSeasonEpisode() {
     }
 
     fetchTvDetails();
-  }, [id]); // Depend only on id for fetching TV details
+  }, [id]);
 
   useEffect(() => {
     setSeasonRef(parseInt(season));
-    // When season/episode changes, update the selected server's URL
-    // and re-select the first server to ensure the URL is fresh.
     if (videoServers.length > 0) {
       setSelectedServer(videoServers[0]);
     }
-  }, [season, episode]); // Depend on season and episode to update embed URLs
+  }, [season, episode]);
 
   const handleServerSelection = (server) => {
     setSelectedServer(server);
   };
 
-  // Conditional rendering for loading, error, or not found
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
@@ -136,7 +132,9 @@ export default function TvPageSeasonEpisode() {
     );
   }
 
-  // Main content rendering
+  // Get a list of valid category values for quick lookup
+  const validSeriesCategoryValues = seriesCategories.map(cat => cat.value);
+
   return (
     <div className="relative min-h-screen flex flex-col">
       {tvPoster && tvPoster.mobile && (
@@ -161,7 +159,6 @@ export default function TvPageSeasonEpisode() {
           quality={70}
         />
       )}
-      {/* Overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/50"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-rich-mahogany-100 container mx-auto px-4">
@@ -174,15 +171,27 @@ export default function TvPageSeasonEpisode() {
           <span>{tvData?.status}</span>
         </div>
         <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
-          {tvData.genres.map((item) => (
-            <Link
-              key={item?.id}
-              href={`/series?category=${getSeriesCategoryValue(item.name)}&page=1`}
-              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium hover:bg-rich-mahogany-600 transition-colors cursor-pointer"
-            >
-              {item?.name}
-            </Link>
-          ))}
+          {tvData.genres.map((item) => {
+            const categoryValue = getSeriesCategoryValue(item.name);
+            const isClickable = validSeriesCategoryValues.includes(categoryValue);
+
+            const genreClasses = "bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium";
+            const hoverClasses = "hover:bg-rich-mahogany-600 transition-colors cursor-pointer";
+
+            return isClickable ? (
+              <Link
+                key={item?.id}
+                href={`/series?category=${categoryValue}&page=1`}
+                className={`${genreClasses} ${hoverClasses}`}
+              >
+                {item?.name}
+              </Link>
+            ) : (
+              <span key={item?.id} className={genreClasses}>
+                {item?.name}
+              </span>
+            );
+          })}
         </div>
         <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">
           {tvData?.overview}
@@ -213,13 +222,12 @@ export default function TvPageSeasonEpisode() {
             onChange={(e) => {
               const newSeason = parseInt(e.target.value);
               setSeasonRef(newSeason);
-              // Navigate to the new season, keeping the current episode (or default to 1)
               router.push(`/tv/${id}/${newSeason}/${episode || 1}`);
             }}
             value={seasonRef}
           >
             {tvData.seasons.map((item) => {
-              if (item.season_number === 0) return null; // Skip season 0 if it exists
+              if (item.season_number === 0) return null;
               return (
                 <option key={item.id} value={item.season_number}>
                   {item.name}
@@ -263,7 +271,7 @@ export default function TvPageSeasonEpisode() {
               })}
           </div>
         </div>
-        {selectedServer ? ( // Use selectedServer here
+        {selectedServer ? (
           <div className="w-full max-w-screen-xl mx-auto mt-8">
             <iframe
               src={selectedServer.url}
