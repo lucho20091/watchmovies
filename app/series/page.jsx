@@ -99,7 +99,7 @@ function SeriesContent() {
   };
 
   return (
-    <div className="p-4 lg:pt-6 container mx-auto">
+    <div className="p-4 lg:pt-6 container mx-auto md:px-0">
       <CategorySelector
         categories={seriesCategories}
         activeCategory={selectedCategory}
@@ -151,23 +151,28 @@ function SeriesContent() {
 // Main SeriesPage component that wraps SeriesContent in Suspense
 export default function SeriesPage() {
   return (
-    <Suspense fallback={
-      <div className="p-4 md:p-0 md:pt-4 container mx-auto animate-pulse">
-        <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
-          <div className="h-10 bg-gray-700 rounded w-64 mb-4 md:mb-0"></div>
-        </div>
-        <div className="w-full overflow-x-auto whitespace-nowrap py-2">
-          <div className="flex flex-nowrap gap-4 px-4 md:px-0">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <div key={i} className="h-8 bg-gray-700 rounded-md w-28 flex-shrink-0"></div>
-            ))}
+    <Suspense
+      fallback={
+        <div className="p-4 md:px-0 md:pt-4 container mx-auto animate-pulse">
+          <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <div className="h-10 bg-gray-700 rounded w-64 mb-4 md:mb-0"></div>
           </div>
+          <div className="w-full overflow-x-auto whitespace-nowrap py-2">
+            <div className="flex flex-nowrap gap-4 px-4 md:px-0">
+              {Array.from({ length: 7 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-8 bg-gray-700 rounded-md w-28 flex-shrink-0"
+                ></div>
+              ))}
+            </div>
+          </div>
+          <p className="text-center text-lg text-gray-400 mt-8">
+            Loading series page...
+          </p>
         </div>
-        <p className="text-center text-lg text-gray-400 mt-8">
-          Loading series page...
-        </p>
-      </div>
-    }>
+      }
+    >
       <SeriesContent />
     </Suspense>
   );

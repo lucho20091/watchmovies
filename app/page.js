@@ -94,7 +94,7 @@ export default async function Home() {
         </div>
       )}
 
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 md:px-0">
         <div className="flex items-center justify-between mb-8 md:mt-8">
           <h2 className="text-3xl font-bold flex items-center text-rich-mahogany-100">
             <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>

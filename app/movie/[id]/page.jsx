@@ -152,7 +152,7 @@ export default function MoviePage() {
             <Link
               key={item.id}
               href={`/movies?category=${item.name.toLowerCase()}&page=1`}
-              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium hover:bg-rich-mahogany-600 transition-colors cursor-pointer"
+              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-sm text-sm font-medium hover:bg-rich-mahogany-600 transition-colors cursor-pointer"
             >
               {item.name}
             </Link>

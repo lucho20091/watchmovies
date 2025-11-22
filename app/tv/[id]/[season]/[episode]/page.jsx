@@ -133,7 +133,7 @@ export default function TvPageSeasonEpisode() {
   }
 
   // Get a list of valid category values for quick lookup
-  const validSeriesCategoryValues = seriesCategories.map(cat => cat.value);
+  const validSeriesCategoryValues = seriesCategories.map((cat) => cat.value);
 
   return (
     <div className="relative min-h-screen flex flex-col">
@@ -173,10 +173,13 @@ export default function TvPageSeasonEpisode() {
         <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
           {tvData.genres.map((item) => {
             const categoryValue = getSeriesCategoryValue(item.name);
-            const isClickable = validSeriesCategoryValues.includes(categoryValue);
+            const isClickable =
+              validSeriesCategoryValues.includes(categoryValue);
 
-            const genreClasses = "bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-full text-sm font-medium";
-            const hoverClasses = "hover:bg-rich-mahogany-600 transition-colors cursor-pointer";
+            const genreClasses =
+              "bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-sm text-sm font-medium";
+            const hoverClasses =
+              "hover:bg-rich-mahogany-600 transition-colors cursor-pointer";
 
             return isClickable ? (
               <Link
