@@ -2,11 +2,11 @@
 
 This document outlines the specific Tailwind CSS color classes used for each UI element within the Homepage (`app/page.js`).
 
--   **Hero Section Overlay**: `from-neutral-900`, `via-neutral-900/70`, `to-transparent`
--   **Hero Section Title**: `text-white` (with `text-shadow` from `globals.css`)
--   **Hero Section Overview Text**: `text-white`
--   **Hero Section Rating/Year Text**: `text-white`
--   **Hero Section "Watch Now" Button**: `bg-red-600`, `hover:bg-red-700`, `text-white`
+-   **Hero Section Overlay**: *Removed, background handled by body's `bg-rich-mahogany-950`*
+-   **Hero Section Title**: `text-rich-mahogany-100` (with `text-shadow` from `globals.css`)
+-   **Hero Section Overview Text**: `text-rich-mahogany-100`
+-   **Hero Section Rating/Year Text**: `text-rich-mahogany-100`
+-   **Hero Section "Watch Now" Button**: `bg-rich-mahogany-500`, `hover:bg-rich-mahogany-600`, `text-rich-mahogany-100`
 -   **Section Titles (e.g., "TOP 10 MOVIES")**: `text-white`
 -   **Section Title Accent Bar**: `bg-red-600`
 -   **"View More" Button**: `bg-red-600`, `hover:bg-red-700`, `text-white`

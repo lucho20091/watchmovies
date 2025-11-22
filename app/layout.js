@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-neutral-900 text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-rich-mahogany-950 text-white`}
       >
         <Navbar />
         <div className="pb-12">{children}</div>

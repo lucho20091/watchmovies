@@ -69,8 +69,8 @@ export default async function Home() {
             priority // Loads this image with high priority
             quality={70} // Reduced image quality for performance
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent"></div>
-          <div className="relative z-10 flex flex-col justify-end h-full p-4 md:p-8 text-white max-w-screen-xl mx-auto">
+          {/* Removed the gradient overlay div */}
+          <div className="relative z-10 flex flex-col justify-end h-full p-4 md:p-8 text-rich-mahogany-100 max-w-screen-xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-4">
               {heroMovie.title}
             </h1>
@@ -86,7 +86,7 @@ export default async function Home() {
               </span>
             </div>
             <Link href={`/movie/${heroMovie.id}`}>
-              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
+              <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
                 Watch Now
               </button>
             </Link>
