@@ -156,7 +156,7 @@ function SeriesContent() {
 
           {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-16 ">
+            <div className="flex justify-center items-center gap-2 mt-16 mb-12">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1 || isLoading}

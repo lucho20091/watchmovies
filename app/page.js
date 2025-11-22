@@ -59,7 +59,7 @@ export default async function Home() {
   return (
     <div className="grow">
       {heroMovie && (
-        <div className="relative h-[500px] md:h-[700px] overflow-hidden mb-12">
+        <div className="relative h-[500px] md:h-[700px] overflow-hidden">
           <Image // Using next/image component
             src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
             alt={heroMovie.title}
@@ -123,7 +123,7 @@ export default async function Home() {
             </button>
           </Link>
         </div>
-        <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:mb-8">
           {trendingSeries &&
             first10TrendingSeries.map((serie) => (
               <MovieCard movie={serie} key={serie.id} isSeries={true} />

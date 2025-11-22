@@ -25,8 +25,10 @@ export default function Navbar() {
     const baseClasses = `px-1 md:px-3 py-1 rounded-md transition-colors duration-200 ease-in-out ${
       path === "/" && "hidden sm:inline"
     }`;
-    const activeClasses = "bg-rich-mahogany-500 text-rich-mahogany-100 font-semibold shadow-md";
-    const inactiveClasses = "text-gray-300 hover:bg-rich-mahogany-800 hover:text-rich-mahogany-100";
+    const activeClasses =
+      "bg-rich-mahogany-500 text-rich-mahogany-100 font-semibold shadow-md";
+    const inactiveClasses =
+      "text-gray-300 hover:bg-rich-mahogany-800 hover:text-rich-mahogany-100";
 
     return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`;
   };
@@ -144,7 +146,7 @@ export default function Navbar() {
             {isSearchInputVisible ? (
               <></>
             ) : (
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex justify-center items-center gap-2 md:px-3">
                 <span className="hidden md:inline">Search</span>
                 <FaSearch size={18} className="md:text-xl" />
               </div>
