@@ -8,21 +8,31 @@ export default function MovieCard({ movie, isSeries }) {
   const displayDate = movie.release_date || movie.first_air_date;
   const releaseYear = displayDate ? displayDate.substring(0, 4) : "";
 
+  // Check if poster_path is a valid string
+  const hasPoster = movie.poster_path && typeof movie.poster_path === 'string';
+  const imageUrl = hasPoster ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null;
+
   return (
     <Link
       href={mediaType === "tv" ? `/tv/${movie.id}/1/1` : `/movie/${movie.id}`}
       className="flex flex-col items-center relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 bg-neutral-950"
     >
       <div className="relative w-full aspect-[2/3]">
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={title || "Movie Poster"}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-cover transition-opacity duration-300 group-hover:opacity-20"
-          priority={false} // Only set to true for above-the-fold images
-          quality={70} // Reduced image quality for performance
-        />
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={title || "Movie Poster"}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-opacity duration-300 group-hover:opacity-20"
+            priority={false}
+            quality={70}
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-800 flex items-center justify-center text-center text-gray-400 text-sm p-2">
+            No Poster Available
+          </div>
+        )}
 
         {/* Gradient overlay for title readability */}
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-neutral-950 to-transparent z-10"></div>
@@ -50,9 +60,7 @@ export default function MovieCard({ movie, isSeries }) {
 
         {/* Hover Overlay for Title, Summary, Release Year, and Rating */}
         <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4 text-center z-40">
-          <h3 className="text-xl font-bold text-white mb-2">
-            {title}
-          </h3>
+          <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
           {movie.overview && (
             <p className="text-white text-sm line-clamp-3 mb-2">
               {movie.overview}
@@ -63,9 +71,7 @@ export default function MovieCard({ movie, isSeries }) {
             <span>{movie.vote_average.toFixed(1)}</span>
           </div>
           {releaseYear && (
-            <p className="text-white text-sm">
-              Year: {releaseYear}
-            </p>
+            <p className="text-white text-sm">Year: {releaseYear}</p>
           )}
         </div>
       </div>
