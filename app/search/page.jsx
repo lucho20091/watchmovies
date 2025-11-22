@@ -1,99 +1,82 @@
 "use client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import MovieCard from "@/components/MovieCard";
+import MovieCardSkeleton from "@/components/MovieCardSkeleton"; // Import skeleton for individual cards
 
 // Separate component that uses useSearchParams
 function SearchContent() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const searchInputRef = useRef(null);
-  const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const performSearch = async (searchQuery) => {
-    if (!searchQuery.trim()) return;
+  const performSearch = async (query) => {
+    if (!query.trim()) {
+      setMovies([]);
+      return;
+    }
 
     try {
       setIsLoading(true);
-      setMovies([]);
+      setMovies([]); // Clear previous results
       const response = await fetch(
-        `/api/search/${encodeURIComponent(searchQuery)}`
+        `/api/search/${encodeURIComponent(query)}`
       );
       const data = await response.json();
       setMovies(data);
     } catch (error) {
       console.error("Search error:", error);
+      setMovies([]);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!search.trim()) return;
-
-    // Update URL with query parameter
-    router.push(`/search?q=${encodeURIComponent(search)}`, { scroll: false });
-
-    // Perform search
-    await performSearch(search);
   };
 
   // Check for query parameters on component mount and when URL changes
   useEffect(() => {
     const queryParam = searchParams.get("q");
     if (queryParam) {
-      setSearch(queryParam);
+      setSearchQuery(queryParam);
       performSearch(queryParam);
+    } else {
+      setSearchQuery("");
+      setMovies([]);
     }
   }, [searchParams]);
 
-  // Focus search input on mount
-  useEffect(() => {
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, []);
-
   return (
-    <div className={`${!search && "md:grid md:place-items-center"} grow p-4`}>
+    <div className="grow p-4">
       <div className="container mx-auto">
-        <form
-          onSubmit={handleSubmit}
-          className="mb-4 flex items-center max-w-md mx-auto"
-        >
-          <label htmlFor="search" className="sr-only">
-            Search
-          </label>
-          <input
-            ref={searchInputRef}
-            type="text"
-            placeholder="Search for movies or shows..."
-            className="p-2 border border-gray-300 rounded w-full"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            disabled={isLoading}
-          />
-          <button
-            type="submit"
-            className="bg-white text-black font-bold p-2 rounded ml-2 disabled:opacity-50"
-            disabled={isLoading || !search.trim()}
-          >
-            {isLoading ? "Searching..." : "Search"}
-          </button>
-        </form>
+        <h1 className="text-3xl font-bold text-white mb-6 text-center">
+          Search Results for "{searchQuery}"
+        </h1>
 
         {isLoading && (
-          <div className="text-center mb-4">
-            <p>Searching...</p>
+          <div className="flex justify-center mt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              {Array.from({ length: 18 }).map((_, index) => (
+                <MovieCardSkeleton key={index} />
+              ))}
+            </div>
           </div>
         )}
 
+        {!isLoading && movies.length === 0 && searchQuery && (
+          <p className="text-center text-lg text-gray-400 mt-8">
+            No results found for "{searchQuery}". Try a different search term.
+          </p>
+        )}
+
+        {!isLoading && movies.length === 0 && !searchQuery && (
+          <p className="text-center text-lg text-gray-400 mt-8">
+            Start by searching for a movie or TV show using the search icon in the navigation bar.
+          </p>
+        )}
+
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-          {movies &&
+          {!isLoading &&
             movies.map((movie) => {
               if (movie.poster_path) {
                 return <MovieCard movie={movie} key={movie.id} />;
@@ -105,25 +88,18 @@ function SearchContent() {
   );
 }
 
-// Loading fallback component
-function SearchLoading() {
+// Loading fallback component for the initial load of the search page
+function SearchPageLoading() {
   return (
-    <div className="md:grid md:place-items-center grow p-4">
+    <div className="grow p-4">
       <div className="container mx-auto">
-        <div className="mb-4 flex items-center max-w-md mx-auto">
-          <input
-            type="text"
-            placeholder="Search for movies or shows..."
-            className="p-2 border border-gray-300 rounded w-full"
-            disabled
-          />
-          <button
-            type="button"
-            className="bg-white text-black font-bold p-2 rounded ml-2 opacity-50"
-            disabled
-          >
-            Search
-          </button>
+        <div className="h-10 bg-gray-700 rounded w-64 mb-6 mx-auto animate-pulse"></div> {/* Placeholder for title */}
+        <div className="flex justify-center mt-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {Array.from({ length: 18 }).map((_, index) => (
+              <MovieCardSkeleton key={index} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -133,7 +109,7 @@ function SearchLoading() {
 // Main component that wraps SearchContent in Suspense
 export default function SearchPage() {
   return (
-    <Suspense fallback={<SearchLoading />}>
+    <Suspense fallback={<SearchPageLoading />}>
       <SearchContent />
     </Suspense>
   );
