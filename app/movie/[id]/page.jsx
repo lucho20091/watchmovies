@@ -13,11 +13,11 @@ export default function MoviePage() {
   const [error, setError] = useState(null);
 
   // Define your video sources dynamically using the 'id'
-  const videoSources = {
-    vidking: `https://www.vidking.net/embed/movie/${id}`,
-    vidsrc: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`,
-    movies111: `https://111movies.com/movie/${id}`, // Consider if this is truly embeddable or if it should be a link
-  };
+  const videoServers = [
+    { name: "Server 1 (vidsrc)", url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1` },
+    { name: "Server 2 (vidking)", url: `https://www.vidking.net/embed/movie/${id}` },
+    // { name: "Server 3 (111Movies)", url: `https://111movies.com/movie/${id}` }, // Uncomment if 111Movies is embeddable
+  ];
 
   useEffect(() => {
     if (!id) return;
@@ -27,7 +27,7 @@ export default function MoviePage() {
       setError(null);
       try {
         // Fetch movie details from your new API route
-        const response = await fetch(`/api/movie-details/${id}`); // This API route needs to be created
+        const response = await fetch(`/api/movie-details/${id}`);
         if (!response.ok) {
           if (response.status === 404) {
             setMovieData(null); // Explicitly set to null if not found
@@ -36,8 +36,10 @@ export default function MoviePage() {
         }
         const data = await response.json();
         setMovieData(data);
-        // Set the initial video URL to Vidking by default
-        setCurrentVideoUrl(videoSources.vidking);
+        // Set the initial video URL to the first server in the list
+        if (videoServers.length > 0) {
+          setCurrentVideoUrl(videoServers[0].url);
+        }
       } catch (err) {
         console.error("Error fetching data:", err);
         setError("Failed to load movie details or video player.");
@@ -147,36 +149,19 @@ export default function MoviePage() {
 
         {/* Server Selection Buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <button
-            onClick={() => setCurrentVideoUrl(videoSources.vidking)}
-            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
-              currentVideoUrl === videoSources.vidking
-                ? "bg-red-600"
-                : "bg-gray-700 hover:bg-gray-600"
-            } text-white`}
-          >
-            Server 1 (Vidking)
-          </button>
-          <button
-            onClick={() => setCurrentVideoUrl(videoSources.vidsrc)}
-            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
-              currentVideoUrl === videoSources.vidsrc
-                ? "bg-red-600"
-                : "bg-gray-700 hover:bg-gray-600"
-            } text-white`}
-          >
-            Server 2 (Vidsrc)
-          </button>
-          <button
-            onClick={() => setCurrentVideoUrl(videoSources.movies111)}
-            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
-              currentVideoUrl === videoSources.movies111
-                ? "bg-red-600"
-                : "bg-gray-700 hover:bg-gray-600"
-            } text-white`}
-          >
-            Server 3 (111Movies)
-          </button>
+          {videoServers.map((server, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentVideoUrl(server.url)}
+              className={`px-6 py-3 rounded-lg font-bold transition-colors cursor-pointer ${
+                currentVideoUrl === server.url
+                  ? "bg-red-600"
+                  : "bg-gray-700 hover:bg-gray-600"
+              } text-white`}
+            >
+              {server.name}
+            </button>
+          ))}
         </div>
 
         {/* Video Player Iframe */}
