@@ -119,47 +119,49 @@ function SeriesContent() {
 
   return (
     <div className="p-4 md:p-0 md:pt-4 container mx-auto">
-      <CategorySelector
-        categories={seriesCategories}
-        activeCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
-      />
-      <div className="flex justify-center mt-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          {isLoading
-            ? Array.from({ length: 18 }).map((_, index) => (
-                <MovieCardSkeleton key={index} />
-              ))
-            : seriesData &&
-              seriesData.map((series) => {
-                if (series.poster_path) {
-                  return (
-                    <MovieCard movie={series} key={series.id} isSeries={true} />
-                  );
-                }
-              })}
-        </div>
-      </div>
+      {isLoading ? (
+        <PageLoadingSkeleton />
+      ) : (
+        <>
+          <CategorySelector
+            categories={seriesCategories}
+            activeCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
+          <div className="flex justify-center mt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              {seriesData &&
+                seriesData.map((series) => {
+                  if (series.poster_path) {
+                    return (
+                      <MovieCard movie={series} key={series.id} isSeries={true} />
+                    );
+                  }
+                })}
+            </div>
+          </div>
 
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-8 mb-20">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1 || isLoading}
-            className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
-          >
-            Previous
-          </button>
-          {renderPaginationButtons()}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages || isLoading}
-            className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-8 mb-20">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1 || isLoading}
+                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+              >
+                Previous
+              </button>
+              {renderPaginationButtons()}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages || isLoading}
+                className="px-4 py-2 rounded-md bg-gray-700 text-white font-bold hover:bg-gray-600 disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
