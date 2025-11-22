@@ -1,57 +1,84 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function MoviePage({ params }) {
-  const { id } = await params;
+export default function MoviePage() {
+  const { id } = useParams();
+  const [movieData, setMovieData] = useState(null);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  async function fetchMovieUrl() {
-    try {
-      const response = await fetch(
-        `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`
-      );
-      return response.url;
-    } catch (error) {
-      console.error("Error fetching movie URL:", error);
-      return null;
-    }
-  }
+  // Define your video sources dynamically using the 'id'
+  const videoSources = {
+    vidking: `https://www.vidking.net/embed/movie/${id}`,
+    vidsrc: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`,
+    movies111: `https://111movies.com/movie/${id}`, // Consider if this is truly embeddable or if it should be a link
+  };
 
-  async function fetchMovieData() {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: process.env.MOVIEDB_API_BEARER,
-      },
-    };
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
-        options
-      );
-      if (!response.ok) {
-        if (response.status === 404) {
-          return null;
+  useEffect(() => {
+    if (!id) return;
+
+    async function fetchMovieAndSetInitialVideo() {
+      setIsLoading(true);
+      setError(null);
+      try {
+        // Fetch movie details from your new API route
+        const response = await fetch(`/api/movie-details/${id}`); // This API route needs to be created
+        if (!response.ok) {
+          if (response.status === 404) {
+            setMovieData(null); // Explicitly set to null if not found
+          }
+          throw new Error("Failed to fetch movie details");
         }
-        throw new Error("Network response was not ok");
+        const data = await response.json();
+        setMovieData(data);
+        // Set the initial video URL to Vidking by default
+        setCurrentVideoUrl(videoSources.vidking);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to load movie details or video player.");
+      } finally {
+        setIsLoading(false);
       }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching movie data:", error);
-      return null;
     }
+
+    fetchMovieAndSetInitialVideo();
+  }, [id]); // Re-run effect if 'id' changes
+
+  // Conditional rendering for loading, error, or movie not found
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
+        <p className="text-xl">Loading movie details...</p>
+      </div>
+    );
   }
 
-  const movieUrl = await fetchMovieUrl();
-  const movieData = await fetchMovieData();
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
+        <h1 className="text-4xl font-bold mb-4">Error</h1>
+        <p className="text-lg text-center mb-6">{error}</p>
+        <Link
+          href="/"
+          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-lg transition-colors"
+        >
+          Go to Home
+        </Link>
+      </div>
+    );
+  }
 
   if (!movieData) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white p-4">
         <h1 className="text-4xl font-bold mb-4">Movie Not Found</h1>
         <p className="text-lg text-center mb-6">
-          The movie you are looking for does not exist or an error occurred.
+          The movie you are looking for does not exist.
         </p>
         <Link
           href="/"
@@ -63,9 +90,10 @@ export default async function MoviePage({ params }) {
     );
   }
 
+  // Main content rendering
   return (
     <div className="relative min-h-screen flex flex-col">
-      {/* Desktop Background Image */}
+      {/* Background Images (using movieData from state) */}
       {movieData.backdrop_path && (
         <Image
           src={`https://image.tmdb.org/t/p/original${movieData.backdrop_path}`}
@@ -74,10 +102,9 @@ export default async function MoviePage({ params }) {
           sizes="100vw"
           className="absolute inset-0 w-full h-full object-cover z-[-2] hidden md:block"
           priority
-          quality={70} // Reduced image quality for performance
+          quality={70}
         />
       )}
-      {/* Mobile Background Image */}
       {movieData.poster_path && (
         <Image
           src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`}
@@ -86,13 +113,11 @@ export default async function MoviePage({ params }) {
           sizes="100vw"
           className="absolute inset-0 w-full h-full object-cover z-[-2] block md:hidden"
           priority
-          quality={70} // Reduced image quality for performance
+          quality={70}
         />
       )}
-      {/* Overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/50"></div>
 
-      {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-white container mx-auto px-4">
         <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
           {movieData.title}
@@ -120,18 +145,55 @@ export default async function MoviePage({ params }) {
           {movieData.overview}
         </p>
 
-        {movieUrl ? (
-          <div className="w-full max-w-screen-xl mx-auto">
+        {/* Server Selection Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <button
+            onClick={() => setCurrentVideoUrl(videoSources.vidking)}
+            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
+              currentVideoUrl === videoSources.vidking
+                ? "bg-red-600"
+                : "bg-gray-700 hover:bg-gray-600"
+            } text-white`}
+          >
+            Server 1 (Vidking)
+          </button>
+          <button
+            onClick={() => setCurrentVideoUrl(videoSources.vidsrc)}
+            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
+              currentVideoUrl === videoSources.vidsrc
+                ? "bg-red-600"
+                : "bg-gray-700 hover:bg-gray-600"
+            } text-white`}
+          >
+            Server 2 (Vidsrc)
+          </button>
+          <button
+            onClick={() => setCurrentVideoUrl(videoSources.movies111)}
+            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
+              currentVideoUrl === videoSources.movies111
+                ? "bg-red-600"
+                : "bg-gray-700 hover:bg-gray-600"
+            } text-white`}
+          >
+            Server 3 (111Movies)
+          </button>
+        </div>
+
+        {/* Video Player Iframe */}
+        <div className="w-full max-w-screen-xl mx-auto">
+          {currentVideoUrl ? (
             <iframe
-              src={movieUrl}
+              src={currentVideoUrl}
               allow="fullscreen"
               allowFullScreen
               className="w-full aspect-video rounded-lg shadow-xl"
             ></iframe>
-          </div>
-        ) : (
-          <p className="text-lg">Loading video player...</p>
-        )}
+          ) : (
+            <p className="text-lg text-center mt-8">
+              Select a server to start watching.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
