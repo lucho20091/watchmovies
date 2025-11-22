@@ -14,5 +14,5 @@ This document outlines the specific Tailwind CSS color classes used for each UI 
     -   Background for card skeleton: `bg-neutral-950` (from `MovieCardSkeleton`)
 -   **Pagination Buttons**:
     -   Active Page Button: `bg-rich-mahogany-500`, `text-rich-mahogany-100`
-    -   Inactive Page Button: `bg-gray-200`, `text-gray-950`, `hover:bg-rich-mahogany-800`
+    -   Inactive Page Button: `bg-rich-mahogany-700`, `text-rich-mahogany-100`, `hover:bg-rich-mahogany-800`
     -   Disabled Buttons: `opacity-50`
