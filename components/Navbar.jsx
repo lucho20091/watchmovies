@@ -22,8 +22,9 @@ export default function Navbar() {
 
   // Helper function to get link classes
   const getLinkClasses = (path) => {
-    const baseClasses =
-      "px-3 py-1 rounded-md transition-colors duration-200 ease-in-out";
+    const baseClasses = `px-1 md:px-3 py-1 rounded-md transition-colors duration-200 ease-in-out ${
+      path === "/" && "hidden sm:inline"
+    }`;
     const activeClasses = "bg-red-600 text-white font-semibold shadow-md";
     const inactiveClasses = "text-gray-300 hover:bg-gray-700 hover:text-white";
 
@@ -82,7 +83,7 @@ export default function Navbar() {
           <span>MoviesFree</span>
         </Link>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-1 md:space-x-4">
           {!isSearchInputVisible && (
             <>
               <Link href="/" className={getLinkClasses("/")}>
@@ -100,7 +101,7 @@ export default function Navbar() {
           {isSearchInputVisible && (
             <form
               onSubmit={handleSearchSubmit}
-              className="flex items-center w-full max-w-md gap-2 mr-0"
+              className="flex items-center w-full max-w-md gap-2 mr-0 ml-2"
             >
               <label htmlFor="navbar-search-input" className="sr-only">
                 Search for movies or shows
