@@ -47,7 +47,7 @@ function SearchContent() {
   }, [searchParams]);
 
   return (
-    <div className="grow p-4">
+    <div className="grow p-4 pt-20">
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold text-white mb-6 text-center">
           Search Results for "{searchQuery}"
@@ -91,7 +91,7 @@ function SearchContent() {
 // Loading fallback component for the initial load of the search page
 function SearchPageLoading() {
   return (
-    <div className="grow p-4">
+    <div className="grow p-4 pt-20">
       <div className="container mx-auto">
         <div className="h-10 bg-gray-700 rounded w-64 mb-6 mx-auto animate-pulse"></div> {/* Placeholder for title */}
         <div className="flex justify-center mt-4">

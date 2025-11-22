@@ -117,7 +117,7 @@ function MoviesContent() {
   };
 
   return (
-    <div className="p-4 md:p-0 md:pt-4 container mx-auto">
+    <div className="p-4 md:p-0 pt-20 container mx-auto">
       <CategorySelector
         categories={movieCategories}
         activeCategory={selectedCategory}

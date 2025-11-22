@@ -52,9 +52,13 @@ export default function Navbar() {
   // Close search input if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchInputRef.current && !searchInputRef.current.contains(event.target) && isSearchInputVisible) {
+      if (
+        searchInputRef.current &&
+        !searchInputRef.current.contains(event.target) &&
+        isSearchInputVisible
+      ) {
         // Check if the click was not on the search toggle button itself
-        const searchButton = document.getElementById('search-toggle-button');
+        const searchButton = document.getElementById("search-toggle-button");
         if (searchButton && !searchButton.contains(event.target)) {
           setIsSearchInputVisible(false);
           setSearchQuery("");
@@ -67,7 +71,6 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isSearchInputVisible]);
-
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-900 py-4 px-6 shadow-lg border-b border-gray-800">
@@ -95,22 +98,32 @@ export default function Navbar() {
           )}
 
           {isSearchInputVisible && (
-            <form onSubmit={handleSearchSubmit} className="flex items-center flex-grow max-w-md">
+            <form
+              onSubmit={handleSearchSubmit}
+              className="flex items-center w-full max-w-md gap-2"
+            >
               <label htmlFor="navbar-search-input" className="sr-only">
                 Search for movies or shows
               </label>
+
               <input
                 ref={searchInputRef}
                 id="navbar-search-input"
                 type="text"
                 placeholder="Search..."
-                className="flex-grow p-2 rounded-l-full bg-neutral-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="flex-1 w-full p-2 rounded-md bg-neutral-800 text-white
+               border border-gray-700 focus:outline-none h-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
+
               <button
                 type="submit"
-                className="bg-neutral-700 hover:bg-neutral-600 text-white p-2 rounded-r-full transition-colors disabled:opacity-50 h-full"
+                className="flex items-center justify-center h-10 min-w-[42px]
+               bg-neutral-800 hover:bg-neutral-600 text-gray-400
+               rounded-md border border-gray-700 transition-colors
+               disabled:opacity-50 disabled:cursor-not-allowed
+               disabled:hover:bg-neutral-800"
                 disabled={!searchQuery.trim()}
                 aria-label="Perform search"
               >
@@ -122,11 +135,11 @@ export default function Navbar() {
           <button
             id="search-toggle-button"
             onClick={toggleSearchInput}
-            className="px-3 py-1 rounded-md transition-colors duration-200 ease-in-out text-gray-300 hover:bg-gray-700 hover:text-white"
+            className="px-3 py-1 rounded-md transition-colors duration-200 ease-in-out text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
             aria-label={isSearchInputVisible ? "Close search" : "Open search"}
           >
             {isSearchInputVisible ? (
-              <FaTimes size={18} className="md:text-xl" />
+              <></>
             ) : (
               <div className="flex justify-center items-center gap-2">
                 <span className="hidden md:inline">Search</span>

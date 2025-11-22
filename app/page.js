@@ -57,7 +57,7 @@ export default async function Home() {
   const heroMovie = trendingMovies[0];
 
   return (
-    <div className="mt-4 grow">
+    <div className="grow">
       {heroMovie && (
         <div className="relative h-[500px] md:h-[700px] overflow-hidden mb-12">
           <Image // Using next/image component
