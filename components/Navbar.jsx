@@ -112,7 +112,7 @@ export default function Navbar() {
                 id="navbar-search-input"
                 type="text"
                 placeholder="Search..."
-                className="flex-1 w-full p-2 rounded-md bg-neutral-800 text-white
+                className="flex-1 w-full p-2 rounded-md bg-rich-mahogany-950 text-white
                border border-gray-700 focus:outline-none h-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -121,10 +121,10 @@ export default function Navbar() {
               <button
                 type="submit"
                 className="flex items-center justify-center h-10 min-w-[42px]
-               bg-neutral-800 hover:bg-rich-mahogany-800 text-gray-400
+               bg-rich-mahogany-950 hover:bg-rich-mahogany-800 text-gray-400
                rounded-md border border-gray-700 transition-colors
                disabled:opacity-50 disabled:cursor-not-allowed
-               disabled:hover:bg-neutral-800"
+               disabled:hover:bg-rich-mahogany-800"
                 disabled={!searchQuery.trim()}
                 aria-label="Perform search"
               >
