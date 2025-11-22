@@ -8,14 +8,13 @@ export default function MovieCard({ movie, isSeries }) {
   const displayDate = movie.release_date || movie.first_air_date;
   const releaseYear = displayDate ? displayDate.substring(0, 4) : "";
 
-  // Check if poster_path is a valid string
   const hasPoster = movie.poster_path && typeof movie.poster_path === 'string';
   const imageUrl = hasPoster ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null;
 
   return (
     <Link
       href={mediaType === "tv" ? `/tv/${movie.id}/1/1` : `/movie/${movie.id}`}
-      className="flex flex-col relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 bg-neutral-950 h-full"
+      className="relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl bg-neutral-950 h-full" // Removed flex flex-col, transform, and transition
     >
       <div className="relative w-full aspect-[2/3]">
         {imageUrl ? (
