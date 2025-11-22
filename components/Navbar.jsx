@@ -74,7 +74,7 @@ export default function Navbar() {
   }, [isSearchInputVisible]);
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-50 bg-rich-mahogany-900 py-4 px-6 shadow-lg border-b border-gray-800">
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-rich-mahogany-900 py-4 px-6 shadow-lg border-b border-rich-mahogany-950">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
@@ -121,7 +121,7 @@ export default function Navbar() {
               <button
                 type="submit"
                 className="flex items-center justify-center h-10 min-w-[42px]
-               bg-rich-mahogany-950 hover:bg-rich-mahogany-800 text-gray-400
+               bg-rich-mahogany-950 hover:bg-rich-mahogany-800 text-gray-300
                rounded-md border border-gray-700 transition-colors
                disabled:opacity-50 disabled:cursor-not-allowed
                disabled:hover:bg-rich-mahogany-800"
