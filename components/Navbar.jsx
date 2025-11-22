@@ -26,7 +26,7 @@ export default function Navbar() {
       path === "/" && "hidden sm:inline"
     }`;
     const activeClasses = "bg-rich-mahogany-500 text-white font-semibold shadow-md";
-    const inactiveClasses = "text-gray-300 hover:bg-rich-mahogany-950 hover:text-white";
+    const inactiveClasses = "text-gray-300 hover:bg-rich-mahogany-800 hover:text-white";
 
     return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`;
   };
@@ -121,7 +121,7 @@ export default function Navbar() {
               <button
                 type="submit"
                 className="flex items-center justify-center h-10 min-w-[42px]
-               bg-neutral-800 hover:bg-rich-mahogany-950 text-gray-400
+               bg-neutral-800 hover:bg-rich-mahogany-800 text-gray-400
                rounded-md border border-gray-700 transition-colors
                disabled:opacity-50 disabled:cursor-not-allowed
                disabled:hover:bg-neutral-800"
@@ -138,7 +138,7 @@ export default function Navbar() {
             onClick={toggleSearchInput}
             className={`${
               isSearchInputVisible && "hidden"
-            }px-3 py-1 rounded-md transition-colors duration-200 ease-in-out text-gray-300 hover:bg-rich-mahogany-950 hover:text-white cursor-pointer`}
+            }px-3 py-1 rounded-md transition-colors duration-200 ease-in-out text-gray-300 hover:bg-rich-mahogany-800 hover:text-white cursor-pointer`}
             aria-label={isSearchInputVisible ? "Close search" : "Open search"}
           >
             {isSearchInputVisible ? (
