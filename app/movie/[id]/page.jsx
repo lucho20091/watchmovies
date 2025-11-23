@@ -147,7 +147,7 @@ export default function MoviePage() {
           )}
           {movieData.runtime && <span>{movieData.runtime} minutes</span>}
         </div>
-        <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
+        <div className="flex flex-wrap justify-center items-center mb-4 gap-4">
           {movieData.genres?.map((item) => (
             <Link
               key={item.id}
