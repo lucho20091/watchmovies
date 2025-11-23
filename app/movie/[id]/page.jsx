@@ -135,10 +135,10 @@ export default function MoviePage() {
       <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-8 text-rich-mahogany-100 container mx-auto">
-        <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
+        <h1 className="text-shadow-lg/90 text-4xl md:text-6xl font-bold mb-4 text-center">
           {movieData.title}
         </h1>
-        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4">
+        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4 text-shadow-lg/90">
           {movieData.release_date && (
             <span>{movieData.release_date.substring(0, 4)}</span>
           )}
@@ -170,8 +170,8 @@ export default function MoviePage() {
               onClick={() => handleServerSelection(server)}
               className={`px-6 py-3 rounded-lg font-bold transition-colors cursor-pointer ${
                 selectedServer?.name === server.name
-                  ? "bg-rich-mahogany-500"
-                  : "bg-rich-mahogany-800 hover:bg-rich-mahogany-700"
+                  ? "bg-rich-mahogany-500 hover:bg-rich-mahogany-600"
+                  : "bg-rich-mahogany-900 hover:bg-rich-mahogany-800"
               } text-rich-mahogany-100`}
             >
               {server.name}
@@ -182,12 +182,12 @@ export default function MoviePage() {
         {/* Video Player Iframe */}
         {selectedServer && ( // Only render iframe if a server is selected
           <div className="w-full max-w-screen-xl mx-auto">
-            {/* <iframe
+            <iframe
               src={selectedServer.url}
               allowFullScreen
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
-            ></iframe> */}
+            ></iframe>
           </div>
         )}
       </div>

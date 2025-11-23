@@ -159,18 +159,18 @@ export default function TvPageSeasonEpisode() {
           quality={70}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center pt-4 md:pt-10 pb-20 text-rich-mahogany-100 container mx-auto px-4">
-        <h1 className="text-shadow-lg/90 text-4xl md:text-6xl font-bold mb-4 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-8 text-rich-mahogany-100 container mx-auto">
+        <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
           {tvData?.name}
         </h1>
-        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4 text-shadow-lg/90">
+        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4">
           <span>{tvData?.first_air_date?.substring(0, 4)}</span>
           <span>⭐{tvData?.vote_average.toFixed(1)}</span>
           <span>{tvData?.status}</span>
         </div>
-        <div className="flex flex-wrap justify-center items-center mt-4 gap-2 mb-6">
+        <div className="flex flex-wrap justify-center items-center mb-4 gap-4">
           {tvData.genres.map((item) => {
             const categoryValue = getSeriesCategoryValue(item.name);
             const isClickable =
