@@ -182,12 +182,12 @@ export default function MoviePage() {
         {/* Video Player Iframe */}
         {selectedServer && ( // Only render iframe if a server is selected
           <div className="w-full max-w-screen-xl mx-auto">
-            <iframe
+            {/* <iframe
               src={selectedServer.url}
               allowFullScreen
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
-            ></iframe>
+            ></iframe> */}
           </div>
         )}
       </div>

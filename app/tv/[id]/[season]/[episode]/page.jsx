@@ -276,12 +276,12 @@ export default function TvPageSeasonEpisode() {
         </div>
         {selectedServer ? (
           <div className="w-full max-w-screen-xl mx-auto mt-8">
-            <iframe
+            {/* <iframe
               src={selectedServer.url}
               allowFullScreen
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
-            ></iframe>
+            ></iframe> */}
           </div>
         ) : (
           <p className="text-lg text-center mt-8">
