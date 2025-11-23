@@ -132,7 +132,7 @@ export default function MoviePage() {
           quality={70}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-10 text-rich-mahogany-100 container mx-auto">
         <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
