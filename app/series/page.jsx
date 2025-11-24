@@ -128,7 +128,7 @@ function SeriesContent() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1 || isLoading}
-                className="px-4 py-2 rounded-md text-rich-mahogany-100 font-bold disabled:opacity-50 cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 hover:bg-rich-mahogany-500/30"
+                className="px-4 py-2 rounded-md text-rich-mahogany-100 font-bold disabled:opacity-50 cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 hover:bg-rich-mahogany-500/30 disabled:cursor-not-allowed disabled:hover:bg-inherit"
               >
                 Previous
               </button>
@@ -136,7 +136,7 @@ function SeriesContent() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages || isLoading}
-                className="px-4 py-2 rounded-md text-rich-mahogany-100 font-bold disabled:opacity-50 cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 hover:bg-rich-mahogany-500/30"
+                className="px-4 py-2 rounded-md text-rich-mahogany-100 font-bold disabled:opacity-50 cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 hover:bg-rich-mahogany-500/30 disabled:cursor-not-allowed disabled:hover:bg-inherit"
               >
                 Next
               </button>
