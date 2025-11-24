@@ -70,6 +70,7 @@ export default function Home() {
         <div className="relative h-[calc(100svh-63px)] overflow-hidden group">
           {currentHeroMovie.backdrop_path && (
             <Image
+              key={`backdrop-${currentHeroMovie.id}`} {/* Added key prop */}
               src={`https://image.tmdb.org/t/p/original${currentHeroMovie.backdrop_path}`}
               alt={currentHeroMovie.title || "Movie Backdrop"}
               fill
@@ -83,6 +84,7 @@ export default function Home() {
           )}
           {currentHeroMovie.poster_path && (
             <Image
+              key={`poster-${currentHeroMovie.id}`} {/* Added key prop */}
               src={`https://image.tmdb.org/t/p/original${currentHeroMovie.poster_path}`}
               alt={currentHeroMovie.title || "Movie Poster"}
               fill
