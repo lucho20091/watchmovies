@@ -59,7 +59,7 @@ export default async function Home() {
   return (
     <div className="grow">
       {heroMovie && (
-        <div className="relative h-[500px] md:h-[700px] overflow-hidden">
+        <div className="relative h-[calc(100svh-63px)] overflow-hidden group ">
           <Image // Using next/image component
             src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
             alt={heroMovie.title}
@@ -69,15 +69,16 @@ export default async function Home() {
             priority // Loads this image with high priority
             quality={70} // Reduced image quality for performance
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
           {/* Removed the gradient overlay div */}
-          <div className="relative z-10 flex flex-col justify-end h-full p-4 md:p-8 text-rich-mahogany-100 max-w-screen-xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-4">
+          <div className="relative z-10 flex flex-col justify-end h-full px-4 sm:px-0 py-8 md:py-12 text-rich-mahogany-100 container mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold text-shadow-lg/90 mb-4">
               {heroMovie.title}
             </h1>
-            <p className="text-lg md:text-xl mb-4 max-w-2xl line-clamp-3">
+            <p className="text-lg md:text-xl mb-4 max-w-2xl line-clamp-3 text-shadow-lg/90">
               {heroMovie.overview}
             </p>
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-4 text-shadow-lg/90">
               <span className="text-lg md:text-xl font-semibold">
                 ⭐ {heroMovie.vote_average.toFixed(1)}
               </span>
@@ -85,7 +86,7 @@ export default async function Home() {
                 {heroMovie.release_date?.substring(0, 4)}
               </span>
             </div>
-            <Link href={`/movie/${heroMovie.id}`}>
+            <Link href={`/movie/${heroMovie.id}`} className="ml-auto sm:ml-0">
               <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
                 Watch Now
               </button>
@@ -96,14 +97,15 @@ export default async function Home() {
 
       <div className="container mx-auto p-4 md:px-0">
         <div className="flex items-center justify-between mb-8 md:mt-8">
-          <h2 className="text-3xl font-bold flex items-center text-rich-mahogany-100">
+          <h2 className="text-lg  font-bold flex items-center text-rich-mahogany-100">
             <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>
             TOP 10 MOVIES
           </h2>
-          <Link href="/movies">
-            <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
-              View More
-            </button>
+          <Link
+            href="/movies"
+            className="text-rich-mahogany-400 border-b-2 border-rich-mahogany-400 text-lg font-bold"
+          >
+            View More
           </Link>
         </div>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -113,14 +115,15 @@ export default async function Home() {
             ))}
         </div>
         <div className="flex items-center justify-between mb-8 mt-4 md:mt-8">
-          <h2 className="text-3xl font-bold flex items-center text-rich-mahogany-100">
+          <h2 className="text-lg font-bold flex items-center text-rich-mahogany-100">
             <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>
             TOP 10 SERIES
           </h2>
-          <Link href="/series">
-            <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-2 px-4 rounded-lg text-base transition-colors cursor-pointer">
-              View More
-            </button>
+          <Link
+            href="/series"
+            className="text-rich-mahogany-400 border-b-2 border-rich-mahogany-400 text-lg font-bold"
+          >
+            View More
           </Link>
         </div>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:mb-8">
