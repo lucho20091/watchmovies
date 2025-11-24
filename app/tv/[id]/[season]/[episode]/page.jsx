@@ -162,10 +162,10 @@ export default function TvPageSeasonEpisode() {
       <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-8 text-rich-mahogany-100 container mx-auto">
-        <h1 className="text-shadow text-4xl md:text-6xl font-bold mb-4 text-center">
+        <h1 className="text-shadow-lg/90 text-4xl md:text-6xl font-bold mb-4 text-center">
           {tvData?.name}
         </h1>
-        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4">
+        <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4 text-shadow-lg/90">
           <span>{tvData?.first_air_date?.substring(0, 4)}</span>
           <span>⭐{tvData?.vote_average.toFixed(1)}</span>
           <span>{tvData?.status}</span>
@@ -208,8 +208,8 @@ export default function TvPageSeasonEpisode() {
               onClick={() => handleServerSelection(server)}
               className={`px-6 py-3 rounded-lg font-bold transition-colors cursor-pointer ${
                 selectedServer?.name === server.name
-                  ? "bg-rich-mahogany-500"
-                  : "bg-rich-mahogany-800 hover:bg-rich-mahogany-700"
+                  ? "bg-rich-mahogany-500 hover:bg-rich-mahogany-600"
+                  : "bg-rich-mahogany-900 hover:bg-rich-mahogany-800 "
               } text-rich-mahogany-100`}
             >
               {server.name}
@@ -221,7 +221,7 @@ export default function TvPageSeasonEpisode() {
           <select
             name="season"
             id="season"
-            className="w-36 mx-auto bg-rich-mahogany-800 px-2 py-1 rounded-md font-bold text-xl border-rich-mahogany-700 border-2 text-center text-rich-mahogany-100 focus:outline-none focus:ring-2 focus:ring-rich-mahogany-500"
+            className="w-36 mx-auto bg-rich-mahogany-900 px-2 py-1 rounded-md font-bold text-xl border-rich-mahogany-500 border-2 text-center text-rich-mahogany-100 focus:outline-none focus:ring-2 cursor-pointer hover:bg-rich-mahogany-800 focus:ring-rich-mahogany-500"
             onChange={(e) => {
               const newSeason = parseInt(e.target.value);
               setSeasonRef(newSeason);
@@ -239,7 +239,7 @@ export default function TvPageSeasonEpisode() {
             })}
           </select>
         </div>
-        <div className="md:border-2 md:border-rich-mahogany-700 w-full max-w-screen-xl mx-auto md:mb-4 mt-4 rounded-lg overflow-hidden">
+        <div className="md:border-2 md:border-rich-mahogany-500 w-full max-w-screen-xl mx-auto mt-4 rounded-lg overflow-hidden">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] gap-4 p-4 bg-rich-mahogany-950 max-h-64 overflow-y-auto">
             {tvData.seasons[
               tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
@@ -263,7 +263,7 @@ export default function TvPageSeasonEpisode() {
                           ${
                             parseInt(episode) === episodeNumber &&
                             parseInt(season) === seasonRef
-                              ? "bg-rich-mahogany-500 text-rich-mahogany-100"
+                              ? "bg-rich-mahogany-500 text-rich-mahogany-100 hover:bg-rich-mahogany-600"
                               : "bg-rich-mahogany-800 text-rich-mahogany-100 hover:bg-rich-mahogany-700"
                           }`}
                     >
@@ -276,12 +276,12 @@ export default function TvPageSeasonEpisode() {
         </div>
         {selectedServer ? (
           <div className="w-full max-w-screen-xl mx-auto mt-8">
-            {/* <iframe
+            <iframe
               src={selectedServer.url}
               allowFullScreen
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
-            ></iframe> */}
+            ></iframe>
           </div>
         ) : (
           <p className="text-lg text-center mt-8">

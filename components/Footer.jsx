@@ -12,13 +12,13 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex space-x-6">
-            <span className="text-gray-400 hover:text-white transition">
+            <span className="text-gray-400 hover:text-rich-mahogany-100 transition">
               Terms
             </span>
-            <span className="text-gray-400 hover:text-white transition">
+            <span className="text-gray-400 hover:text-rich-mahogany-100 transition">
               Privacy
             </span>
-            <span className="text-gray-400 hover:text-white transition">
+            <span className="text-gray-400 hover:text-rich-mahogany-100 transition">
               Contact
             </span>
           </div>

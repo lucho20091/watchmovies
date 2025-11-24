@@ -46,24 +46,24 @@ function SearchContent() {
   return (
     <div className="grow p-4 lg:pt-6">
       <div className="container mx-auto">
-        <h1 className="text-3xl font-bold text-white mb-6 text-center">
+        <h1 className="text-3xl font-bold     text-rich-mahogany-100 mb-6 text-center">
           Search Results for "{searchQuery}"
         </h1>
 
         {isLoading && (
-          <p className="text-center text-lg text-gray-400 mt-8">
+          <p className="text-center text-lg text-rich-mahogany-200 mt-8">
             Loading search results...
           </p>
         )}
 
         {!isLoading && movies.length === 0 && searchQuery && (
-          <p className="text-center text-lg text-gray-400 mt-8">
+          <p className="text-center text-lg text-rich-mahogany-200 mt-8">
             No results found for "{searchQuery}". Try a different search term.
           </p>
         )}
 
         {!isLoading && movies.length === 0 && !searchQuery && (
-          <p className="text-center text-lg text-gray-400 mt-8">
+          <p className="text-center text-lg text-rich-mahogany-200 mt-8">
             Start by searching for a movie or TV show using the search icon in
             the navigation bar.
           </p>
@@ -85,16 +85,18 @@ function SearchContent() {
 // Main component that wraps SearchContent in Suspense
 export default function SearchPage() {
   return (
-    <Suspense fallback={
-      <div className="grow p-4">
-        <div className="container mx-auto">
-          <div className="h-10 bg-gray-700 rounded w-64 mb-6 mx-auto animate-pulse"></div>
-          <p className="text-center text-lg text-gray-400 mt-8">
-            Loading search page...
-          </p>
+    <Suspense
+      fallback={
+        <div className="grow p-4">
+          <div className="container mx-auto">
+            <div className="h-10 bg-gray-700 rounded w-64 mb-6 mx-auto animate-pulse"></div>
+            <p className="text-center text-lg text-rich-mahogany-200 mt-8">
+              Loading search page...
+            </p>
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <SearchContent />
     </Suspense>
   );

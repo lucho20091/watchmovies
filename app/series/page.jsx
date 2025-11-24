@@ -106,7 +106,7 @@ function SeriesContent() {
         onCategoryChange={handleCategoryChange}
       />
       {isLoading ? (
-        <p className="text-center text-lg text-gray-400 mt-8">
+        <p className="text-center text-lg text-rich-mahogany-200 mt-8">
           Loading series...
         </p>
       ) : (
@@ -154,7 +154,7 @@ export default function SeriesPage() {
     <Suspense
       fallback={
         <div className="p-4 md:px-0 md:pt-4 container mx-auto animate-pulse">
-          <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
+          <div className="text-rich-mahogany-100 flex flex-col md:flex-row md:items-center justify-between mb-4">
             <div className="h-10 bg-gray-700 rounded w-64 mb-4 md:mb-0"></div>
           </div>
           <div className="w-full overflow-x-auto whitespace-nowrap py-2">
@@ -167,7 +167,7 @@ export default function SeriesPage() {
               ))}
             </div>
           </div>
-          <p className="text-center text-lg text-gray-400 mt-8">
+          <p className="text-center text-lg text-rich-mahogany-200 mt-8">
             Loading series page...
           </p>
         </div>

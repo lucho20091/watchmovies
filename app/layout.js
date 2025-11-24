@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-rich-mahogany-950 text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-rich-mahogany-950 text-rich-mahogany-100`}
       >
         <Navbar />
         {/* add pb-12 where needed */}

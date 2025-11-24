@@ -122,7 +122,7 @@ function MoviesContent() {
         onCategoryChange={handleCategoryChange}
       />
       {isLoading ? (
-        <p className="text-center text-lg text-gray-400 mt-8">
+        <p className="text-center text-lg text-rich-mahogany-200 mt-8">
           Loading movies...
         </p>
       ) : (
@@ -168,7 +168,7 @@ export default function MoviesPage() {
     <Suspense
       fallback={
         <div className="p-4 md:p-0 md:pt-4 container mx-auto animate-pulse">
-          <div className="text-white flex flex-col md:flex-row md:items-center justify-between mb-4">
+          <div className="text-rich-mahogany-100 flex flex-col md:flex-row md:items-center justify-between mb-4">
             <div className="h-10 bg-gray-700 rounded w-64 mb-4 md:mb-0"></div>
           </div>
           <div className="w-full overflow-x-auto whitespace-nowrap py-2">
@@ -181,7 +181,7 @@ export default function MoviesPage() {
               ))}
             </div>
           </div>
-          <p className="text-center text-lg text-gray-400 mt-8">
+          <p className="text-center text-lg text-rich-mahogany-200 mt-8">
             Loading movies page...
           </p>
         </div>
