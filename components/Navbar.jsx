@@ -24,7 +24,6 @@ export default function Navbar() {
   // Helper function to get link classes
   const getLinkClasses = (path) => {
     const baseClasses = `
-    px-1 md:px-4 
     text-rich-mahogany-100
     h-full 
     flex items-center 
@@ -33,14 +32,15 @@ export default function Navbar() {
   `;
 
     const activeClasses = `
-    bg-rich-mahogany-500 
-    text-rich-mahogany-100 
+    text-rich-mahogany-500 
+    border-b-1
+    border-rich-mahogany-500
     font-semibold 
     shadow-md
   `;
 
     const inactiveClasses = `
-    hover:bg-rich-mahogany-800 
+    hover:text-rich-mahogany-300 
   `;
 
     return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`;
@@ -95,7 +95,7 @@ export default function Navbar() {
           <span>MoviesFree</span>
         </Link>
 
-        <div className="flex items-center h-full">
+        <div className="flex items-center gap-1 sm:gap-4">
           {!isSearchInputVisible && (
             <>
               <Link href="/" className={getLinkClasses("/")}>
@@ -152,13 +152,13 @@ export default function Navbar() {
             onClick={toggleSearchInput}
             className={`${
               isSearchInputVisible && "hidden"
-            }py-1 pl-1 rounded-md transition-colors duration-200 ease-in-out     text-rich-mahogany-100 cursor-pointer`}
+            }py-1  rounded-md transition-colors duration-200 ease-in-out     text-rich-mahogany-100 cursor-pointer`}
             aria-label={isSearchInputVisible ? "Close search" : "Open search"}
           >
             {isSearchInputVisible ? (
               <></>
             ) : (
-              <div className="flex justify-center items-center gap-2  md:pl-3 h-full">
+              <div className="flex justify-center items-center gap-2  h-full       text-rich-mahogany-100  hover:text-rich-mahogany-300 ">
                 <span className="hidden md:inline">Search</span>
                 <FaSearch size={18} className="md:text-xl" />
               </div>

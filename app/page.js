@@ -103,29 +103,29 @@ export default function Home() {
                 {currentHeroMovie.release_date?.substring(0, 4)}
               </span>
             </div>
-            <div className="flex items-center gap-4 ml-auto sm:ml-0">
+            <div className="flex items-center justify-between gap-4">
               <Link href={`/movie/${currentHeroMovie.id}`}>
-                <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
+                <button className="border border-rich-mahogany-500 hover:bg-rich-mahogany-500/60 text-rich-mahogany-100 font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
                   Watch Now
                 </button>
               </Link>
               {heroMovies.length > 1 && (
-                <>
+                <div className="flex items-center gap-4">
                   <button
                     onClick={handlePrevHero}
-                    className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-4 rounded-lg text-lg transition-colors cursor-pointer flex items-center justify-center"
+                    className="text-rich-mahogany-100 border border-rich-mahogany-500 hover:bg-rich-mahogany-500/60 font-bold py-3 px-4 rounded-lg text-lg transition-colors cursor-pointer flex items-center justify-center"
                     aria-label="Previous hero movie"
                   >
                     <FaChevronLeft size={20} />
                   </button>
                   <button
                     onClick={handleNextHero}
-                    className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-4 rounded-lg text-lg transition-colors cursor-pointer flex items-center justify-center"
+                    className="text-rich-mahogany-100 border border-rich-mahogany-500 hover:bg-rich-mahogany-500/60 font-bold py-3 px-4 rounded-lg text-lg transition-colors cursor-pointer flex items-center justify-center"
                     aria-label="Next hero movie"
                   >
                     <FaChevronRight size={20} />
                   </button>
-                </>
+                </div>
               )}
             </div>
           </div>
@@ -135,12 +135,12 @@ export default function Home() {
       <div className="container mx-auto p-4 md:px-0">
         <div className="flex items-center justify-between mb-8 md:mt-8">
           <h2 className="text-lg  font-bold flex items-center text-rich-mahogany-100">
-            <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>
+            <span className="bg-rich-mahogany-500 w-[2px] h-6 mr-3"></span>
             TOP 10 MOVIES
           </h2>
           <Link
             href="/movies"
-            className="text-rich-mahogany-400 border-b-2 border-rich-mahogany-400 text-lg font-bold"
+            className="text-rich-mahogany-500 border-b-1 border-rich-mahogany-500 text-lg hover:text-rich-mahogany-500 hover:border-rich-mahogany-500"
           >
             View More
           </Link>
@@ -152,12 +152,12 @@ export default function Home() {
         </div>
         <div className="flex items-center justify-between mb-8 mt-4 md:mt-8">
           <h2 className="text-lg font-bold flex items-center text-rich-mahogany-100">
-            <span className="bg-rich-mahogany-500 w-2 h-8 mr-3"></span>
+            <span className="bg-rich-mahogany-500 w-[2px] h-6 mr-3"></span>
             TOP 10 SERIES
           </h2>
           <Link
             href="/series"
-            className="text-rich-mahogany-400 border-b-2 border-rich-mahogany-400 text-lg font-bold"
+            className="text-rich-mahogany-500 border-b-1 border-rich-mahogany-500 text-lg hover:text-rich-mahogany-500 hover:border-rich-mahogany-500"
           >
             View More
           </Link>
