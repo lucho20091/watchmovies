@@ -6,6 +6,10 @@ import MovieCard from "@/components/MovieCard";
 import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
+// A 1x1 transparent GIF for blurDataURL placeholder
+const transparentGif =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
 export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingSeries, setTrendingSeries] = useState([]);
@@ -73,6 +77,8 @@ export default function Home() {
               className="absolute inset-0 w-full h-full object-cover z-[-2] hidden md:block"
               priority
               quality={70}
+              placeholder="blur"
+              blurDataURL={transparentGif}
             />
           )}
           {currentHeroMovie.poster_path && (
@@ -84,6 +90,8 @@ export default function Home() {
               className="absolute inset-0 w-full h-full object-cover z-[-2] block md:hidden"
               priority
               quality={70}
+              placeholder="blur"
+              blurDataURL={transparentGif}
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
