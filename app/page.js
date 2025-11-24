@@ -1,96 +1,133 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 import MovieCard from "@/components/MovieCard";
+import { useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default async function Home() {
-  async function getTrendingMovies() {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: process.env.MOVIEDB_API_BEARER,
-      },
-    };
-    try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-        options
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+export default function Home() {
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [trendingSeries, setTrendingSeries] = useState([]);
+  const [heroMovies, setHeroMovies] = useState([]);
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        // Fetch trending movies
+        const moviesResponse = await fetch("/api/movies/trending?page=1");
+        const moviesData = await moviesResponse.json();
+        setTrendingMovies(moviesData.results);
+        setHeroMovies(moviesData.results.slice(0, 5)); // Take first 5 for hero section
+
+        // Fetch trending series
+        const seriesResponse = await fetch("/api/series/trending?page=1");
+        const seriesData = await seriesResponse.json();
+        setTrendingSeries(seriesData.results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
-      const data = await response.json();
-      return data.results;
-    } catch (error) {
-      console.error(error);
-      return [];
     }
-  }
-  async function getTrendingSeries() {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: process.env.MOVIEDB_API_BEARER,
-      },
-    };
-    try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
-        options
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.results;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  }
-  const trendingMovies = await getTrendingMovies();
-  const trendingSeries = await getTrendingSeries();
-  const first10TrendingSeries = trendingSeries.slice(0, 10);
+    fetchData();
+  }, []);
+
+  const handlePrevHero = () => {
+    setCurrentHeroIndex((prevIndex) =>
+      prevIndex === 0 ? heroMovies.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNextHero = () => {
+    setCurrentHeroIndex((prevIndex) =>
+      prevIndex === heroMovies.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const currentHeroMovie = heroMovies[currentHeroIndex];
   const first10TrendingMovies = trendingMovies.slice(0, 10);
+  const first10TrendingSeries = trendingSeries.slice(0, 10);
 
-  const heroMovie = trendingMovies[0];
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
+        <p className="text-xl">Loading content...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="grow">
-      {heroMovie && (
-        <div className="relative h-[calc(100svh-63px)] overflow-hidden group ">
-          <Image // Using next/image component
-            src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
-            alt={heroMovie.title}
-            fill // Fills the parent container
-            sizes="100vw" // Image will be 100% of viewport width
-            className="absolute inset-0 w-full h-full object-cover"
-            priority // Loads this image with high priority
-            quality={70} // Reduced image quality for performance
-          />
+      {currentHeroMovie && (
+        <div className="relative h-[calc(100svh-63px)] overflow-hidden group">
+          {currentHeroMovie.backdrop_path && (
+            <Image
+              src={`https://image.tmdb.org/t/p/original${currentHeroMovie.backdrop_path}`}
+              alt={currentHeroMovie.title || "Movie Backdrop"}
+              fill
+              sizes="100vw"
+              className="absolute inset-0 w-full h-full object-cover z-[-2] hidden md:block"
+              priority
+              quality={70}
+            />
+          )}
+          {currentHeroMovie.poster_path && (
+            <Image
+              src={`https://image.tmdb.org/t/p/original${currentHeroMovie.poster_path}`}
+              alt={currentHeroMovie.title || "Movie Poster"}
+              fill
+              sizes="100vw"
+              className="absolute inset-0 w-full h-full object-cover z-[-2] block md:hidden"
+              priority
+              quality={70}
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
-          {/* Removed the gradient overlay div */}
+
           <div className="relative z-10 flex flex-col justify-end h-full px-4 sm:px-0 py-8 md:py-12 text-rich-mahogany-100 container mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-shadow-lg/90 mb-4">
-              {heroMovie.title}
+            <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-4">
+              {currentHeroMovie.title}
             </h1>
-            <p className="text-lg md:text-xl mb-4 max-w-2xl line-clamp-3 text-shadow-lg/90">
-              {heroMovie.overview}
+            <p className="text-lg md:text-xl mb-4 max-w-2xl line-clamp-3 text-shadow">
+              {currentHeroMovie.overview}
             </p>
-            <div className="flex items-center gap-4 mb-4 text-shadow-lg/90">
+            <div className="flex items-center gap-4 mb-6 text-shadow">
               <span className="text-lg md:text-xl font-semibold">
-                ⭐ {heroMovie.vote_average.toFixed(1)}
+                ⭐ {currentHeroMovie.vote_average.toFixed(1)}
               </span>
               <span className="text-lg md:text-xl font-semibold">
-                {heroMovie.release_date?.substring(0, 4)}
+                {currentHeroMovie.release_date?.substring(0, 4)}
               </span>
             </div>
-            <Link href={`/movie/${heroMovie.id}`} className="ml-auto sm:ml-0">
-              <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
-                Watch Now
-              </button>
-            </Link>
+            <div className="flex items-center gap-4 ml-auto sm:ml-0">
+              <Link href={`/movie/${currentHeroMovie.id}`}>
+                <button className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-6 rounded-lg text-lg transition-colors cursor-pointer">
+                  Watch Now
+                </button>
+              </Link>
+              {heroMovies.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevHero}
+                    className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-4 rounded-lg text-lg transition-colors cursor-pointer flex items-center justify-center"
+                    aria-label="Previous hero movie"
+                  >
+                    <FaChevronLeft size={20} />
+                  </button>
+                  <button
+                    onClick={handleNextHero}
+                    className="bg-rich-mahogany-500 hover:bg-rich-mahogany-600 text-rich-mahogany-100 font-bold py-3 px-4 rounded-lg text-lg transition-colors cursor-pointer flex items-center justify-center"
+                    aria-label="Next hero movie"
+                  >
+                    <FaChevronRight size={20} />
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -109,10 +146,9 @@ export default async function Home() {
           </Link>
         </div>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {trendingMovies &&
-            first10TrendingMovies.map((movie) => (
-              <MovieCard movie={movie} key={movie.id} />
-            ))}
+          {first10TrendingMovies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
         </div>
         <div className="flex items-center justify-between mb-8 mt-4 md:mt-8">
           <h2 className="text-lg font-bold flex items-center text-rich-mahogany-100">
@@ -127,10 +163,9 @@ export default async function Home() {
           </Link>
         </div>
         <div className="mt-4 md:mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:mb-8">
-          {trendingSeries &&
-            first10TrendingSeries.map((serie) => (
-              <MovieCard movie={serie} key={serie.id} isSeries={true} />
-            ))}
+          {first10TrendingSeries.map((serie) => (
+            <MovieCard movie={serie} key={serie.id} isSeries={true} />
+          ))}
         </div>
       </div>
     </div>
