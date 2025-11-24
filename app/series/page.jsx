@@ -85,10 +85,10 @@ function SeriesContent() {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={`px-4 py-2 rounded-md font-bold cursor-pointer ${
+          className={`px-4 py-2 rounded-md font-bold cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 ${
             currentPage === i
-              ? "bg-rich-mahogany-500 text-rich-mahogany-100"
-              : "bg-rich-mahogany-300 text-rich-mahogany-950 hover:bg-rich-mahogany-400"
+              ? "bg-rich-mahogany-500 "
+              : "hover:bg-rich-mahogany-500/30"
           }`}
         >
           {i}
@@ -128,7 +128,7 @@ function SeriesContent() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1 || isLoading}
-                className="px-4 py-2 rounded-md bg-rich-mahogany-300 text-rich-mahogany-950 font-bold hover:bg-rich-mahogany-400 disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-md text-rich-mahogany-100 font-bold disabled:opacity-50 cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 hover:bg-rich-mahogany-500/30"
               >
                 Previous
               </button>
@@ -136,7 +136,7 @@ function SeriesContent() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages || isLoading}
-                className="px-4 py-2 rounded-md bg-rich-mahogany-300 text-rich-mahogany-950 font-bold hover:bg-rich-mahogany-400 disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-md text-rich-mahogany-100 font-bold disabled:opacity-50 cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 hover:bg-rich-mahogany-500/30"
               >
                 Next
               </button>

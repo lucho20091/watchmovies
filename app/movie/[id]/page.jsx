@@ -132,7 +132,7 @@ export default function MoviePage() {
           quality={70}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-neutral-900"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-8 text-rich-mahogany-100 container mx-auto">
         <h1 className="text-shadow-lg/90 text-4xl md:text-6xl font-bold mb-4 text-center">
@@ -152,13 +152,13 @@ export default function MoviePage() {
             <Link
               key={item.id}
               href={`/movies?category=${item.name.toLowerCase()}&page=1`}
-              className="bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-sm text-sm font-medium hover:bg-rich-mahogany-600 transition-colors cursor-pointer"
+              className="border border-rich-mahogany-500 backdrop-blur-xs shadow-xl  hover:bg-rich-mahogany-500/30  text-rich-mahogany-100 px-3 py-1 rounded-sm text-sm font-medium transition-colors cursor-pointer hover:shadow-rich-mahogany-900/90"
             >
               {item.name}
             </Link>
           ))}
         </div>
-        <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">
+        <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-4">
           {movieData.overview}
         </p>
 
@@ -168,11 +168,12 @@ export default function MoviePage() {
             <button
               key={index}
               onClick={() => handleServerSelection(server)}
-              className={`px-6 py-3 rounded-lg font-bold transition-colors cursor-pointer ${
-                selectedServer?.name === server.name
-                  ? "bg-rich-mahogany-500 hover:bg-rich-mahogany-600"
-                  : "bg-rich-mahogany-900 hover:bg-rich-mahogany-800"
-              } text-rich-mahogany-100`}
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90
+ ${
+   selectedServer?.name === server.name
+     ? "bg-rich-mahogany-500 "
+     : " hover:bg-rich-mahogany-500/30"
+ } text-rich-mahogany-100`}
             >
               {server.name}
             </button>

@@ -159,7 +159,7 @@ export default function TvPageSeasonEpisode() {
           quality={70}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/70 to-neutral-900"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-8 text-rich-mahogany-100 container mx-auto">
         <h1 className="text-shadow-lg/90 text-4xl md:text-6xl font-bold mb-4 text-center">
@@ -177,9 +177,9 @@ export default function TvPageSeasonEpisode() {
               validSeriesCategoryValues.includes(categoryValue);
 
             const genreClasses =
-              "bg-rich-mahogany-500 text-rich-mahogany-100 px-3 py-1 rounded-sm text-sm font-medium";
+              "border border-rich-mahogany-500 backdrop-blur-xs shadow-xl  text-rich-mahogany-100 px-3 py-1 rounded-sm text-sm font-medium transition-colors cursor-pointer ";
             const hoverClasses =
-              "hover:bg-rich-mahogany-600 transition-colors cursor-pointer";
+              "hover:bg-rich-mahogany-500/30  hover:shadow-rich-mahogany-900/90 cursor-pointer";
 
             return isClickable ? (
               <Link
@@ -196,51 +196,54 @@ export default function TvPageSeasonEpisode() {
             );
           })}
         </div>
-        <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-8">
+        <p className="line-clamp-4 md:line-clamp-5 text-base md:text-lg text-center max-w-3xl mx-auto font-semibold mb-4">
           {tvData?.overview}
         </p>
 
         {/* Server Selection Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-4">
           {videoServers.map((server, index) => (
             <button
               key={index}
               onClick={() => handleServerSelection(server)}
-              className={`px-6 py-3 rounded-lg font-bold transition-colors cursor-pointer ${
-                selectedServer?.name === server.name
-                  ? "bg-rich-mahogany-500 hover:bg-rich-mahogany-600"
-                  : "bg-rich-mahogany-900 hover:bg-rich-mahogany-800 "
-              } text-rich-mahogany-100`}
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors cursor-pointer border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90
+ ${
+   selectedServer?.name === server.name
+     ? "bg-rich-mahogany-500 "
+     : " hover:bg-rich-mahogany-500/30"
+ } text-rich-mahogany-100`}
             >
               {server.name}
             </button>
           ))}
         </div>
 
-        <div className="grid place-items-center mb-4">
-          <select
-            name="season"
-            id="season"
-            className="w-36 mx-auto bg-rich-mahogany-900 px-2 py-1 rounded-md font-bold text-xl border-rich-mahogany-500 border-2 text-center text-rich-mahogany-100 focus:outline-none focus:ring-2 cursor-pointer hover:bg-rich-mahogany-800 focus:ring-rich-mahogany-500"
-            onChange={(e) => {
-              const newSeason = parseInt(e.target.value);
-              setSeasonRef(newSeason);
-              router.push(`/tv/${id}/${newSeason}/${episode || 1}`);
-            }}
-            value={seasonRef}
-          >
-            {tvData.seasons.map((item) => {
-              if (item.season_number === 0) return null;
-              return (
-                <option key={item.id} value={item.season_number}>
-                  {item.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="md:border-2 md:border-rich-mahogany-500 w-full max-w-screen-xl mx-auto mt-4 rounded-lg overflow-hidden">
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] gap-4 p-4 bg-rich-mahogany-950 max-h-64 overflow-y-auto">
+        <div className="w-full max-w-screen-xl mx-auto rounded-lg overflow-hidden shadow-xl shadow-neutral-950/90">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] gap-4 p-4 bg-neutral-950/30 max-h-64 overflow-y-auto">
+            <select
+              name="season"
+              id="season"
+              className="col-span-2 appearance-none lg:w-30 lg:mx-auto px-2 py-1 rounded-md font-semibold text-xl text-center text-rich-mahogany-100 focus:outline-none focus:ring-1 cursor-pointer  focus:ring-rich-mahogany-500 border border-rich-mahogany-500 backdrop-blur-xs shadow-xl  hover:bg-rich-mahogany-500/30 hover:shadow-rich-mahogany-900/90"
+              onChange={(e) => {
+                const newSeason = parseInt(e.target.value);
+                setSeasonRef(newSeason);
+                router.push(`/tv/${id}/${newSeason}/${episode || 1}`);
+              }}
+              value={seasonRef}
+            >
+              {tvData.seasons.map((item) => {
+                if (item.season_number === 0) return null;
+                return (
+                  <option
+                    className="bg-rich-mahogany-950"
+                    key={item.id}
+                    value={item.season_number}
+                  >
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
             {tvData.seasons[
               tvData.seasons[0].season_number === 0 ? seasonRef : seasonRef - 1
             ]?.episode_count &&
@@ -259,12 +262,12 @@ export default function TvPageSeasonEpisode() {
                     href={`/tv/${id}/${seasonRef}/${episodeNumber}`}
                   >
                     <button
-                      className={`px-4 py-2 rounded-md font-bold transition-colors duration-200 w-full cursor-pointer
+                      className={`px-4 py-2 rounded-md font-bold transition-colors duration-200 w-full cursor-pointer  border border-rich-mahogany-500 backdrop-blur-xs shadow-xl shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90
                           ${
                             parseInt(episode) === episodeNumber &&
                             parseInt(season) === seasonRef
-                              ? "bg-rich-mahogany-500 text-rich-mahogany-100 hover:bg-rich-mahogany-600"
-                              : "bg-rich-mahogany-800 text-rich-mahogany-100 hover:bg-rich-mahogany-700"
+                              ? "bg-rich-mahogany-500"
+                              : " hover:bg-rich-mahogany-500/30"
                           }`}
                     >
                       E{episodeNumber}
