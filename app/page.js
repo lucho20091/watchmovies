@@ -58,7 +58,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100svh-63px)] bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <p className="text-xl">Loading content...</p>
       </div>
     );

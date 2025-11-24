@@ -94,7 +94,7 @@ export default function TvPageSeasonEpisode() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100svh-63px)] bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <p className="text-xl">Loading TV series details...</p>
       </div>
     );
@@ -102,7 +102,7 @@ export default function TvPageSeasonEpisode() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100svh-63px)] bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <h1 className="text-4xl font-bold mb-4">Error</h1>
         <p className="text-lg text-center mb-6">{error}</p>
         <Link
@@ -117,7 +117,7 @@ export default function TvPageSeasonEpisode() {
 
   if (!tvData) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100svh-63px)] bg-rich-mahogany-950 text-rich-mahogany-100 p-4">
         <h1 className="text-4xl font-bold mb-4">TV Series Not Found</h1>
         <p className="text-lg text-center mb-6">
           The TV series you are looking for does not exist.
@@ -136,7 +136,7 @@ export default function TvPageSeasonEpisode() {
   const validSeriesCategoryValues = seriesCategories.map((cat) => cat.value);
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-[calc(100svh-63px)] flex flex-col">
       {tvPoster && tvPoster.mobile && (
         <Image
           src={tvPoster.mobile}
