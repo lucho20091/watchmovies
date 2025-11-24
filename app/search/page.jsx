@@ -44,9 +44,9 @@ function SearchContent() {
   }, [searchParams]);
 
   return (
-    <div className="grow p-4 lg:pt-6">
+    <div className="grow p-4 lg:py-6">
       <div className="container mx-auto">
-        <h1 className="text-3xl font-bold     text-rich-mahogany-100 mb-6 text-center">
+        <h1 className="text-xl font-bold     text-rich-mahogany-100 mb-4 lg:mb-6 text-center">
           Search Results for "{searchQuery}"
         </h1>
 

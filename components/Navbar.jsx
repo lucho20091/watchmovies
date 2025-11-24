@@ -152,13 +152,13 @@ export default function Navbar() {
             onClick={toggleSearchInput}
             className={`${
               isSearchInputVisible && "hidden"
-            }px-3 py-1 pl-1 rounded-md transition-colors duration-200 ease-in-out     text-rich-mahogany-100 cursor-pointer`}
+            }py-1 pl-1 rounded-md transition-colors duration-200 ease-in-out     text-rich-mahogany-100 cursor-pointer`}
             aria-label={isSearchInputVisible ? "Close search" : "Open search"}
           >
             {isSearchInputVisible ? (
               <></>
             ) : (
-              <div className="flex justify-center items-center gap-2  md:px-3 h-full">
+              <div className="flex justify-center items-center gap-2  md:pl-3 h-full">
                 <span className="hidden md:inline">Search</span>
                 <FaSearch size={18} className="md:text-xl" />
               </div>
