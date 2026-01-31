@@ -99,7 +99,7 @@ function SeriesContent() {
   };
 
   return (
-    <div className="p-4 lg:pt-6 container mx-auto md:px-0">
+    <div className="p-4 lg:pt-6 container mx-auto">
       <CategorySelector
         categories={seriesCategories}
         activeCategory={selectedCategory}
