@@ -98,7 +98,7 @@ export default function Home() {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/60"></div>
 
-          <div className="relative z-10 flex flex-col justify-end h-full px-4 sm:px-0 py-8 md:py-12 text-rich-mahogany-100 container mx-auto">
+          <div className="relative z-10 flex flex-col justify-end h-full px-4 py-8 md:py-12 text-rich-mahogany-100 container mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-shadow mb-4">
               {currentHeroMovie.title}
             </h1>
@@ -142,7 +142,7 @@ export default function Home() {
         </div>
       )}
 
-      <div className="container mx-auto p-4 md:px-0">
+      <div className="container mx-auto p-4">
         <div className="flex items-center justify-between mb-8 md:mt-8">
           <h2 className="text-lg  font-bold flex items-center text-rich-mahogany-100">
             <span className="bg-rich-mahogany-500 w-[2px] h-6 mr-3"></span>
