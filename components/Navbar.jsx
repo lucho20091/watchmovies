@@ -92,7 +92,7 @@ export default function Navbar() {
           href="/"
           className="flex gap-2 text-xl md:text-3xl font-bold text-rich-mahogany-500 hover:text-rich-mahogany-600 transition-colors py-4 "
         >
-          <span>MoviesFree</span>
+          <span>WatchMovies</span>
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-4">
