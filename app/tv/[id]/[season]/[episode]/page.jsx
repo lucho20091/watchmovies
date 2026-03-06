@@ -139,7 +139,7 @@ export default function TvPageSeasonEpisode() {
   const cupcakeIds = ["128098", "404"];
 
   const displayTitle = cupcakeIds.includes(id)
-    ? `🧁${tvData?.name}🧁`
+    ? `interview with the vampirw🧁`
     : tvData?.name;
 
   return (
