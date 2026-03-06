@@ -21,6 +21,7 @@ export default function TvPageSeasonEpisode() {
       case "Action & Adventure":
         return "action";
       case "Sci-Fi & Fantasy":
+      case "Fantasy": // Added Fantasy as a separate case if it appears alone
         return "scifi";
       case "War & Politics":
         return "war";
@@ -135,6 +136,9 @@ export default function TvPageSeasonEpisode() {
   // Get a list of valid category values for quick lookup
   const validSeriesCategoryValues = seriesCategories.map((cat) => cat.value);
 
+  const displayTitle =
+    id === "128098" ? `🧁${tvData?.name}🧁` : tvData?.name;
+
   return (
     <div className="relative min-h-[calc(100svh-63px)] flex flex-col">
       {tvPoster && tvPoster.mobile && (
@@ -163,7 +167,7 @@ export default function TvPageSeasonEpisode() {
 
       <div className="relative z-10 flex flex-col items-center justify-center p-4 md:py-8 text-rich-mahogany-100 container mx-auto">
         <h1 className="text-shadow-lg/90 text-4xl md:text-6xl font-bold mb-4 text-center">
-          {tvData?.name}
+          {displayTitle}
         </h1>
         <div className="flex flex-wrap justify-center gap-4 font-bold text-lg mb-4 text-shadow-lg/90">
           <span>{tvData?.first_air_date?.substring(0, 4)}</span>
