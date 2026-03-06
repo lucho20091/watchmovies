@@ -1,7 +1,9 @@
 export async function generateMetadata({ params }) {
   const { id } = params;
   // Construct base URL for server-side fetch to internal API routes
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : `http://localhost:${process.env.PORT || 3000}`; // Dynamically use the port Next.js is running on
   const fetchUrl = `${baseUrl}/api/movie-details/${id}`;
   console.log(`[Movie Metadata] Fetching: ${fetchUrl}`);
 
