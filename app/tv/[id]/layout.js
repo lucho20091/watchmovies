@@ -2,26 +2,28 @@ export async function generateMetadata({ params }) {
   const { id } = params;
   // Construct base URL for server-side fetch to internal API routes
   const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+  const fetchUrl = `${baseUrl}/api/tv-details/${id}`;
+  console.log(`[TV Metadata] Fetching: ${fetchUrl}`);
 
   try {
-    const response = await fetch(`${baseUrl}/api/tv-details/${id}`);
+    const response = await fetch(fetchUrl);
 
     if (!response.ok) {
-      // If the TV series details API returns a non-OK status, return a generic title.
-      // The page component will handle displaying "not found" or error messages.
+      console.error(`[TV Metadata] Failed to fetch TV series ${id}. Status: ${response.status}`);
       return {
         title: "TV Series Details - MoviesFree",
       };
     }
 
     const tvData = await response.json();
+    console.log(`[TV Metadata] Fetched data for TV series ${id}:`, tvData.name);
 
     return {
       title: `${tvData.name} - MoviesFree`,
       description: tvData.overview,
     };
   } catch (error) {
-    console.error(`Error generating metadata for TV series ${id}:`, error);
+    console.error(`[TV Metadata] Error generating metadata for TV series ${id}:`, error);
     return {
       title: "TV Series Details - MoviesFree",
     };
