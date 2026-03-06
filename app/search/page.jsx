@@ -18,34 +18,10 @@ function SearchContent() {
   const getCorrection = (query) => {
     const lowerQuery = query.toLowerCase();
     switch (lowerQuery) {
-      case "movi":
-        return "movie";
-      case "seri":
-        return "series";
-      case "acton":
-        return "action";
-      case "comdy":
-        return "comedy";
-      case "dram":
-        return "drama";
-      case "fantasi":
-        return "fantasy";
-      case "horor":
-        return "horror";
-      case "mistery":
-        return "mystery";
-      case "romanc":
-        return "romance";
-      case "scifi":
-        return "sci-fi";
-      case "thriler":
-        return "thriller";
-      case "adventur":
-        return "adventure";
-      case "animaton":
-        return "animation";
-      case "crim":
-        return "crime";
+      case "vampirw":
+        return "vampire";
+      case "interview with the vampirw":
+        return "interview with the vampire";
       default:
         return null; // No specific correction found
     }
