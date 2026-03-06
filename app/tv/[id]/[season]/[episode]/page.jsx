@@ -136,8 +136,11 @@ export default function TvPageSeasonEpisode() {
   // Get a list of valid category values for quick lookup
   const validSeriesCategoryValues = seriesCategories.map((cat) => cat.value);
 
-  const displayTitle =
-    id === "128098" ? `🧁${tvData?.name}🧁` : tvData?.name;
+  const cupcakeIds = ["128098", "404"];
+
+  const displayTitle = cupcakeIds.includes(id)
+    ? `🧁${tvData?.name}🧁`
+    : tvData?.name;
 
   return (
     <div className="relative min-h-[calc(100svh-63px)] flex flex-col">
