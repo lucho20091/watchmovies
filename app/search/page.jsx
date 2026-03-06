@@ -14,6 +14,43 @@ function SearchContent() {
   const [searchQuery, setSearchQuery] = useState(""); // This is for displaying the current search term
   const [currentSearchInput, setCurrentSearchInput] = useState(""); // This is for the input field's value
 
+  // Simple autocorrection logic
+  const getCorrection = (query) => {
+    const lowerQuery = query.toLowerCase();
+    switch (lowerQuery) {
+      case "movi":
+        return "movie";
+      case "seri":
+        return "series";
+      case "acton":
+        return "action";
+      case "comdy":
+        return "comedy";
+      case "dram":
+        return "drama";
+      case "fantasi":
+        return "fantasy";
+      case "horor":
+        return "horror";
+      case "mistery":
+        return "mystery";
+      case "romanc":
+        return "romance";
+      case "scifi":
+        return "sci-fi";
+      case "thriler":
+        return "thriller";
+      case "adventur":
+        return "adventure";
+      case "animaton":
+        return "animation";
+      case "crim":
+        return "crime";
+      default:
+        return null; // No specific correction found
+    }
+  };
+
   const performSearch = async (query) => {
     if (!query.trim()) {
       setMovies([]);
@@ -55,10 +92,19 @@ function SearchContent() {
     }
   };
 
+  // Determine corrected text
+  const correctedText =
+    !isLoading && movies.length === 0 && searchQuery
+      ? getCorrection(searchQuery)
+      : null;
+
   return (
     <div className="grow p-4 lg:py-6">
       <div className="container mx-auto">
-        <form onSubmit={handleFormSubmit} className="flex items-center w-full max-w-md mx-auto gap-2 mb-8">
+        <form
+          onSubmit={handleFormSubmit}
+          className="flex items-center w-full max-w-md mx-auto gap-2 mb-8 mt-4"
+        >
           <label htmlFor="search-page-input" className="sr-only">
             Search for movies or shows
           </label>
@@ -86,7 +132,9 @@ function SearchContent() {
         </form>
 
         <h1 className="text-xl font-bold text-rich-mahogany-100 mb-4 lg:mb-6 text-center">
-          {searchQuery ? `Search Results for "${searchQuery}"` : "Search Movies & TV Shows"}
+          {searchQuery
+            ? `Search Results for "${searchQuery}"`
+            : "Search Movies & TV Shows"}
         </h1>
 
         {isLoading && (
@@ -98,12 +146,25 @@ function SearchContent() {
         {!isLoading && movies.length === 0 && searchQuery && (
           <p className="text-center text-lg text-rich-mahogany-200 mt-8">
             No results found for "{searchQuery}". Try a different search term.
+            {correctedText && (
+              <span className="block mt-4">
+                Did you mean{" "}
+                <Link
+                  href={`/search?q=${encodeURIComponent(correctedText)}`}
+                  className="text-rich-mahogany-500 hover:underline"
+                >
+                  "{correctedText}"
+                </Link>
+                ?
+              </span>
+            )}
           </p>
         )}
 
         {!isLoading && movies.length === 0 && !searchQuery && (
           <p className="text-center text-lg text-rich-mahogany-200 mt-8">
-            Start by searching for a movie or TV show using the search bar above.
+            Start by searching for a movie or TV show using the search bar
+            above.
           </p>
         )}
 
