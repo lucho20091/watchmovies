@@ -32,17 +32,18 @@ export default function TvPageSeasonEpisode() {
 
   // Define video servers dynamically
   const videoServers = [
+    // {
+    //   name: "Vidsrc",
+    //   url: `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=es&autoplay=1`,
+    // },
     {
-      name: "Vidsrc",
-      url: `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=es&autoplay=1`,
-    },{
       name: "Peach",
       url: `https://peachify.top/embed/tv/${id}/${season}/${episode}`
     },
-    {
-      name: "Vidking",
-      url: `https://www.vidking.net/embed/tv/${id}/${season}/${episode}?color=9146ff&autoPlay=true&nextEpisode=true&episodeSelector=true`,
-    },
+    // {
+    //   name: "Vidking",
+    //   url: `https://www.vidking.net/embed/tv/${id}/${season}/${episode}?color=9146ff&autoPlay=true&nextEpisode=true&episodeSelector=true`,
+    // },
     {
       name: "111Movies",
       url: `https://111movies.com/tv/${id}/${season}/${episode}`,
