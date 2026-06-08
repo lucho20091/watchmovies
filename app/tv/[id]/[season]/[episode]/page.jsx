@@ -34,7 +34,15 @@ export default function TvPageSeasonEpisode() {
   const videoServers = [
     {
       name: "Peach",
-      url: `https://peachify.top/embed/tv/${id}/${season}/${episode}`
+      url: `https://peachify.top/embed/tv/${id}/${season}/${episode}`,
+    },
+    {
+      name: "Vidlink",
+      url: `https://vidlink.pro/tv/${id}/${season}/${episode}`,
+    },
+    {
+      name: "Vidsrc",
+      url: `https://vidsrcme.ru/embed/tv/${id}/${season}/${episode}`,
     },
     {
       name: "111Movies",

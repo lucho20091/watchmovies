@@ -17,7 +17,15 @@ export default function MoviePage() {
   const videoServers = [
     {
       name: "Peach",
-      url:`https://peachify.top/embed/movie/${id}`
+      url: `https://peachify.top/embed/movie/${id}`,
+    },
+    {
+      name: "Vidlink",
+      url: `https://vidlink.pro/movie/${id}`,
+    },
+    {
+      name: "Vidsrc",
+      url: `https://vidsrcme.ru/embed/movie/${id}`,
     },
     {
       name: "111Movies",
