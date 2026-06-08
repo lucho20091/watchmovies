@@ -35,6 +35,9 @@ export default function TvPageSeasonEpisode() {
     {
       name: "Vidsrc",
       url: `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&ds_lang=es&autoplay=1`,
+    },{
+      name: "Peach",
+      url: `https://peachify.top/embed/tv/${id}/${season}/${episode}`
     },
     {
       name: "Vidking",
