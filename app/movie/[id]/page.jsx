@@ -15,17 +15,10 @@ export default function MoviePage() {
   // Define your video sources dynamically using the 'id'
   // This array will be recreated on each render, but the URLs depend on 'id'
   const videoServers = [
-    // {
-    //   name: "Vidsrc",
-    //   url: `https://vidsrc.me/embed/movie?tmdb=${id}&ds_lang=es&autoplay=1`, // Changed language to English
-    // },
-    {name: "Peach",
-    url:`https://peachify.top/embed/movie/${id}`
+    {
+      name: "Peach",
+      url:`https://peachify.top/embed/movie/${id}`
     },
-    // {
-    //   name: "Vidking",
-    //   url: `https://www.vidking.net/embed/movie/${id}`,
-    // },
     {
       name: "111Movies",
       url: `https://111movies.com/movie/${id}`,
