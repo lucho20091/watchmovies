@@ -33,6 +33,10 @@ export default function TvPageSeasonEpisode() {
   // Define video servers dynamically
   const videoServers = [
     {
+      name: "vidfast",
+      url: `https://vidfast.pro/tv/${id}/${season}/${episode}`,
+    },
+    {
       name: "VidsrcMov",
       url: `https://vidsrc.mov/embed/tv/${id}/${season}/${episode}`,
     },
