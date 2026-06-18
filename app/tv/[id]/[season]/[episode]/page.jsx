@@ -33,6 +33,10 @@ export default function TvPageSeasonEpisode() {
   // Define video servers dynamically
   const videoServers = [
     {
+      name: "VidsrcMov",
+      url: `https://vidsrc.mov/embed/tv/${id}/${season}/${episode}`,
+    },
+    {
       name: "Peach",
       url: `https://peachify.top/embed/tv/${id}/${season}/${episode}`,
     },

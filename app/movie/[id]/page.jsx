@@ -16,6 +16,14 @@ export default function MoviePage() {
   // This array will be recreated on each render, but the URLs depend on 'id'
   const videoServers = [
     {
+      name: "vidfast",
+      url: `https://vidfast.pro/movie/${id}?sub=es`,
+    },
+    {
+      name: "VidsrcMov",
+      url: `https://vidsrc.mov/embed/movie/${id}`,
+    },
+    {
       name: "Peach",
       url: `https://peachify.top/embed/movie/${id}`,
     },
