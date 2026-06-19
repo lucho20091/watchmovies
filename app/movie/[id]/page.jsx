@@ -210,7 +210,7 @@ export default function MoviePage() {
                 >
                   Trailer
                 </Link>
-              )}{" "}
+              )}
               {movieData.imdb_id && (
                 <Link
                   href={`https://www.imdb.com/title/${movieData.imdb_id}/parentalguide/`}
