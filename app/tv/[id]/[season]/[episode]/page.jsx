@@ -29,11 +29,10 @@ export default function TvPageSeasonEpisode() {
         return genreName.toLowerCase();
     }
   };
-
   // Define video servers dynamically
   const videoServers = [
     {
-      name: "vidfast",
+      name: "Vidfast",
       url: `https://vidfast.pro/tv/${id}/${season}/${episode}`,
     },
     {
@@ -304,6 +303,17 @@ export default function TvPageSeasonEpisode() {
               frameBorder="0"
               className="w-full aspect-video rounded-lg shadow-xl"
             ></iframe>
+            <div className="flex justify-end gap-4 mt-8 mr-auto flex-wrap">
+              {tvData.external_ids.imdb_id && (
+                <Link
+                  href={`https://www.imdb.com/title/${tvData.external_ids.imdb_id}/parentalguide/`}
+                  target="_blank"
+                  className="border border-rich-mahogany-500 backdrop-blur-xs shadow-xl bg-rich-mahogany-500 shadow-rich-mahogany-900/50 hover:shadow-rich-mahogany-900/90 text-rich-mahogany-100 px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  IMDb Content Rating
+                </Link>
+              )}
+            </div>
           </div>
         ) : (
           <p className="text-lg text-center mt-8">

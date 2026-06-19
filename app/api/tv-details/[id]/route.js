@@ -13,15 +13,21 @@ export async function GET(request, { params }) {
 
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
-      options
+      `https://api.themoviedb.org/3/tv/${id}?language=en-US&append_to_response=external_ids`,
+      options,
     );
 
     if (!response.ok) {
       if (response.status === 404) {
-        return NextResponse.json({ message: "TV series not found" }, { status: 404 });
+        return NextResponse.json(
+          { message: "TV series not found" },
+          { status: 404 },
+        );
       }
-      return NextResponse.json({ message: "Failed to fetch TV series data from TMDB" }, { status: response.status });
+      return NextResponse.json(
+        { message: "Failed to fetch TV series data from TMDB" },
+        { status: response.status },
+      );
     }
 
     const data = await response.json();
@@ -30,7 +36,7 @@ export async function GET(request, { params }) {
     console.error("Error in tv-details API route:", error);
     return NextResponse.json(
       { error: "Internal server error while fetching TV series details" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
