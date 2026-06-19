@@ -14,7 +14,7 @@ export default function MoviePage() {
 
   const videoServers = [
     {
-      name: "vidfast",
+      name: "Vidfast",
       url: `https://vidfast.pro/movie/${id}?sub=es`,
     },
     {
